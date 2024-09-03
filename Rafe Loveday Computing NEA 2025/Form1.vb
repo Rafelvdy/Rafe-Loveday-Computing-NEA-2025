@@ -14,4 +14,8 @@
             ImageAnalysis.Show
         End If
     End Sub
+
+    Private Sub CMDOpenWardrobe_Click(sender As Object, e As EventArgs) Handles CMDOpenWardrobe.Click
+        Wardrobe.Show()
+    End Sub
 End Class

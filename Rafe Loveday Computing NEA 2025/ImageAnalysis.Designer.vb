@@ -65,6 +65,7 @@ Partial Class ImageAnalysis
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "ImageAnalysis"
         Me.Text = "ImageAnalysis"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

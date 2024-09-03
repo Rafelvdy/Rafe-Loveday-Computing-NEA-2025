@@ -1,0 +1,70 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class Wardrobe
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.CMDAddImage = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.SuspendLayout()
+        '
+        'CMDAddImage
+        '
+        Me.CMDAddImage.Location = New System.Drawing.Point(12, 12)
+        Me.CMDAddImage.Name = "CMDAddImage"
+        Me.CMDAddImage.Size = New System.Drawing.Size(161, 49)
+        Me.CMDAddImage.TabIndex = 0
+        Me.CMDAddImage.Text = "Add Image to Wardrobe"
+        Me.CMDAddImage.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog1.Multiselect = True
+        '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.AllowDrop = True
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(65, 79)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1401, 477)
+        Me.FlowLayoutPanel1.TabIndex = 2
+        '
+        'Wardrobe
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1579, 584)
+        Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Controls.Add(Me.CMDAddImage)
+        Me.Name = "Wardrobe"
+        Me.Text = "Wardrobe"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents CMDAddImage As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+End Class

@@ -23,28 +23,41 @@ Partial Class MainMenu
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.CMDSelectImage = New System.Windows.Forms.Button()
+        Me.CMDOpenWardrobe = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CMDSelectImage
         '
-        Me.CMDSelectImage.Location = New System.Drawing.Point(332, 288)
+        Me.CMDSelectImage.Location = New System.Drawing.Point(552, 274)
         Me.CMDSelectImage.Name = "CMDSelectImage"
         Me.CMDSelectImage.Size = New System.Drawing.Size(120, 57)
         Me.CMDSelectImage.TabIndex = 0
         Me.CMDSelectImage.Text = "Select Image"
         Me.CMDSelectImage.UseVisualStyleBackColor = True
         '
+        'CMDOpenWardrobe
+        '
+        Me.CMDOpenWardrobe.Location = New System.Drawing.Point(832, 274)
+        Me.CMDOpenWardrobe.Name = "CMDOpenWardrobe"
+        Me.CMDOpenWardrobe.Size = New System.Drawing.Size(119, 57)
+        Me.CMDOpenWardrobe.TabIndex = 1
+        Me.CMDOpenWardrobe.Text = "Open Wardrobe"
+        Me.CMDOpenWardrobe.UseVisualStyleBackColor = True
+        '
         'MainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1461, 557)
+        Me.Controls.Add(Me.CMDOpenWardrobe)
         Me.Controls.Add(Me.CMDSelectImage)
         Me.Name = "MainMenu"
         Me.Text = "Digital Wardrobe"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents CMDSelectImage As Button
+    Friend WithEvents CMDOpenWardrobe As Button
 End Class
