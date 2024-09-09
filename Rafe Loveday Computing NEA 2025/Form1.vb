@@ -15,7 +15,27 @@
         End If
     End Sub
 
-    Private Sub CMDOpenWardrobe_Click(sender As Object, e As EventArgs) Handles CMDOpenWardrobe.Click
-        Wardrobe.Show()
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If SC.SplitterDistance > 60 Then
+            SC.SplitterDistance -= 90
+        Else
+            Timer1.Enabled = False
+        End If
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        If SC.SplitterDistance < 60 Then
+            SC.SplitterDistance += 90
+        Else
+            Timer2.Enabled = False
+        End If
+    End Sub
+
+    Private Sub CMDOpenMenu_Click(sender As Object, e As EventArgs) Handles CMDOpenMenu.Click
+        If SC.SplitterDistance > 60 Then
+            Timer1.Enabled = True
+        Else
+            Timer2.Enabled = True
+        End If
     End Sub
 End Class
