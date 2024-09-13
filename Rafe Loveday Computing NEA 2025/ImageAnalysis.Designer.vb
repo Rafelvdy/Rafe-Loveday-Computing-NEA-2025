@@ -59,7 +59,7 @@ Partial Class ImageAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1764, 943)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CMDImageAnalyse)
         Me.Controls.Add(Me.PictureBox1)

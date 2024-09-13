@@ -7,6 +7,8 @@ Public Class Wardrobe
     Dim cmd As OleDbCommand
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
+        'TO DO!!!!!!
+        'Have a validation to make sure images inputted are actually clothes (maybe)
 
 
         'Create a new OpenFileDialogue Instance so that the user is able to select their images that they want to enter into the library
@@ -25,8 +27,8 @@ Public Class Wardrobe
                 Dim pictureBox As New PictureBox
                 'This will resize the picture box proportionally so that all images are then displayed as same sizes
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom
-                pictureBox.Height = 200
-                pictureBox.Width = 200
+                pictureBox.Height = 150
+                pictureBox.Width = 150
 
 
                 'Loading the image from file so that it can be added to the library
@@ -45,8 +47,6 @@ Public Class Wardrobe
         Dim mstream As New System.IO.MemoryStream()
 
     End Sub
-
-
 
 
 End Class
