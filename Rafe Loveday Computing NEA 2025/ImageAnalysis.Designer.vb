@@ -30,7 +30,8 @@ Partial Class ImageAnalysis
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(338, 146)
+        Me.PictureBox1.Location = New System.Drawing.Point(254, 119)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -39,9 +40,10 @@ Partial Class ImageAnalysis
         '
         'CMDImageAnalyse
         '
-        Me.CMDImageAnalyse.Location = New System.Drawing.Point(161, 160)
+        Me.CMDImageAnalyse.Location = New System.Drawing.Point(121, 130)
+        Me.CMDImageAnalyse.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDImageAnalyse.Name = "CMDImageAnalyse"
-        Me.CMDImageAnalyse.Size = New System.Drawing.Size(129, 23)
+        Me.CMDImageAnalyse.Size = New System.Drawing.Size(97, 19)
         Me.CMDImageAnalyse.TabIndex = 2
         Me.CMDImageAnalyse.Text = "Find URLs"
         Me.CMDImageAnalyse.UseVisualStyleBackColor = True
@@ -49,20 +51,22 @@ Partial Class ImageAnalysis
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(426, 72)
+        Me.Label1.Location = New System.Drawing.Point(320, 58)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(48, 16)
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Label1"
         '
         'ImageAnalysis
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1764, 943)
+        Me.ClientSize = New System.Drawing.Size(1323, 766)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CMDImageAnalyse)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "ImageAnalysis"
         Me.Text = "ImageAnalysis"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

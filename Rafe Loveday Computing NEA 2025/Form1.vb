@@ -19,13 +19,11 @@ Public Class MainMenu
         Wardrobe.Show()
     End Sub
 
-
     Sub menuSwap(ByVal panel As Form)
-
-
-        'This IF statement was added as the menu would bug out when switching back and forth.
-        ' Checks if there is a form being displayed or not
-        If currentForm IsNot Nothing Then
+        If panel.Visible = False Then
+            'This IF statement was added as the menu would bug out when switching back and forth.
+            ' Checks if there is a form being displayed or not
+            If currentForm IsNot Nothing Then
                 'closes the current form
                 currentForm.Close()
                 'Removes the current form that is being displayed from the display panel
@@ -34,15 +32,16 @@ Public Class MainMenu
                 currentForm.Dispose()
             End If
 
+            currentForm = panel
+            panel.TopLevel = False
+            panel.WindowState = FormWindowState.Maximized
+            'Removes the close buttons so that the form looks like it is apart of the page.
+            panel.FormBorderStyle = Windows.Forms.BorderStyle.None
+            panel.Visible = True
+            DisplayPanel.Controls.Add(panel)
+        End If
 
 
-        currentForm = panel
-        panel.TopLevel = False
-        panel.WindowState = FormWindowState.Maximized
-        'Removes the close buttons so that the form looks like it is apart of the page.
-        panel.FormBorderStyle = Windows.Forms.BorderStyle.None
-        panel.Visible = True
-        DisplayPanel.Controls.Add(panel)
     End Sub
 
     Private Sub CMDSelectImage_Click(sender As Object, e As EventArgs) Handles CMDSelectImage.Click
@@ -62,4 +61,5 @@ Public Class MainMenu
         End If
 
     End Sub
+
 End Class
