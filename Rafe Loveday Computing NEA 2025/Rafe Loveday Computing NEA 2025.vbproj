@@ -166,6 +166,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClothingDetails.Designer.vb">
+      <DependentUpon>ClothingDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ClothingDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DigitalWardrobeDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DigitalWardrobeDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +213,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClothingDetails.resx">
+      <DependentUpon>ClothingDetails.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +233,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DigitalWardrobeDataSet.xsc">
+      <DependentUpon>DigitalWardrobeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DigitalWardrobeDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DigitalWardrobeDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DigitalWardrobeDataSet.xss">
+      <DependentUpon>DigitalWardrobeDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

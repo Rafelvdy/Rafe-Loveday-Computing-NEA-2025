@@ -1,10 +1,12 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
+Imports System.Drawing
+Imports System.Windows.Automation
 
 Public Class Wardrobe
-    'Creating variables to communicate with the database
-    Dim con As OleDbConnection = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\DigitalWardrobe.accdb")
-    Dim cmd As OleDbCommand
+    'Creating variables to communicate with the database (& Application.StartupPath &)(
+    Dim con As OleDbConnection = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\DigitalWardrobe.accdb;")
+
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
         'TO DO!!!!!!
@@ -25,6 +27,7 @@ Public Class Wardrobe
             For Each filename In openFileDialog.FileNames
                 'creating a new picture box as images are added so that there isnt a limit to the amount of picture boxes
                 Dim pictureBox As New PictureBox
+
                 'This will resize the picture box proportionally so that all images are then displayed as same sizes
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom
                 pictureBox.Height = 150
@@ -33,20 +36,17 @@ Public Class Wardrobe
 
                 'Loading the image from file so that it can be added to the library
                 pictureBox.Image = Image.FromFile(filename)
-
                 'This then adds the picture box into the flow layout pannel so that they images can be automatically arranged
                 FlowLayoutPanel1.Controls.Add(pictureBox)
+
+                'Event handler to link each picture box to the picturebox click subroutine, so that as new pictureboxes are created they can all open the clothingdetails form
+                AddHandler pictureBox.Click, AddressOf PictureBox_click
             Next
         End If
-        'SAVING IMAGE TO DATABASE
-        Dim Sql = "Insert into tblimage (img) Values (@img)"
-
-    End Sub
-    Private Sub saveImage(sql As String)
-        Dim arrImage() As Byte
-        Dim mstream As New System.IO.MemoryStream()
-
     End Sub
 
+    Private Sub PictureBox_click(sender As Object, e As EventArgs)
+        ClothingDetails.Show()
+    End Sub
 
 End Class

@@ -20,6 +20,7 @@ Public Class MainMenu
     End Sub
 
     Sub menuSwap(ByVal panel As Form)
+        'This IF statement prevents the program from crashing if you press the same button of the page that you are already on
         If panel.Visible = False Then
             'This IF statement was added as the menu would bug out when switching back and forth.
             ' Checks if there is a form being displayed or not
@@ -39,9 +40,9 @@ Public Class MainMenu
             panel.FormBorderStyle = Windows.Forms.BorderStyle.None
             panel.Visible = True
             DisplayPanel.Controls.Add(panel)
+            'Will close the menu panel when a button is pressed so that the menu disssapears and it appears to be full screen
+            MenuPanel.Hide()
         End If
-
-
     End Sub
 
     Private Sub CMDSelectImage_Click(sender As Object, e As EventArgs) Handles CMDSelectImage.Click
@@ -59,6 +60,7 @@ Public Class MainMenu
             menuSwap(ImageAnalysis)
             ImageAnalysis.Show()
         End If
+
 
     End Sub
 
