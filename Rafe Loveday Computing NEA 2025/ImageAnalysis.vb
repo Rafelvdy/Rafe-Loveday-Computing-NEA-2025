@@ -5,7 +5,7 @@ Imports System.IO
 
 
 Public Class ImageAnalysis
-    Private Sub ImageAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
 
     End Sub
 End Class

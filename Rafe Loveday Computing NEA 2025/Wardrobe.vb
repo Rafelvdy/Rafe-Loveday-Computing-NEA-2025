@@ -5,7 +5,7 @@ Imports System.Windows.Automation
 
 Public Class Wardrobe
     'Creating variables to communicate with the database (& Application.StartupPath &)(
-    Dim con As OleDbConnection = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\DigitalWardrobe.accdb;")
+    ' Dim con As OleDbConnection = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\DigitalWardrobe.accdb;")
 
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
@@ -32,8 +32,6 @@ Public Class Wardrobe
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom
                 pictureBox.Height = 150
                 pictureBox.Width = 150
-
-
                 'Loading the image from file so that it can be added to the library
                 pictureBox.Image = Image.FromFile(filename)
                 'This then adds the picture box into the flow layout pannel so that they images can be automatically arranged
@@ -48,5 +46,6 @@ Public Class Wardrobe
     Private Sub PictureBox_click(sender As Object, e As EventArgs)
         ClothingDetails.Show()
     End Sub
+
 
 End Class

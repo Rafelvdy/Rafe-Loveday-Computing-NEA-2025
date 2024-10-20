@@ -29,10 +29,10 @@ Partial Class Wardrobe
         '
         'CMDAddImage
         '
-        Me.CMDAddImage.Location = New System.Drawing.Point(566, 85)
-        Me.CMDAddImage.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CMDAddImage.Location = New System.Drawing.Point(755, 105)
+        Me.CMDAddImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDAddImage.Name = "CMDAddImage"
-        Me.CMDAddImage.Size = New System.Drawing.Size(121, 40)
+        Me.CMDAddImage.Size = New System.Drawing.Size(161, 49)
         Me.CMDAddImage.TabIndex = 0
         Me.CMDAddImage.Text = "Add Image to Wardrobe"
         Me.CMDAddImage.UseVisualStyleBackColor = True
@@ -47,22 +47,22 @@ Partial Class Wardrobe
         Me.FlowLayoutPanel1.AllowDrop = True
         Me.FlowLayoutPanel1.AutoScroll = True
         Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(9, 130)
-        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(12, 160)
+        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1419, 612)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1892, 753)
         Me.FlowLayoutPanel1.TabIndex = 2
         '
         'Wardrobe
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1426, 804)
+        Me.ClientSize = New System.Drawing.Size(1901, 990)
         Me.Controls.Add(Me.CMDAddImage)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Wardrobe"
         Me.Text = "Wardrobe"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

@@ -29,7 +29,7 @@ Partial Public Class DigitalWardrobeDataSet
     
     Private tableIMAGE As IMAGEDataTable
     
-    Private tableUSER As USERDataTable
+    Private tableTEST As TESTDataTable
     
     Private tableWARDROBE As WARDROBEDataTable
     
@@ -68,8 +68,8 @@ Partial Public Class DigitalWardrobeDataSet
             If (Not (ds.Tables("IMAGE")) Is Nothing) Then
                 MyBase.Tables.Add(New IMAGEDataTable(ds.Tables("IMAGE")))
             End If
-            If (Not (ds.Tables("USER")) Is Nothing) Then
-                MyBase.Tables.Add(New USERDataTable(ds.Tables("USER")))
+            If (Not (ds.Tables("TEST")) Is Nothing) Then
+                MyBase.Tables.Add(New TESTDataTable(ds.Tables("TEST")))
             End If
             If (Not (ds.Tables("WARDROBE")) Is Nothing) Then
                 MyBase.Tables.Add(New WARDROBEDataTable(ds.Tables("WARDROBE")))
@@ -115,9 +115,9 @@ Partial Public Class DigitalWardrobeDataSet
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property USER() As USERDataTable
+    Public ReadOnly Property TEST() As TESTDataTable
         Get
-            Return Me.tableUSER
+            Return Me.tableTEST
         End Get
     End Property
     
@@ -204,8 +204,8 @@ Partial Public Class DigitalWardrobeDataSet
             If (Not (ds.Tables("IMAGE")) Is Nothing) Then
                 MyBase.Tables.Add(New IMAGEDataTable(ds.Tables("IMAGE")))
             End If
-            If (Not (ds.Tables("USER")) Is Nothing) Then
-                MyBase.Tables.Add(New USERDataTable(ds.Tables("USER")))
+            If (Not (ds.Tables("TEST")) Is Nothing) Then
+                MyBase.Tables.Add(New TESTDataTable(ds.Tables("TEST")))
             End If
             If (Not (ds.Tables("WARDROBE")) Is Nothing) Then
                 MyBase.Tables.Add(New WARDROBEDataTable(ds.Tables("WARDROBE")))
@@ -254,10 +254,10 @@ Partial Public Class DigitalWardrobeDataSet
                 Me.tableIMAGE.InitVars
             End If
         End If
-        Me.tableUSER = CType(MyBase.Tables("USER"),USERDataTable)
+        Me.tableTEST = CType(MyBase.Tables("TEST"),TESTDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableUSER) Is Nothing) Then
-                Me.tableUSER.InitVars
+            If (Not (Me.tableTEST) Is Nothing) Then
+                Me.tableTEST.InitVars
             End If
         End If
         Me.tableWARDROBE = CType(MyBase.Tables("WARDROBE"),WARDROBEDataTable)
@@ -280,8 +280,8 @@ Partial Public Class DigitalWardrobeDataSet
         MyBase.Tables.Add(Me.tableCLOTHINGITEM)
         Me.tableIMAGE = New IMAGEDataTable()
         MyBase.Tables.Add(Me.tableIMAGE)
-        Me.tableUSER = New USERDataTable()
-        MyBase.Tables.Add(Me.tableUSER)
+        Me.tableTEST = New TESTDataTable()
+        MyBase.Tables.Add(Me.tableTEST)
         Me.tableWARDROBE = New WARDROBEDataTable()
         MyBase.Tables.Add(Me.tableWARDROBE)
     End Sub
@@ -300,7 +300,7 @@ Partial Public Class DigitalWardrobeDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-    Private Function ShouldSerializeUSER() As Boolean
+    Private Function ShouldSerializeTEST() As Boolean
         Return false
     End Function
     
@@ -375,7 +375,7 @@ Partial Public Class DigitalWardrobeDataSet
     Public Delegate Sub IMAGERowChangeEventHandler(ByVal sender As Object, ByVal e As IMAGERowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-    Public Delegate Sub USERRowChangeEventHandler(ByVal sender As Object, ByVal e As USERRowChangeEvent)
+    Public Delegate Sub TESTRowChangeEventHandler(ByVal sender As Object, ByVal e As TESTRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Public Delegate Sub WARDROBERowChangeEventHandler(ByVal sender As Object, ByVal e As WARDROBERowChangeEvent)
@@ -863,14 +863,14 @@ Partial Public Class DigitalWardrobeDataSet
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class USERDataTable
-        Inherits Global.System.Data.TypedTableBase(Of USERRow)
+    Partial Public Class TESTDataTable
+        Inherits Global.System.Data.TypedTableBase(Of TESTRow)
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "USER"
+            Me.TableName = "TEST"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -912,44 +912,44 @@ Partial Public Class DigitalWardrobeDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As USERRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As TESTRow
             Get
-                Return CType(Me.Rows(index),USERRow)
+                Return CType(Me.Rows(index),TESTRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Event USERRowChanging As USERRowChangeEventHandler
+        Public Event TESTRowChanging As TESTRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Event USERRowChanged As USERRowChangeEventHandler
+        Public Event TESTRowChanged As TESTRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Event USERRowDeleting As USERRowChangeEventHandler
+        Public Event TESTRowDeleting As TESTRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Event USERRowDeleted As USERRowChangeEventHandler
+        Public Event TESTRowDeleted As TESTRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Sub AddUSERRow(ByVal row As USERRow)
+        Public Overloads Sub AddTESTRow(ByVal row As TESTRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddUSERRow() As USERRow
-            Dim rowUSERRow As USERRow = CType(Me.NewRow,USERRow)
+        Public Overloads Function AddTESTRow() As TESTRow
+            Dim rowTESTRow As TESTRow = CType(Me.NewRow,TESTRow)
             Dim columnValuesArray(-1) As Object
-            rowUSERRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowUSERRow)
-            Return rowUSERRow
+            rowTESTRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowTESTRow)
+            Return rowTESTRow
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As USERDataTable = CType(MyBase.Clone,USERDataTable)
+            Dim cln As TESTDataTable = CType(MyBase.Clone,TESTDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -957,7 +957,7 @@ Partial Public Class DigitalWardrobeDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New USERDataTable()
+            Return New TESTDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -972,28 +972,28 @@ Partial Public Class DigitalWardrobeDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function NewUSERRow() As USERRow
-            Return CType(Me.NewRow,USERRow)
+        Public Function NewTESTRow() As TESTRow
+            Return CType(Me.NewRow,TESTRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New USERRow(builder)
+            Return New TESTRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(USERRow)
+            Return GetType(TESTRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.USERRowChangedEvent) Is Nothing) Then
-                RaiseEvent USERRowChanged(Me, New USERRowChangeEvent(CType(e.Row,USERRow), e.Action))
+            If (Not (Me.TESTRowChangedEvent) Is Nothing) Then
+                RaiseEvent TESTRowChanged(Me, New TESTRowChangeEvent(CType(e.Row,TESTRow), e.Action))
             End If
         End Sub
         
@@ -1001,8 +1001,8 @@ Partial Public Class DigitalWardrobeDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.USERRowChangingEvent) Is Nothing) Then
-                RaiseEvent USERRowChanging(Me, New USERRowChangeEvent(CType(e.Row,USERRow), e.Action))
+            If (Not (Me.TESTRowChangingEvent) Is Nothing) Then
+                RaiseEvent TESTRowChanging(Me, New TESTRowChangeEvent(CType(e.Row,TESTRow), e.Action))
             End If
         End Sub
         
@@ -1010,8 +1010,8 @@ Partial Public Class DigitalWardrobeDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.USERRowDeletedEvent) Is Nothing) Then
-                RaiseEvent USERRowDeleted(Me, New USERRowChangeEvent(CType(e.Row,USERRow), e.Action))
+            If (Not (Me.TESTRowDeletedEvent) Is Nothing) Then
+                RaiseEvent TESTRowDeleted(Me, New TESTRowChangeEvent(CType(e.Row,TESTRow), e.Action))
             End If
         End Sub
         
@@ -1019,14 +1019,14 @@ Partial Public Class DigitalWardrobeDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.USERRowDeletingEvent) Is Nothing) Then
-                RaiseEvent USERRowDeleting(Me, New USERRowChangeEvent(CType(e.Row,USERRow), e.Action))
+            If (Not (Me.TESTRowDeletingEvent) Is Nothing) Then
+                RaiseEvent TESTRowDeleting(Me, New TESTRowChangeEvent(CType(e.Row,TESTRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub RemoveUSERRow(ByVal row As USERRow)
+        Public Sub RemoveTESTRow(ByVal row As TESTRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -1053,7 +1053,7 @@ Partial Public Class DigitalWardrobeDataSet
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "USERDataTable"
+            attribute2.FixedValue = "TESTDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -1371,16 +1371,16 @@ Partial Public Class DigitalWardrobeDataSet
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class USERRow
+    Partial Public Class TESTRow
         Inherits Global.System.Data.DataRow
         
-        Private tableUSER As USERDataTable
+        Private tableTEST As TESTDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableUSER = CType(Me.Table,USERDataTable)
+            Me.tableTEST = CType(Me.Table,TESTDataTable)
         End Sub
     End Class
     
@@ -1476,16 +1476,16 @@ Partial Public Class DigitalWardrobeDataSet
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-    Public Class USERRowChangeEvent
+    Public Class TESTRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As USERRow
+        Private eventRow As TESTRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub New(ByVal row As USERRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As TESTRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -1493,7 +1493,7 @@ Partial Public Class DigitalWardrobeDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property Row() As USERRow
+        Public ReadOnly Property Row() As TESTRow
             Get
                 Return Me.eventRow
             End Get
@@ -1677,7 +1677,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnectionString
+            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnection
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1686,7 +1686,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ClothingItemID, ImageID, Catagory, SubCatagory, Colour, Material, Pattern,"& _ 
+            Me._commandCollection(0).CommandText = "SELECT ClothingItemID, ImageID, Category, SubCategory, Colour, Material, Pattern,"& _ 
                 " LastWornDate, WearFrequency FROM CLOTHINGITEM"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
@@ -1846,7 +1846,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnectionString
+            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnection
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1893,7 +1893,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class USERTableAdapter
+    Partial Public Class TESTTableAdapter
         Inherits Global.System.ComponentModel.Component
         
         Private WithEvents _adapter As Global.System.Data.OleDb.OleDbDataAdapter
@@ -2014,7 +2014,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnectionString
+            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnection
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2023,7 +2023,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT UserID, UserName, Email, UserImage FROM [USER]"
+            Me._commandCollection(0).CommandText = "SELECT TestName FROM TEST"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -2031,7 +2031,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As DigitalWardrobeDataSet.USERDataTable) As Integer
+        Public Overloads Overridable Function Fill(ByVal dataTable As DigitalWardrobeDataSet.TESTDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -2044,9 +2044,9 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As DigitalWardrobeDataSet.USERDataTable
+        Public Overloads Overridable Function GetData() As DigitalWardrobeDataSet.TESTDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As DigitalWardrobeDataSet.USERDataTable = New DigitalWardrobeDataSet.USERDataTable()
+            Dim dataTable As DigitalWardrobeDataSet.TESTDataTable = New DigitalWardrobeDataSet.TESTDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
@@ -2182,7 +2182,7 @@ Namespace DigitalWardrobeDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnectionString
+            Me._connection.ConnectionString = Global.Rafe_Loveday_Computing_NEA_2025.My.MySettings.Default.DigitalWardrobeConnection
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

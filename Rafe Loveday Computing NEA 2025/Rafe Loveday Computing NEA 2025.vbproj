@@ -121,6 +121,7 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -172,6 +173,7 @@
     <Compile Include="ClothingDetails.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dataBaseconnector.vb" />
     <Compile Include="DigitalWardrobeDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +207,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="URLFinder.vb" />
     <Compile Include="Wardrobe.Designer.vb">
       <DependentUpon>Wardrobe.vb</DependentUpon>
     </Compile>

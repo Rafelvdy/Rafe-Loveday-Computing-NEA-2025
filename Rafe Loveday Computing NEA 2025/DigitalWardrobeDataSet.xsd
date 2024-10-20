@@ -4,15 +4,15 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="DigitalWardrobeConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DigitalWardrobeConnectionString (MySettings)" PropertyReference="ApplicationSettings.Rafe_Loveday_Computing_NEA_2025.My.MySettings.GlobalReference.Default.DigitalWardrobeConnectionString" Provider="System.Data.OleDb" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="DigitalWardrobeConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DigitalWardrobeConnection (MySettings)" PropertyReference="ApplicationSettings.Rafe_Loveday_Computing_NEA_2025.My.MySettings.GlobalReference.Default.DigitalWardrobeConnection" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CLOTHINGITEMTableAdapter" GeneratorDataComponentClassName="CLOTHINGITEMTableAdapter" Name="CLOTHINGITEM" UserDataComponentName="CLOTHINGITEMTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DigitalWardrobeConnectionString (MySettings)" DbObjectName="CLOTHINGITEM" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DigitalWardrobeConnection (MySettings)" DbObjectName="CLOTHINGITEM" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT ClothingItemID, ImageID, Catagory, SubCatagory, Colour, Material, Pattern, LastWornDate, WearFrequency FROM CLOTHINGITEM</CommandText>
+                    <CommandText>SELECT ClothingItemID, ImageID, Category, SubCategory, Colour, Material, Pattern, LastWornDate, WearFrequency FROM CLOTHINGITEM</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -23,7 +23,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="IMAGETableAdapter" GeneratorDataComponentClassName="IMAGETableAdapter" Name="IMAGE" UserDataComponentName="IMAGETableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DigitalWardrobeConnectionString (MySettings)" DbObjectName="IMAGE" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DigitalWardrobeConnection (MySettings)" DbObjectName="IMAGE" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT ImageID, UserID, ImageURL, UploadDate FROM [IMAGE]</CommandText>
@@ -35,12 +35,12 @@
             <Mappings />
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="USERTableAdapter" GeneratorDataComponentClassName="USERTableAdapter" Name="USER" UserDataComponentName="USERTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TESTTableAdapter" GeneratorDataComponentClassName="TESTTableAdapter" Name="TEST" UserDataComponentName="TESTTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DigitalWardrobeConnectionString (MySettings)" DbObjectName="[USER]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DigitalWardrobeConnection (MySettings)" DbObjectName="TEST" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT UserID, UserName, Email, UserImage FROM [USER]</CommandText>
+                    <CommandText>SELECT TestName FROM TEST</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -51,7 +51,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WARDROBETableAdapter" GeneratorDataComponentClassName="WARDROBETableAdapter" Name="WARDROBE" UserDataComponentName="WARDROBETableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DigitalWardrobeConnectionString (MySettings)" DbObjectName="WARDROBE" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DigitalWardrobeConnection (MySettings)" DbObjectName="WARDROBE" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT WardrobeID, UserID, ClothingItemID FROM WARDROBE</CommandText>
@@ -68,7 +68,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="DigitalWardrobeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DigitalWardrobeDataSet" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DigitalWardrobeDataSet">
+  <xs:element name="DigitalWardrobeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="DigitalWardrobeDataSet" msprop:Generator_DataSetName="DigitalWardrobeDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="CLOTHINGITEM" msprop:Generator_RowEvHandlerName="CLOTHINGITEMRowChangeEventHandler" msprop:Generator_RowDeletedName="CLOTHINGITEMRowDeleted" msprop:Generator_RowDeletingName="CLOTHINGITEMRowDeleting" msprop:Generator_RowEvArgName="CLOTHINGITEMRowChangeEvent" msprop:Generator_TablePropName="CLOTHINGITEM" msprop:Generator_RowChangedName="CLOTHINGITEMRowChanged" msprop:Generator_RowChangingName="CLOTHINGITEMRowChanging" msprop:Generator_TableClassName="CLOTHINGITEMDataTable" msprop:Generator_RowClassName="CLOTHINGITEMRow" msprop:Generator_TableVarName="tableCLOTHINGITEM" msprop:Generator_UserTableName="CLOTHINGITEM">
@@ -79,7 +79,7 @@
           <xs:complexType>
           </xs:complexType>
         </xs:element>
-        <xs:element name="USER" msprop:Generator_RowEvHandlerName="USERRowChangeEventHandler" msprop:Generator_RowDeletedName="USERRowDeleted" msprop:Generator_RowDeletingName="USERRowDeleting" msprop:Generator_RowEvArgName="USERRowChangeEvent" msprop:Generator_TablePropName="USER" msprop:Generator_RowChangedName="USERRowChanged" msprop:Generator_RowChangingName="USERRowChanging" msprop:Generator_TableClassName="USERDataTable" msprop:Generator_RowClassName="USERRow" msprop:Generator_TableVarName="tableUSER" msprop:Generator_UserTableName="USER">
+        <xs:element name="TEST" msprop:Generator_RowEvHandlerName="TESTRowChangeEventHandler" msprop:Generator_RowDeletedName="TESTRowDeleted" msprop:Generator_RowDeletingName="TESTRowDeleting" msprop:Generator_RowEvArgName="TESTRowChangeEvent" msprop:Generator_TablePropName="TEST" msprop:Generator_RowChangedName="TESTRowChanged" msprop:Generator_RowChangingName="TESTRowChanging" msprop:Generator_TableClassName="TESTDataTable" msprop:Generator_RowClassName="TESTRow" msprop:Generator_TableVarName="tableTEST" msprop:Generator_UserTableName="TEST">
           <xs:complexType>
           </xs:complexType>
         </xs:element>
