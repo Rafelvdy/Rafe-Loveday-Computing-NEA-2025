@@ -1,6 +1,10 @@
 ﻿Imports System.Windows.Automation
 
 Public Class ClothingDetails
+    'Variables which store the colour of the selected and unselected buttons
+    Private unselectedColour As Color = Color.FromArgb(53, 59, 72)
+    Private selectedColour As Color = Color.FromArgb(72, 126, 176)
+
     'Variable used to show if there is already a filter open
     Dim filterOpen As Boolean = False
     'Variable to record the last drop down menu which is open
@@ -17,10 +21,18 @@ Public Class ClothingDetails
     Dim associatedCategories As New Dictionary(Of String, List(Of String)) From {
         {"Outwear", New List(Of String) From {"Jackets", "Coats", "Gilets"}},
         {"Jumpers", New List(Of String) From {"Hoodies", "Zipup", "knit"}},
-        {"TShirts", New List(Of String) From {"Tshirt", "Shirt"}},
+        {"T-Shirt", New List(Of String) From {"Tshirt", "Shirt"}},
         {"Trousers", New List(Of String) From {"Jeans", "Chinos", "Joggers", "Cargos", "Corduroy", "Other"}},
         {"Shorts", New List(Of String) From {"Cargo", "Chino", "Denim", "Sports", "Jersey"}}
     }
+
+    Dim panelTomainButton As New Dictionary(Of String, String) From {
+        {"CatagoryPanel", "CMDCatagory"},
+        {"SubCatagoryPanel", "CMDSubCatagory"},
+        {"ColourPanel", "CMDColour"},
+        {"MaterialPanel", "CMDMaterial"},
+        {"PatternPanel", "CMDPattern"}}
+
 
     Private Sub insertToDB(filter, fieldName)
         'instantiates teh dataBaseconnecter class to an object
@@ -76,6 +88,12 @@ Public Class ClothingDetails
             End If
             'Using addhandler so that when the buttons are created they can also have the addhandler
             AddHandler newButton.Click, AddressOf filterPress
+            'This IF statement allows it so if a button is selected, when they are created it will stay highlighted
+            If newButton.Text = SubCatagory Then
+                newButton.BackColor = selectedColour
+            Else
+                newButton.BackColor = unselectedColour
+            End If
         Next
         'Finds the total height of all the buttons, and then will set the height of the panel to change to it so it dynamically changes
         SubCatagoryPanel.Height = (noButtons * 25)
@@ -156,26 +174,64 @@ Public Class ClothingDetails
         Dim buttonClicked As Button = sender
         'Saves the parent of the button to a local variable
         Dim buttonsPanel As Panel = buttonClicked.Parent
-        'This case statement will compare the name of the panel to the panels i have to determine which panel the buttons are apart of
-        Select Case buttonsPanel.Name
-            Case "CatagoryPanel"
-                'Will save the filter chosen to the appropriate variable
-                Catagory = buttonClicked.Text
-                'runs the subroutine to start sending the data to the database
-                'insertToDB(Catagory, "Category")
-            Case "SubCatagoryPanel"
-                SubCatagory = buttonClicked.Text
-                'insertToDB(SubCatagory, "SubCategory")
-            Case "ColourPanel"
-                colour = buttonClicked.Text
-                'insertToDB(colour, "Colour")
-            Case "MaterialPanel"
-                material = buttonClicked.Text
-               ' insertToDB(material, "Material")
-            Case "PatternPanel"
-                pattern = buttonClicked.Text
-                ' insertToDB(pattern, "Pattern")
-        End Select
+        'THIS CODE HANDLES THE COLOUR OF THE BUTTONS WHEN SELECTING AND DESELECTING
+        'Checking if the clicked button is already selected so that if it is, it can be reverted and the variable set back to nothing
+        If buttonClicked.BackColor = selectedColour Then
+            'If the button is selected already and then pressed again, its colour will be reverted back
+            buttonClicked.BackColor = unselectedColour
+            'THIS CODE HANDLES WHAT IS SAVED IN THE VARIABLES WHEN BUTTONS ARE SELECTED AND DESELECTED
+            'If the button clicked is already the selected colour, then the variable associated with it is changed back to nothing
+            Select Case buttonsPanel.Name
+                Case "CatagoryPanel"
+                    Catagory = Nothing
+                    'When the button is deselected it will change the text of the button back to its original text
+                    CMDCatagory.Text = "Category"
+                Case "SubCatagoryPanel"
+                    SubCatagory = Nothing
+                    CMDSubCatagory.Text = "Sub Category"
+                Case "ColourPanel"
+                    colour = Nothing
+                    CMDColour.Text = "Colour"
+                Case "MaterialPanel"
+                    material = Nothing
+                    CMDMaterial.Text = "Material"
+                Case "PatternPanel"
+                    pattern = Nothing
+                    CMDPattern.Text = "Pattern"
+            End Select
+        Else
+            'If the colour is not selected it will make all the buttons in the panel become unselected so the new one can be selected
+            'This for loop goes through each button inside of the panel which is being used
+            For Each control As Control In buttonsPanel.Controls
+                'If any of the buttons are selected they will be set back to the original colour
+                If control.BackColor = selectedColour Then
+                    control.BackColor = unselectedColour
+                End If
+            Next
+            'This will set the button that was pressed to the selected colour
+            buttonClicked.BackColor = selectedColour
+            'This case statement will compare the name of the panel to the panels i have to determine which panel the buttons are apart of
+            Select Case buttonsPanel.Name
+                Case "CatagoryPanel"
+                    'Will save the filter chosen to the appropriate variable
+                    Catagory = buttonClicked.Text
+                    'When the button is selected, it will change the text of the category button
+                    CMDCatagory.Text = buttonClicked.Text
+                Case "SubCatagoryPanel"
+
+                    SubCatagory = buttonClicked.Text
+                    CMDSubCatagory.Text = buttonClicked.Text
+                Case "ColourPanel"
+                    colour = buttonClicked.Text
+                    CMDColour.Text = buttonClicked.Text
+                Case "MaterialPanel"
+                    material = buttonClicked.Text
+                    CMDMaterial.Text = buttonClicked.Text
+                Case "PatternPanel"
+                    pattern = buttonClicked.Text
+                    CMDPattern.Text = buttonClicked.Text
+            End Select
+        End If
     End Sub
 
     Private Sub CMDFindURLs_Click(sender As Object, e As EventArgs) Handles CMDFindURLs.Click
@@ -186,6 +242,16 @@ Public Class ClothingDetails
             Dim myURLFinder As New URLFinder
             myURLFinder.keyWord = keyword
             myURLFinder.getURLs()
+            Dim title As String = myURLFinder.TitleResult
+            Dim url As String = myURLFinder.URLResult
+            Dim price As String = myURLFinder.PriceResult
+            MessageBox.Show(title)
+            MessageBox.Show(url)
+            MessageBox.Show(price)
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        MessageBox.Show(Catagory & SubCatagory & colour & material & pattern)
     End Sub
 End Class

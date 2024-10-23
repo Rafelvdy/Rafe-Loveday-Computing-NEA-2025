@@ -68,6 +68,7 @@ Partial Class ClothingDetails
         Me.CMDPatternAbstract = New System.Windows.Forms.Button()
         Me.CMDPatternPolka = New System.Windows.Forms.Button()
         Me.CMDPatternFloral = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.LabelPanel.SuspendLayout()
         Me.CatagoryPanel.SuspendLayout()
         Me.ColourPanel.SuspendLayout()
@@ -87,7 +88,7 @@ Partial Class ClothingDetails
         Me.LabelPanel.Location = New System.Drawing.Point(0, 0)
         Me.LabelPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.LabelPanel.Name = "LabelPanel"
-        Me.LabelPanel.Size = New System.Drawing.Size(803, 46)
+        Me.LabelPanel.Size = New System.Drawing.Size(1907, 46)
         Me.LabelPanel.TabIndex = 4
         '
         'CMDFindURLs
@@ -202,10 +203,10 @@ Partial Class ClothingDetails
         Me.CMDOutWear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDOutWear.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDOutWear.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDOutWear.Location = New System.Drawing.Point(0, 0)
+        Me.CMDOutWear.Location = New System.Drawing.Point(-6, 0)
         Me.CMDOutWear.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDOutWear.Name = "CMDOutWear"
-        Me.CMDOutWear.Size = New System.Drawing.Size(95, 31)
+        Me.CMDOutWear.Size = New System.Drawing.Size(101, 31)
         Me.CMDOutWear.TabIndex = 6
         Me.CMDOutWear.Text = "Outwear"
         Me.CMDOutWear.UseVisualStyleBackColor = False
@@ -217,10 +218,10 @@ Partial Class ClothingDetails
         Me.CMDShorts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDShorts.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDShorts.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDShorts.Location = New System.Drawing.Point(1, 140)
+        Me.CMDShorts.Location = New System.Drawing.Point(-6, 140)
         Me.CMDShorts.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDShorts.Name = "CMDShorts"
-        Me.CMDShorts.Size = New System.Drawing.Size(93, 31)
+        Me.CMDShorts.Size = New System.Drawing.Size(111, 34)
         Me.CMDShorts.TabIndex = 5
         Me.CMDShorts.Text = "Shorts"
         Me.CMDShorts.UseVisualStyleBackColor = False
@@ -232,10 +233,10 @@ Partial Class ClothingDetails
         Me.CMDTrousers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDTrousers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDTrousers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDTrousers.Location = New System.Drawing.Point(3, 105)
+        Me.CMDTrousers.Location = New System.Drawing.Point(-6, 105)
         Me.CMDTrousers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDTrousers.Name = "CMDTrousers"
-        Me.CMDTrousers.Size = New System.Drawing.Size(92, 31)
+        Me.CMDTrousers.Size = New System.Drawing.Size(101, 31)
         Me.CMDTrousers.TabIndex = 4
         Me.CMDTrousers.Text = "Trousers"
         Me.CMDTrousers.UseVisualStyleBackColor = False
@@ -247,10 +248,10 @@ Partial Class ClothingDetails
         Me.CMDTshirt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDTshirt.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDTshirt.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDTshirt.Location = New System.Drawing.Point(0, 70)
+        Me.CMDTshirt.Location = New System.Drawing.Point(-6, 70)
         Me.CMDTshirt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDTshirt.Name = "CMDTshirt"
-        Me.CMDTshirt.Size = New System.Drawing.Size(95, 31)
+        Me.CMDTshirt.Size = New System.Drawing.Size(111, 31)
         Me.CMDTshirt.TabIndex = 3
         Me.CMDTshirt.Text = "T-Shirt"
         Me.CMDTshirt.UseVisualStyleBackColor = False
@@ -262,10 +263,10 @@ Partial Class ClothingDetails
         Me.CMDJumpers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDJumpers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDJumpers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDJumpers.Location = New System.Drawing.Point(0, 34)
+        Me.CMDJumpers.Location = New System.Drawing.Point(-6, 34)
         Me.CMDJumpers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDJumpers.Name = "CMDJumpers"
-        Me.CMDJumpers.Size = New System.Drawing.Size(95, 31)
+        Me.CMDJumpers.Size = New System.Drawing.Size(101, 31)
         Me.CMDJumpers.TabIndex = 6
         Me.CMDJumpers.Text = "Jumpers"
         Me.CMDJumpers.UseVisualStyleBackColor = False
@@ -776,11 +777,21 @@ Partial Class ClothingDetails
         Me.CMDPatternFloral.Text = "Floral"
         Me.CMDPatternFloral.UseVisualStyleBackColor = False
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(923, 182)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 10
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'ClothingDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 418)
+        Me.ClientSize = New System.Drawing.Size(1902, 1033)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PatternPanel)
         Me.Controls.Add(Me.MaterialPanel)
         Me.Controls.Add(Me.ColourPanel)
@@ -845,4 +856,5 @@ Partial Class ClothingDetails
     Friend WithEvents CMDMaterialPolyester As Button
     Friend WithEvents CMDPatternGeometric As Button
     Friend WithEvents CMDFindURLs As Button
+    Friend WithEvents Button1 As Button
 End Class

@@ -7,6 +7,10 @@ Public Class URLFinder
     Private _keyWord As String
     Private urlList As List(Of String)
 
+    Public Property TitleResult As String
+    Public Property URLResult As String
+    Public Property PriceResult As String
+
     'Setter and getter so that i can securely have the keyword inputted from the user put into the object
     Public Property keyWord As String
         Set(value As String)
@@ -22,7 +26,7 @@ Public Class URLFinder
         'Variables will be instantiated when the subroutine is called to save memory
         'Variables are used to set up the API request
         Dim apiKey As String = "RafeLove-TLtest-PRD-6cd756e94-4998fc56"
-        Dim keyWord As String = "trousers jeans blue denim stussy"
+        Dim keyWord As String = _keyWord
         'This is the end point URL and handles the connection to the ebay API 
         Dim endPoint As String = $"https://svcs.ebay.com/services/search/FindingService/v1?SECURITY-APPNAME={apiKey}&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&RESPONSE-DATA-FORMAT=JSON&keywords={keyWord}"
         'Making the HTTP request
@@ -50,7 +54,9 @@ Public Class URLFinder
             'Searching through the JSON structure to access the array of items returned by the API
             Dim items = json("findItemsByKeywordsResponse")(0)("searchResult")(0)("item")
             'Initialises an empty string so that the results can be added to it
-            Dim result As String = ""
+            Dim titleResult As String = ""
+            Dim urlResult As String = ""
+            Dim priceResult As String = ""
 
             'This will loop through the items so that it can gather URLs and prices
             For Each item In items
@@ -62,12 +68,21 @@ Public Class URLFinder
                 Dim price As String = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
 
                 'Appends the results so that it is formatted for display
-                result &= $"Item: {title}" & Environment.NewLine
-                result &= $"URL: {viewUrl}" & Environment.NewLine
-                result &= $"Price: ${price}" & Environment.NewLine & Environment.NewLine
+                titleResult &= $"Item: {title}" & Environment.NewLine
+                'me allows me to reference the current class so that the variables can be stored in the public properties
+                Me.TitleResult = titleResult
+                urlResult &= $"URL: {viewUrl}" & Environment.NewLine
+                Me.URLResult = urlResult
+                priceResult &= $"Price: ${price}" & Environment.NewLine & Environment.NewLine
+                Me.PriceResult = priceResult
             Next
 
-            MessageBox.Show(result)
+            'calls subroutine so that it can be returned to to the clothingDetails form
+            Dim results() As String = {titleResult, urlResult, priceResult}
+            For Each item In results
+                getResults(item)
+            Next
+
             reader.Close()
             response.Close()
 
@@ -83,4 +98,9 @@ Public Class URLFinder
             End If
         End Try
     End Sub
+
+    'A method which can pass the data back into clothingDetails form
+    Public Function getResults(ByVal result As String)
+        Return result
+    End Function
 End Class

@@ -90,7 +90,7 @@ Partial Class MainMenu
         Me.MenuBar.Location = New System.Drawing.Point(0, 0)
         Me.MenuBar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MenuBar.Name = "MenuBar"
-        Me.MenuBar.Size = New System.Drawing.Size(1901, 46)
+        Me.MenuBar.Size = New System.Drawing.Size(1902, 46)
         Me.MenuBar.TabIndex = 3
         '
         'CMDOpenMenu
@@ -112,7 +112,7 @@ Partial Class MainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1901, 1033)
+        Me.ClientSize = New System.Drawing.Size(1902, 1033)
         Me.Controls.Add(Me.MenuPanel)
         Me.Controls.Add(Me.DisplayPanel)
         Me.Controls.Add(Me.MenuBar)
