@@ -9,9 +9,6 @@ Public Class Wardrobe
 
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
-        'TO DO!!!!!!
-        'Have a validation to make sure images inputted are actually clothes (maybe)
-
 
         'Create a new OpenFileDialogue Instance so that the user is able to select their images that they want to enter into the library
         Dim openFileDialog As New OpenFileDialog()

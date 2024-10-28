@@ -1,13 +1,31 @@
 ﻿Imports System.Data.OleDb
 
 Public Class dataBaseconnector
+    'Creating a variable to hold the connection string to the access database which is private so that it can only be accessed inside the object
+    Private connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\My nea\Rafe Loveday Computing NEA 2025\Rafe Loveday Computing NEA 2025\DatabaseFile\DigitalWardrobe.accdb"
+
+
+    'A structure which will hold the information which is being written to the database
+    Public Structure dataToDB
+        Public ImagePath As String
+        Public ImageURL As String
+        Public category As String
+        Public SubCategory As String
+        Public Colour As String
+        Public Material As String
+        Public Brand As String
+        Public Pattern As String
+        Public LastWornDate As String
+        Public WearFrequency As String
+    End Structure
 
 
     Public Function createConnection()
-        'Creating a variable to hold the connection string to the access database
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\My nea\Rafe Loveday Computing NEA 2025\Rafe Loveday Computing NEA 2025\DatabaseFile\DigitalWardrobe.accdb"
+
+
         'Creating a new instance of the oleDBConnection object with the connection string as a parameter
         Dim connection As New OleDbConnection(connectionString)
+
         Return connection
     End Function
 
