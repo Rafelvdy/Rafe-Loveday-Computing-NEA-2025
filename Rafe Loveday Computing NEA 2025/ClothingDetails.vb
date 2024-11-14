@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Automation
+﻿Imports System.Text.RegularExpressions
+Imports System.Windows.Automation
 
 Public Class ClothingDetails
     'Variables which store the colour of the selected and unselected buttons
@@ -16,6 +17,7 @@ Public Class ClothingDetails
     Dim colour As String = Nothing
     Dim material As String = Nothing
     Dim pattern As String = Nothing
+    Dim brand As String = Nothing
 
     'A dictionary created to store which sub-categories are associated with each category
     Dim associatedCategories As New Dictionary(Of String, List(Of String)) From {
@@ -123,6 +125,10 @@ Public Class ClothingDetails
         openPanel(PatternPanel)
     End Sub
 
+    Private Sub CMDBrand_Click(sender As Object, e As EventArgs) Handles CMDBrand.Click
+        openPanel(BrandPanel)
+    End Sub
+
     'When these buttons are pressed, they will save their associated clothing items into the catagory panel
     'Can be saved to the database and also be used to choose what to display in the subcategory
     Private Sub ClothingDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -218,7 +224,6 @@ Public Class ClothingDetails
                     'When the button is selected, it will change the text of the category button
                     CMDCatagory.Text = buttonClicked.Text
                 Case "SubCatagoryPanel"
-
                     SubCatagory = buttonClicked.Text
                     CMDSubCatagory.Text = buttonClicked.Text
                 Case "ColourPanel"
@@ -234,26 +239,94 @@ Public Class ClothingDetails
         End If
     End Sub
 
+    'This subroutine handles finding URLs depending on the chosen inputs
     Private Sub CMDFindURLs_Click(sender As Object, e As EventArgs) Handles CMDFindURLs.Click
+        'These must be declared outside of the IF statement so that they can be accessed within the entire subroutine
+        Dim titles As String
+        Dim prices As String
+        Dim urls As String
+        'This IF statement makes a minimum requirement for the amount of data that must be entered
         If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
         Else
-            Dim keyword As String = Catagory & " " & SubCatagory & " " & colour & " " & material & " " & pattern
+            'This constructs the keyword string that is entered for the API
+            Dim keyword As String = brand & "" & Catagory & " " & SubCatagory & " " & colour & " " & material & " " & pattern
             Dim myURLFinder As New URLFinder
             myURLFinder.keyWord = keyword
             myURLFinder.getURLs()
-            Dim title As String = myURLFinder.TitleResult
-            Dim url As String = myURLFinder.URLResult
-            Dim price As String = myURLFinder.PriceResult
-            MessageBox.Show(title)
-            MessageBox.Show(url)
-            MessageBox.Show(price)
+            titles = myURLFinder.TitleResult
+            urls = myURLFinder.URLResult
+            prices = myURLFinder.PriceResult
+            'MessageBox.Show(titles)
+            'messagebox.show(urls)+
+            MessageBox.Show(prices)
         End If
 
+        'This is where the scroll bar is made
+        'Dim noOfMatches As Integer = findNoMatches(titles)
+        DisplayURLResults(titles, prices, urls)
+    End Sub
 
+    Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
+        'This splits the results by using the separator that i put in.
+        Dim titleArray() As String = titles.Split("|||")
+        Dim urlArray() As String = urls.Split("|||")
+        Dim priceArray() As String = prices.Split("|||")
+
+        'These variables will handle the spacing between each of the results
+        Dim padding As Integer = 10
+        Dim currentX As Integer = padding
+
+        'This creates a loop which will iterate the number of times that there are results. 
+        'The array is 0-based so i have to take 1 away from the total length
+        For i = 0 To titleArray.Length - 1
+            'This creates a new label on each iteration
+            Dim button As New Button
+            With button
+                'Formatting the label so it is the same format for each iteration 
+                .AutoSize = False
+                .Width = 200
+                .Height = 60
+                'This places the label according to other labels and the padding
+                .Location = New Point(currentX, padding)
+
+                'Saving the data to a variable so that it is easier to manipulate later
+                Dim separateTitle = titleArray(i).Replace("[", "").Replace("]", "").Trim()
+                Dim separateURL = urlArray(i)
+                Dim separatePrice = priceArray(i)
+
+                'displaying the data as text
+                '.Text = $"{separateTitle}" & Environment.NewLine & $"£{separatePrice}"
+                .Text = $"£{separatePrice}"
+
+                .TextAlign = ContentAlignment.MiddleCenter
+                'Makes the label visible in the panel
+                ResultsScrollPanel.Controls.Add(button)
+                'Creates the new x position for the next label
+                currentX += .Width + padding
+            End With
+        Next
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MessageBox.Show(Catagory & SubCatagory & colour & material & pattern)
+    End Sub
+
+    'Subroutine that will check that the brand the user enters is a real brand
+    Private Sub CMDValidateBrand_Click(sender As Object, e As EventArgs) Handles CMDValidateBrand.Click
+        Dim myValidation As New ValidateBrand
+        'Saves the brand name that is entered to the object using setters and getters.
+        myValidation.brand = brandText.Text
+        'Runs the subroutine inside of the class to valid if the brand is valid or not
+        myValidation.GetURLs()
+        'If the brand is valid, it will save the brand name to a variable in this forms, if it is not the variable is set to nothing to clear any previous entries from the field
+        If myValidation.valid = True Then
+            brand = myValidation.brand
+        Else
+            'Variable is reset back to nothing if the brand is invalid
+            brand = Nothing
+            'This is the error message that will appear if the user enteres a brand which the algorithm determines to be invalid
+            MessageBox.Show("Whoops! This brand was not a valid entry, please try again.")
+        End If
     End Sub
 End Class

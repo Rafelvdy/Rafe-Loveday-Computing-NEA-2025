@@ -7,9 +7,36 @@ Public Class URLFinder
     Private _keyWord As String
     Private urlList As List(Of String)
 
+    Private _TitleResult As String
+    Private _URLResults As String
+    Private _PriceResults As String
+
     Public Property TitleResult As String
+        Set(value As String)
+            _TitleResult = value
+        End Set
+        Get
+            Return _TitleResult
+        End Get
+    End Property
+
     Public Property URLResult As String
+        Set(value As String)
+            _URLResults = value
+        End Set
+        Get
+            Return _URLResults
+        End Get
+    End Property
+
     Public Property PriceResult As String
+        Set(value As String)
+            _PriceResults = value
+        End Set
+        Get
+            Return _PriceResults
+        End Get
+    End Property
 
     'Setter and getter so that i can securely have the keyword inputted from the user put into the object
     Public Property keyWord As String
@@ -22,7 +49,7 @@ Public Class URLFinder
     End Property
 
     'Subroutine which will get the URLs
-    Public Sub getURLs()
+    Public Overridable Sub getURLs()
         'Variables will be instantiated when the subroutine is called to save memory
         'Variables are used to set up the API request
         Dim apiKey As String = "RafeLove-TLtest-PRD-6cd756e94-4998fc56"
@@ -68,20 +95,16 @@ Public Class URLFinder
                 Dim price As String = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
 
                 'Appends the results so that it is formatted for display
-                titleResult &= $"Item: {title}" & Environment.NewLine
-                'me allows me to reference the current class so that the variables can be stored in the public properties
-                Me.TitleResult = titleResult
-                urlResult &= $"URL: {viewUrl}" & Environment.NewLine
-                Me.URLResult = urlResult
-                priceResult &= $"Price: ${price}" & Environment.NewLine & Environment.NewLine
-                Me.PriceResult = priceResult
-            Next
+                titleResult &= $"{title}|||"
+                urlResult &= $"{viewUrl}|||"
+                priceResult &= $"{price}|||"
 
-            'calls subroutine so that it can be returned to to the clothingDetails form
-            Dim results() As String = {titleResult, urlResult, priceResult}
-            For Each item In results
-                getResults(item)
             Next
+            'me allows me to reference the current class so that the variables can be stored in the public properties
+            'I moved these out as they did not need to be ran every iteration. Also the change takes off the extra splitters at the end.
+            Me.TitleResult = titleResult.TrimEnd("|||")
+            Me.URLResult = urlResult.TrimEnd("|||")
+            Me.PriceResult = priceResult.TrimEnd("|||")
 
             reader.Close()
             response.Close()
@@ -89,7 +112,7 @@ Public Class URLFinder
         Catch ex As WebException
             'This will handle any potential errors
             If ex.Response IsNot Nothing Then
-                Using reader As New StreamReader(ex.Response.GetresponseStream())
+                Using reader As New StreamReader(ex.Response.GetResponseStream())
                     Dim errorResponse As String = reader.ReadToEnd()
                     MessageBox.Show("API Error: " & errorResponse, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Using
@@ -99,8 +122,6 @@ Public Class URLFinder
         End Try
     End Sub
 
-    'A method which can pass the data back into clothingDetails form
-    Public Function getResults(ByVal result As String)
-        Return result
-    End Function
+
+
 End Class

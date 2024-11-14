@@ -181,6 +181,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="URLFinder.vb" />
+    <Compile Include="ValidateBrand.vb" />
     <Compile Include="Wardrobe.Designer.vb">
       <DependentUpon>Wardrobe.vb</DependentUpon>
     </Compile>

@@ -29,7 +29,7 @@ Partial Class ImageAnalysis
         'PictureBox1
         '
         Me.PictureBox1.Location = New System.Drawing.Point(47, 55)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -42,7 +42,7 @@ Partial Class ImageAnalysis
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1323, 766)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ImageAnalysis"
         Me.Text = "ImageAnalysis"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
