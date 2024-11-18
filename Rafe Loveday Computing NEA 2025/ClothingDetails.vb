@@ -246,7 +246,8 @@ Public Class ClothingDetails
         Dim prices As String
         Dim urls As String
         'This IF statement makes a minimum requirement for the amount of data that must be entered
-        If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
+        ' If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
+        If brand = Nothing Then
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
         Else
             'This constructs the keyword string that is entered for the API
@@ -257,55 +258,56 @@ Public Class ClothingDetails
             titles = myURLFinder.TitleResult
             urls = myURLFinder.URLResult
             prices = myURLFinder.PriceResult
-            'MessageBox.Show(titles)
-            'messagebox.show(urls)+
             MessageBox.Show(prices)
+            DisplayURLResults(titles, prices, urls)
         End If
-
-        'This is where the scroll bar is made
-        'Dim noOfMatches As Integer = findNoMatches(titles)
-        DisplayURLResults(titles, prices, urls)
     End Sub
 
     Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
+        'Showing the panel so that the buttons can be organised inside and resets anything that could be in there
+        If ResultsScrollPanel.Visible = False Then
+            ResultsScrollPanel.Show()
+        End If
+        ResultsScrollPanel.Controls.Clear()
         'This splits the results by using the separator that i put in.
         Dim titleArray() As String = titles.Split("|||")
         Dim urlArray() As String = urls.Split("|||")
         Dim priceArray() As String = prices.Split("|||")
-
         'These variables will handle the spacing between each of the results
         Dim padding As Integer = 10
         Dim currentX As Integer = padding
-
         'This creates a loop which will iterate the number of times that there are results. 
         'The array is 0-based so i have to take 1 away from the total length
         For i = 0 To titleArray.Length - 1
-            'This creates a new label on each iteration
-            Dim button As New Button
-            With button
-                'Formatting the label so it is the same format for each iteration 
-                .AutoSize = False
-                .Width = 200
-                .Height = 60
-                'This places the label according to other labels and the padding
-                .Location = New Point(currentX, padding)
+            If priceArray(i) <> "" Then
+                'This creates a new label on each iteration
+                Dim button As New Button
+                With button
+                    'Tagging the button with the URL so that it can be accessed
+                    .Tag = urlArray(i)
+                    'Formatting the label so it is the same format for each iteration 
+                    .AutoSize = False
+                    .Width = 200
+                    .Height = 60
+                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{priceArray(i)}"
+                    'This places the label according to other labels and the padding
+                    .Location = New Point(currentX, padding)
+                    .TextAlign = ContentAlignment.MiddleCenter
+                    'Makes the label visible in the panel
+                    ResultsScrollPanel.Controls.Add(button)
+                    'Creates the new x position for the next label
+                    currentX += .Width + padding
 
-                'Saving the data to a variable so that it is easier to manipulate later
-                Dim separateTitle = titleArray(i).Replace("[", "").Replace("]", "").Trim()
-                Dim separateURL = urlArray(i)
-                Dim separatePrice = priceArray(i)
-
-                'displaying the data as text
-                '.Text = $"{separateTitle}" & Environment.NewLine & $"£{separatePrice}"
-                .Text = $"£{separatePrice}"
-
-                .TextAlign = ContentAlignment.MiddleCenter
-                'Makes the label visible in the panel
-                ResultsScrollPanel.Controls.Add(button)
-                'Creates the new x position for the next label
-                currentX += .Width + padding
-            End With
+                    'Adding a handler to the buttons so that the user can display the pages on the browser
+                    AddHandler button.Click, AddressOf resultButton
+                End With
+            End If
         Next
+    End Sub
+
+    Private Sub resultButton(e As EventArgs, sender As Object)
+        Dim buttonClicked As Button = sender
+        ResultBrowser.Url = sender.tag
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -322,11 +324,15 @@ Public Class ClothingDetails
         'If the brand is valid, it will save the brand name to a variable in this forms, if it is not the variable is set to nothing to clear any previous entries from the field
         If myValidation.valid = True Then
             brand = myValidation.brand
+            'This will make a green box appear under the brand text box if the user enters a valid brand
+            isValidPanel.BackColor = Color.Green
+            isValidPanel.Visible = True
         Else
             'Variable is reset back to nothing if the brand is invalid
             brand = Nothing
-            'This is the error message that will appear if the user enteres a brand which the algorithm determines to be invalid
-            MessageBox.Show("Whoops! This brand was not a valid entry, please try again.")
+            'This will make a red box appear under the brand text box if the user enters an invalid brand
+            isValidPanel.BackColor = Color.Red
+            isValidPanel.Visible = True
         End If
     End Sub
 End Class

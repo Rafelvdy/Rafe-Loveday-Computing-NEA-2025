@@ -122,6 +122,4 @@ Public Class URLFinder
         End Try
     End Sub
 
-
-
 End Class

@@ -73,7 +73,9 @@ Partial Class ClothingDetails
         Me.BrandPanel = New System.Windows.Forms.Panel()
         Me.CMDValidateBrand = New System.Windows.Forms.Button()
         Me.brandText = New System.Windows.Forms.TextBox()
+        Me.isValidPanel = New System.Windows.Forms.Panel()
         Me.ResultsScrollPanel = New System.Windows.Forms.Panel()
+        Me.ResultBrowser = New System.Windows.Forms.WebBrowser()
         Me.LabelPanel.SuspendLayout()
         Me.CatagoryPanel.SuspendLayout()
         Me.ColourPanel.SuspendLayout()
@@ -801,7 +803,7 @@ Partial Class ClothingDetails
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(923, 182)
+        Me.Button1.Location = New System.Drawing.Point(1345, 296)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
@@ -814,24 +816,25 @@ Partial Class ClothingDetails
         Me.BrandPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.BrandPanel.Controls.Add(Me.CMDValidateBrand)
         Me.BrandPanel.Controls.Add(Me.brandText)
+        Me.BrandPanel.Controls.Add(Me.isValidPanel)
         Me.BrandPanel.Location = New System.Drawing.Point(505, 50)
         Me.BrandPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BrandPanel.Name = "BrandPanel"
-        Me.BrandPanel.Size = New System.Drawing.Size(229, 68)
+        Me.BrandPanel.Size = New System.Drawing.Size(229, 80)
         Me.BrandPanel.TabIndex = 8
         Me.BrandPanel.Visible = False
         '
         'CMDValidateBrand
         '
-        Me.CMDValidateBrand.BackColor = System.Drawing.Color.FromArgb(CType(CType(47, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CMDValidateBrand.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.CMDValidateBrand.FlatAppearance.BorderSize = 0
         Me.CMDValidateBrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDValidateBrand.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDValidateBrand.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDValidateBrand.Location = New System.Drawing.Point(13, 32)
+        Me.CMDValidateBrand.Location = New System.Drawing.Point(-4, 48)
         Me.CMDValidateBrand.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDValidateBrand.Name = "CMDValidateBrand"
-        Me.CMDValidateBrand.Size = New System.Drawing.Size(95, 30)
+        Me.CMDValidateBrand.Size = New System.Drawing.Size(233, 32)
         Me.CMDValidateBrand.TabIndex = 9
         Me.CMDValidateBrand.Text = "Enter"
         Me.CMDValidateBrand.UseVisualStyleBackColor = False
@@ -844,22 +847,43 @@ Partial Class ClothingDetails
         Me.brandText.Size = New System.Drawing.Size(199, 22)
         Me.brandText.TabIndex = 0
         '
+        'isValidPanel
+        '
+        Me.isValidPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.isValidPanel.Location = New System.Drawing.Point(13, 5)
+        Me.isValidPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.isValidPanel.Name = "isValidPanel"
+        Me.isValidPanel.Size = New System.Drawing.Size(199, 28)
+        Me.isValidPanel.TabIndex = 1
+        Me.isValidPanel.Visible = False
+        '
         'ResultsScrollPanel
         '
         Me.ResultsScrollPanel.AutoScroll = True
-        Me.ResultsScrollPanel.BackColor = System.Drawing.Color.LightGray
-        Me.ResultsScrollPanel.Location = New System.Drawing.Point(130, 82)
+        Me.ResultsScrollPanel.BackColor = System.Drawing.SystemColors.Control
+        Me.ResultsScrollPanel.Location = New System.Drawing.Point(42, 82)
+        Me.ResultsScrollPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ResultsScrollPanel.Name = "ResultsScrollPanel"
-        Me.ResultsScrollPanel.Size = New System.Drawing.Size(1743, 939)
+        Me.ResultsScrollPanel.Size = New System.Drawing.Size(1440, 120)
         Me.ResultsScrollPanel.TabIndex = 11
+        Me.ResultsScrollPanel.Visible = False
+        '
+        'ResultBrowser
+        '
+        Me.ResultBrowser.Location = New System.Drawing.Point(42, 222)
+        Me.ResultBrowser.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.ResultBrowser.Name = "ResultBrowser"
+        Me.ResultBrowser.Size = New System.Drawing.Size(1440, 655)
+        Me.ResultBrowser.TabIndex = 12
         '
         'ClothingDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1901, 1033)
-        Me.Controls.Add(Me.BrandPanel)
+        Me.Controls.Add(Me.ResultBrowser)
         Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.BrandPanel)
         Me.Controls.Add(Me.PatternPanel)
         Me.Controls.Add(Me.MaterialPanel)
         Me.Controls.Add(Me.ColourPanel)
@@ -867,9 +891,10 @@ Partial Class ClothingDetails
         Me.Controls.Add(Me.CatagoryPanel)
         Me.Controls.Add(Me.LabelPanel)
         Me.Controls.Add(Me.ResultsScrollPanel)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ClothingDetails"
-        Me.Text = "Z"
+        Me.Text = "Clothing Details"
         Me.LabelPanel.ResumeLayout(False)
         Me.CatagoryPanel.ResumeLayout(False)
         Me.ColourPanel.ResumeLayout(False)
@@ -933,4 +958,6 @@ Partial Class ClothingDetails
     Friend WithEvents CMDValidateBrand As Button
     Friend WithEvents brandText As TextBox
     Friend WithEvents ResultsScrollPanel As Panel
+    Friend WithEvents isValidPanel As Panel
+    Friend WithEvents ResultBrowser As WebBrowser
 End Class
