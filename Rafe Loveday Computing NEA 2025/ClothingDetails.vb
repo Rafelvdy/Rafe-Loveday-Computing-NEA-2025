@@ -40,7 +40,7 @@ Public Class ClothingDetails
         'instantiates teh dataBaseconnecter class to an object
         Dim myDBConnector As New dataBaseconnector
         'Calls the required method, passing the data and table name for the data to go to
-        myDBConnector.Insert(filter, fieldName)
+        'myDBConnector.Insert(filter, fieldName)
     End Sub
 
     Private Sub openPanel(ByVal panel As Panel)
@@ -246,8 +246,7 @@ Public Class ClothingDetails
         Dim prices As String
         Dim urls As String
         'This IF statement makes a minimum requirement for the amount of data that must be entered
-        ' If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
-        If brand = Nothing Then
+        If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
         Else
             'This constructs the keyword string that is entered for the API
@@ -284,11 +283,20 @@ Public Class ClothingDetails
                 Dim button As New Button
                 With button
                     'Tagging the button with the URL so that it can be accessed
-                    .Tag = urlArray(i)
+                    Dim cleanURL = urlArray(i)
+                    With cleanURL
+                        .Replace("[", "")
+                        .Replace("]", "")
+                        .Replace("""", "")
+                        .Replace("'", "")
+                        .Trim()
+                    End With
+                    .Tag = cleanURL
                     'Formatting the label so it is the same format for each iteration 
                     .AutoSize = False
                     .Width = 200
                     .Height = 60
+                    .BackColor = Color.White
                     .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{priceArray(i)}"
                     'This places the label according to other labels and the padding
                     .Location = New Point(currentX, padding)
@@ -305,9 +313,20 @@ Public Class ClothingDetails
         Next
     End Sub
 
-    Private Sub resultButton(e As EventArgs, sender As Object)
+    'This subroutine is ran when one of the buttons which shows the URL results are pressed to display the url in google chrome
+    Private Sub resultButton(sender As Object, e As EventArgs)
         Dim buttonClicked As Button = sender
-        ResultBrowser.Url = sender.tag
+        Dim url As String = buttonClicked.Tag.ToString()
+        If buttonClicked.BackColor = Color.White Then
+            buttonClicked.BackColor = Color.Gray
+            ' Clean the URL
+            url = url.Replace("[", "").Replace("]", "").Replace("""", "").Trim()
+            'Open web page with URL
+            Process.Start(url)
+        ElseIf buttonClicked.BackColor = Color.Gray Then
+            buttonClicked.BackColor = Color.white
+        End If
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

@@ -9,7 +9,6 @@ Public Class Wardrobe
 
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
-
         'Create a new OpenFileDialogue Instance so that the user is able to select their images that they want to enter into the library
         Dim openFileDialog As New OpenFileDialog()
 
@@ -33,6 +32,10 @@ Public Class Wardrobe
                 pictureBox.Image = Image.FromFile(filename)
                 'This then adds the picture box into the flow layout pannel so that they images can be automatically arranged
                 FlowLayoutPanel1.Controls.Add(pictureBox)
+
+                'This calls the class that connects the program to the database and runs the subroutine to insert data
+                Dim myDBCon As New dataBaseconnector
+                myDBCon.Insert(filename, "ImageID", "IMAGE")
 
                 'Event handler to link each picture box to the picturebox click subroutine, so that as new pictureboxes are created they can all open the clothingdetails form
                 AddHandler pictureBox.Click, AddressOf PictureBox_click

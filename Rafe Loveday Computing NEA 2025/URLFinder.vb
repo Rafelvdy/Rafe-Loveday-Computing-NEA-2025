@@ -80,32 +80,35 @@ Public Class URLFinder
 
             'Searching through the JSON structure to access the array of items returned by the API
             Dim items = json("findItemsByKeywordsResponse")(0)("searchResult")(0)("item")
-            'Initialises an empty string so that the results can be added to it
-            Dim titleResult As String = ""
-            Dim urlResult As String = ""
-            Dim priceResult As String = ""
 
-            'This will loop through the items so that it can gather URLs and prices
-            For Each item In items
-                'Getting the title from the JSON object
-                Dim title As String = item("title").ToString()
-                'Getting the URL so the user can view the items on ebay 
-                Dim viewUrl As String = item("viewItemURL").ToString()
-                'Getting the price from the JSON structure
-                Dim price As String = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
+            If items IsNot Nothing Then
+                'Initialises an empty string so that the results can be added to it
+                Dim titleResult As String = ""
+                Dim urlResult As String = ""
+                Dim priceResult As String = ""
 
-                'Appends the results so that it is formatted for display
-                titleResult &= $"{title}|||"
-                urlResult &= $"{viewUrl}|||"
-                priceResult &= $"{price}|||"
+                'This will loop through the items so that it can gather URLs and prices
+                For Each item In items
+                    'Getting the title from the JSON object
+                    Dim title As String = item("title").ToString()
+                    'Getting the URL so the user can view the items on ebay 
+                    Dim viewUrl As String = item("viewItemURL").ToString()
+                    'Getting the price from the JSON structure
+                    Dim price As String = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
 
-            Next
-            'me allows me to reference the current class so that the variables can be stored in the public properties
-            'I moved these out as they did not need to be ran every iteration. Also the change takes off the extra splitters at the end.
-            Me.TitleResult = titleResult.TrimEnd("|||")
-            Me.URLResult = urlResult.TrimEnd("|||")
-            Me.PriceResult = priceResult.TrimEnd("|||")
-
+                    'Appends the results so that it is formatted for display
+                    titleResult &= $"{title}|||"
+                    urlResult &= $"{viewUrl}|||"
+                    priceResult &= $"{price}|||"
+                Next
+                'me allows me to reference the current class so that the variables can be stored in the public properties
+                'I moved these out as they did not need to be ran every iteration. Also the change takes off the extra splitters at the end.
+                Me.TitleResult = titleResult.TrimEnd("|||")
+                Me.URLResult = urlResult.TrimEnd("|||")
+                Me.PriceResult = priceResult.TrimEnd("|||")
+            Else
+                MessageBox.Show("There is no search results...")
+            End If
             reader.Close()
             response.Close()
 

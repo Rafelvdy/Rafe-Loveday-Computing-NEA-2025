@@ -75,7 +75,6 @@ Partial Class ClothingDetails
         Me.brandText = New System.Windows.Forms.TextBox()
         Me.isValidPanel = New System.Windows.Forms.Panel()
         Me.ResultsScrollPanel = New System.Windows.Forms.Panel()
-        Me.ResultBrowser = New System.Windows.Forms.WebBrowser()
         Me.LabelPanel.SuspendLayout()
         Me.CatagoryPanel.SuspendLayout()
         Me.ColourPanel.SuspendLayout()
@@ -803,7 +802,7 @@ Partial Class ClothingDetails
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(1345, 296)
+        Me.Button1.Location = New System.Drawing.Point(963, 224)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
@@ -868,20 +867,11 @@ Partial Class ClothingDetails
         Me.ResultsScrollPanel.TabIndex = 11
         Me.ResultsScrollPanel.Visible = False
         '
-        'ResultBrowser
-        '
-        Me.ResultBrowser.Location = New System.Drawing.Point(42, 222)
-        Me.ResultBrowser.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.ResultBrowser.Name = "ResultBrowser"
-        Me.ResultBrowser.Size = New System.Drawing.Size(1440, 655)
-        Me.ResultBrowser.TabIndex = 12
-        '
         'ClothingDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1901, 1033)
-        Me.Controls.Add(Me.ResultBrowser)
+        Me.ClientSize = New System.Drawing.Size(1545, 276)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BrandPanel)
         Me.Controls.Add(Me.PatternPanel)
@@ -959,5 +949,4 @@ Partial Class ClothingDetails
     Friend WithEvents brandText As TextBox
     Friend WithEvents ResultsScrollPanel As Panel
     Friend WithEvents isValidPanel As Panel
-    Friend WithEvents ResultBrowser As WebBrowser
 End Class
