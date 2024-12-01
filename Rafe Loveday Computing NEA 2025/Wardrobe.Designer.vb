@@ -24,7 +24,7 @@ Partial Class Wardrobe
     Private Sub InitializeComponent()
         Me.CMDAddImage = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.WardrobeImagePanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.SuspendLayout()
         '
         'CMDAddImage
@@ -42,16 +42,16 @@ Partial Class Wardrobe
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         Me.OpenFileDialog1.Multiselect = True
         '
-        'FlowLayoutPanel1
+        'WardrobeImagePanel
         '
-        Me.FlowLayoutPanel1.AllowDrop = True
-        Me.FlowLayoutPanel1.AutoScroll = True
-        Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(12, 160)
-        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1892, 753)
-        Me.FlowLayoutPanel1.TabIndex = 2
+        Me.WardrobeImagePanel.AllowDrop = True
+        Me.WardrobeImagePanel.AutoScroll = True
+        Me.WardrobeImagePanel.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.WardrobeImagePanel.Location = New System.Drawing.Point(12, 160)
+        Me.WardrobeImagePanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.WardrobeImagePanel.Name = "WardrobeImagePanel"
+        Me.WardrobeImagePanel.Size = New System.Drawing.Size(1892, 753)
+        Me.WardrobeImagePanel.TabIndex = 2
         '
         'Wardrobe
         '
@@ -60,7 +60,7 @@ Partial Class Wardrobe
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1901, 990)
         Me.Controls.Add(Me.CMDAddImage)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Controls.Add(Me.WardrobeImagePanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Wardrobe"
@@ -72,5 +72,5 @@ Partial Class Wardrobe
 
     Friend WithEvents CMDAddImage As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents WardrobeImagePanel As FlowLayoutPanel
 End Class

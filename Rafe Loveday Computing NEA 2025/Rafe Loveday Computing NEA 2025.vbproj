@@ -180,6 +180,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="searchOrFilter.vb" />
     <Compile Include="URLFinder.vb" />
     <Compile Include="ValidateBrand.vb" />
     <Compile Include="Wardrobe.Designer.vb">

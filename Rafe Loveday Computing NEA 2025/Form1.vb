@@ -4,8 +4,12 @@ Imports System.Drawing
 Public Class MainMenu
     'A variable to keep track of the current form which is being displayed in the panel
     Private currentForm As Form = Nothing
+    'This variable is used to store whether there is an existing wardrobe for the user or not
+    Public WardrobeID As Integer
 
     Private Sub CMDOpenMenu_Click(sender As Object, e As EventArgs) Handles CMDOpenMenu.Click
+        Dim todaysdate As String = String.Format("{0:yyyy/MM/dd HH:mm:ss}", DateTime.Now)
+        MessageBox.Show(todaysdate)
         If MenuPanel.Visible = True Then
             MenuPanel.Hide()
         Else
@@ -15,6 +19,13 @@ Public Class MainMenu
 
     Private Sub CMDOpenWardrobe_Click(sender As Object, e As EventArgs) Handles CMDOpenWardrobe.Click
         menuSwap(Wardrobe)
+        Dim myDBconnector As New dataBaseconnector
+        'This identifies if there is a wardrobe
+        'If there is not it will create one
+        'The wardrobe ID is then returned
+        WardrobeID = myDBconnector.checkForWardrobe()
+        'This then populates the wardrobe using the wardrobeID just returned
+        myDBconnector.populateWardrobe(WardrobeID)
         'Clothes only show when this is here, not sure why
         Wardrobe.Show()
     End Sub
@@ -60,8 +71,6 @@ Public Class MainMenu
             menuSwap(ImageAnalysis)
             ImageAnalysis.Show()
         End If
-
-
     End Sub
 
 End Class
