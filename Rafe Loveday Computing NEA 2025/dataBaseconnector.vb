@@ -28,6 +28,7 @@ Public Class dataBaseconnector
 
 
     Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String)
+        'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
         'Runs the createConnection function and the returned value is stored into this subroutine
         Dim connection = createConnection()
         'Opens the connection between my program and the database
@@ -45,12 +46,12 @@ Public Class dataBaseconnector
         Dim wardrobeID As Integer = findWardrobeID()
         'This finds the wardrobeID of the wardrobe currently being used
         Dim imageID As Integer = findImageID()
-
         linkTables(wardrobeID, imageID)
         'Then reloads the flowlayout panel
         populateWardrobe(wardrobeID)
     End Sub
 
+    'This is used to link the image to the wardrobe
     Private Sub linkTables(ByVal wardrobeID As Integer, ByVal imageID As Integer)
         Dim connection = createConnection()
         'Opens the connection between my program and the database
@@ -97,6 +98,7 @@ Public Class dataBaseconnector
                         .Tag = imagePath
                     End With
                     AddHandler picturebox.Click, AddressOf pictureBox_Click
+                    AddHandler picturebox.MouseHover, AddressOf DeleteImage
                     Wardrobe.WardrobeImagePanel.Controls.Add(picturebox)
                 End If
             End While
@@ -207,5 +209,19 @@ Public Class dataBaseconnector
             MessageBox.Show("No data")
         End If
     End Function
+
+    Public Sub DeleteImage(sender As Object, e As EventArgs)
+        Dim deleteButton As New PictureBox
+        Dim imageItem As PictureBox = sender
+        imageItem.Controls.Add(deleteButton)
+        With deleteButton
+            .Image = Image.FromFile("C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\Images\60761.png")
+        End With
+        deleteButton.Show()
+    End Sub
+
+    Public Sub DeleteImageLeave()
+
+    End Sub
 
 End Class

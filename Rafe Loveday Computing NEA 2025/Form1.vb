@@ -8,14 +8,13 @@ Public Class MainMenu
     Public WardrobeID As Integer
 
     Private Sub CMDOpenMenu_Click(sender As Object, e As EventArgs) Handles CMDOpenMenu.Click
-        Dim todaysdate As String = String.Format("{0:yyyy/MM/dd HH:mm:ss}", DateTime.Now)
-        MessageBox.Show(todaysdate)
         If MenuPanel.Visible = True Then
             MenuPanel.Hide()
         Else
             MenuPanel.Show()
         End If
     End Sub
+
 
     Private Sub CMDOpenWardrobe_Click(sender As Object, e As EventArgs) Handles CMDOpenWardrobe.Click
         menuSwap(Wardrobe)
@@ -59,12 +58,10 @@ Public Class MainMenu
     Private Sub CMDSelectImage_Click(sender As Object, e As EventArgs) Handles CMDSelectImage.Click
         'Create a new OpenFileDialogue Instance
         Dim openFileDialog As New OpenFileDialog()
-
         'Set the filter options
         openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
         openFileDialog.Title = "Select an Image File"
         openFileDialog.ShowDialog()
-
         If openFileDialog.FileName <> "" Then
             Dim imageFile = openFileDialog.FileName
             ImageAnalysis.PictureBox1.Image = System.Drawing.Image.FromFile(imageFile)
