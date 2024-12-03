@@ -27,26 +27,38 @@ Public Class dataBaseconnector
     End Function
 
 
-    Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String)
+    Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String, ByVal link As Boolean, Optional ByVal UploadDate As String = Nothing)
         'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
         'Runs the createConnection function and the returned value is stored into this subroutine
         Dim connection = createConnection()
         'Opens the connection between my program and the database
         connection.open()
-        'Inserting into the Image table
-        'Making the sql command
-        Dim command As New OleDbCommand($"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)", connection)
-        'This uses a parameterized query to prevent any potential sql injections
+        Dim sql As String
+        'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
+        If UploadDate <> Nothing Then
+            'If there is an upload date, the upload date will be inserted when the image path is inserted
+            sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
+        Else
+            sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
+        End If
+        'Creating the command depending on the IF statement
+        Dim command As New OleDbCommand(sql, connection)
         command.Parameters.AddWithValue("@data", data)
-        'Executing the command to put the information into the database
+
+        If UploadDate <> Nothing Then
+            command.Parameters.AddWithValue("@uploadDate", UploadDate)
+        End If
         command.ExecuteNonQuery()
         connection.close()
-
-        'This finds the imageID of the most recent image added and then returns it to the variable
-        Dim wardrobeID As Integer = findWardrobeID()
         'This finds the wardrobeID of the wardrobe currently being used
-        Dim imageID As Integer = findImageID()
-        linkTables(wardrobeID, imageID)
+        Dim wardrobeID As Integer = findWardrobeID()
+        'If the link variable inputted as a parameter is true, the link tables subroutine is used
+        If link = True Then
+            'This finds the imageID of the most recent image added and then returns it to the variable
+            Dim imageID As Integer = findImageID()
+            linkTables(wardrobeID, imageID)
+        End If
+
         'Then reloads the flowlayout panel
         populateWardrobe(wardrobeID)
     End Sub
@@ -98,7 +110,7 @@ Public Class dataBaseconnector
                         .Tag = imagePath
                     End With
                     AddHandler picturebox.Click, AddressOf pictureBox_Click
-                    AddHandler picturebox.MouseHover, AddressOf DeleteImage
+                    AddHandler picturebox.MouseEnter, AddressOf DeleteButtonHandler
                     Wardrobe.WardrobeImagePanel.Controls.Add(picturebox)
                 End If
             End While
@@ -210,18 +222,56 @@ Public Class dataBaseconnector
         End If
     End Function
 
-    Public Sub DeleteImage(sender As Object, e As EventArgs)
+    Public Sub DeleteButtonHandler(sender As Object, e As EventArgs)
+        'This creates a new picture box so that the bin icon can be loaded into it
         Dim deleteButton As New PictureBox
+        'Gets the picture box that was hovered over and stores it in a variable
         Dim imageItem As PictureBox = sender
-        imageItem.Controls.Add(deleteButton)
+
+        'Formatting the delete button that will appear on hover
         With deleteButton
             .Image = Image.FromFile("C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\Images\60761.png")
+            .Size = New Size(20, 20)
+            .SizeMode = PictureBoxSizeMode.Zoom
+            'Choosing the location of the button depending on the width of the picture box so it will always be in top corner
+            .Location = New Point(imageItem.Width - 25, 5)
+            .BackColor = Color.Transparent
         End With
+
+        'Adding a handler if the deletebutton is clicked so that the record can be deleted
+        AddHandler deleteButton.Click, AddressOf DeleteImage
+
+
+        imageItem.Controls.Add(deleteButton)
         deleteButton.Show()
+
+
+
+        'Adding a handler here as it is only needed if the user has hovered over the image
+        AddHandler imageItem.MouseLeave, AddressOf DeleteImageLeave
+
+
     End Sub
 
-    Public Sub DeleteImageLeave()
+    Public Sub DeleteImageLeave(sender As Object, e As EventArgs)
+        Dim imageItem As PictureBox = sender
+        imageItem.Controls.Clear()
+    End Sub
 
+    Public Sub DeleteImage(sender As Object, e As EventArgs)
+        MessageBox.Show("HELLO")
+        Dim imageItem As PictureBox = sender
+        Dim imagePath As String = imageItem.Tag
+        Dim wardrobeID As Integer = findWardrobeID()
+
+        Dim connection = createConnection()
+        connection.open()
+        Dim command As New OleDbCommand($"DELETE FROM IMAGE WHERE ImagePath = {imagePath}", connection)
+
+
+        command.ExecuteNonQuery()
+        connection.close()
+        populateWardrobe(wardrobeID)
     End Sub
 
 End Class

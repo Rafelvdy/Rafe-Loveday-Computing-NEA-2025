@@ -4,9 +4,7 @@ Imports System.Drawing
 Imports System.Windows.Automation
 
 Public Class Wardrobe
-    'Creating variables to communicate with the database (& Application.StartupPath &)(
-    ' Dim con As OleDbConnection = New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\DigitalWardrobe.accdb;")
-
+    Private link As Boolean = False
 
     Private Sub CMDAddImage_Click(sender As Object, e As EventArgs) Handles CMDAddImage.Click
         'Create a new OpenFileDialogue Instance so that the user is able to select their images that they want to enter into the library
@@ -21,9 +19,11 @@ Public Class Wardrobe
             For Each filename In openFileDialog.FileNames
                 'This calls the class that connects the program to the database and runs the subroutine to insert data
                 Dim myDBCon As New dataBaseconnector
-                myDBCon.Insert(filename, "ImagePath", "IMAGE")
+                ''Link is set to true before hand as it this requires linking the tables
+                link = True
                 Dim todaysDate As String = DateString
-                myDBCon.Insert(todaysDate, "UploadDate", "IMAGE")
+                myDBCon.Insert(filename, "ImagePath", "IMAGE", link, todaysDate)
+                'DISPLAYING THE WARDROBE
                 Dim wardrobeID As Integer = myDBCon.findWardrobeID()
                 myDBCon.populateWardrobe(wardrobeID)
             Next
