@@ -352,6 +352,12 @@
   <ItemGroup>
     <None Include="Resources\menu.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bin Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bin Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets" Condition="Exists('..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

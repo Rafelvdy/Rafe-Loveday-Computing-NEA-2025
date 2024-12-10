@@ -1,9 +1,14 @@
 ﻿Imports System.Data.OleDb
 
 Public Class dataBaseconnector
+    'This creates a new picture box so that the bin icon can be loaded into it
+    'Also becomes global so that i can add handlers to it
+    Dim WithEvents deleteButton As New PictureBox
+
+    Dim deleteButtonTimer As New Timer
+
     'Creating a variable to hold the connection string to the access database which is private so that it can only be accessed inside the object
     Private connectionString As String = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & Application.StartupPath & "\DigitalWardrobe.accdb"
-
 
     'A structure which will hold the information which is being written to the database
     Public Structure dataToDB
@@ -19,13 +24,11 @@ Public Class dataBaseconnector
         Public WearFrequency As String
     End Structure
 
-
     Public Function createConnection()
         'Creating a new instance of the oleDBConnection object with the connection string as a parameter
         Dim connection As New OleDbConnection(connectionString)
         Return connection
     End Function
-
 
     Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String, ByVal link As Boolean, Optional ByVal UploadDate As String = Nothing)
         'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
@@ -109,8 +112,12 @@ Public Class dataBaseconnector
                         .SizeMode = PictureBoxSizeMode.Zoom
                         .Tag = imagePath
                     End With
-                    AddHandler picturebox.Click, AddressOf pictureBox_Click
+                    'This handler makes the clothing details page when double clicked
+                    AddHandler picturebox.DoubleClick, AddressOf pictureBox_Click
+                    'This handler makes the bin icon appear when hovering over a clothing item
                     AddHandler picturebox.MouseEnter, AddressOf DeleteButtonHandler
+
+
                     Wardrobe.WardrobeImagePanel.Controls.Add(picturebox)
                 End If
             End While
@@ -164,6 +171,7 @@ Public Class dataBaseconnector
             Return createWardrobe(connection)
         End If
     End Function
+
     'This subroutine is ran if there is no existing wardrobe
     'It will create a wardrobe and return its ID
     Public Function createWardrobe(ByVal connection As OleDbConnection)
@@ -223,45 +231,54 @@ Public Class dataBaseconnector
     End Function
 
     Public Sub DeleteButtonHandler(sender As Object, e As EventArgs)
-        'This creates a new picture box so that the bin icon can be loaded into it
-        Dim deleteButton As New PictureBox
         'Gets the picture box that was hovered over and stores it in a variable
-        Dim imageItem As PictureBox = sender
+        Dim clothingItem As PictureBox = sender
+
+        'When the user hovers over the clothing item any current controls are removed to ensure one bin icon
+        clothingItem.Controls.Clear()
 
         'Formatting the delete button that will appear on hover
         With deleteButton
-            .Image = Image.FromFile("C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\Images\60761.png")
+            .Image = Image.FromFile(Application.StartupPath & "\Icons\60761.png")
             .Size = New Size(20, 20)
             .SizeMode = PictureBoxSizeMode.Zoom
             'Choosing the location of the button depending on the width of the picture box so it will always be in top corner
-            .Location = New Point(imageItem.Width - 25, 5)
+            .Location = New Point(clothingItem.Width - 25, 5)
             .BackColor = Color.Transparent
+            'This adds the imagepath of the clothing item to the tag of the bin icon so that when clicked the program knows which image is being deleted
+            .Tag = clothingItem.Tag
         End With
 
-        'Adding a handler if the deletebutton is clicked so that the record can be deleted
+
+
+        deleteButtonTimer.Interval = 1500
+        AddHandler deleteButtonTimer.Tick, AddressOf TimerEnd
+
+        'Handler is now only added to the bin icon when the clothing item is hovered over
+        'So there is only ever one handler for this event running at one time on one bin icon
         AddHandler deleteButton.Click, AddressOf DeleteImage
 
+        AddHandler clothingItem.MouseMove, AddressOf showIcon
 
-        imageItem.Controls.Add(deleteButton)
+        clothingItem.Controls.Add(deleteButton)
         deleteButton.Show()
-
-
-
-        'Adding a handler here as it is only needed if the user has hovered over the image
-        AddHandler imageItem.MouseLeave, AddressOf DeleteImageLeave
-
-
     End Sub
 
-    Public Sub DeleteImageLeave(sender As Object, e As EventArgs)
-        Dim imageItem As PictureBox = sender
-        imageItem.Controls.Clear()
+    Private Sub TimerEnd()
+        deleteButton.Visible = False
+        deleteButtonTimer.Stop()
+    End Sub
+
+    Private Sub showIcon()
+        deleteButton.Visible = True
+        deleteButtonTimer.Start()
     End Sub
 
     Public Sub DeleteImage(sender As Object, e As EventArgs)
-        MessageBox.Show("HELLO")
-        Dim imageItem As PictureBox = sender
-        Dim imagePath As String = imageItem.Tag
+        'Sender is the delete button and the program needs to be able to access the tag of the clothingItem
+        'This finds the parent of the deleteButton so the image can be accessed
+        deleteButton = sender
+        Dim imagePath As String = deleteButton.Tag
         Dim wardrobeID As Integer = findWardrobeID()
 
         Dim connection = createConnection()
@@ -271,6 +288,8 @@ Public Class dataBaseconnector
 
         command.ExecuteNonQuery()
         connection.close()
+
+        'Refreshing the wardrobe
         populateWardrobe(wardrobeID)
     End Sub
 
