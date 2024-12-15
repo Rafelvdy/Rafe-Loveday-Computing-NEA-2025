@@ -4,12 +4,24 @@ Imports Newtonsoft.Json.Linq
 
 
 Public Class URLFinder
+    'Variable to flag whether to Display URLS
+    Private _displayResult As Boolean
+
     Private _keyWord As String
     Private urlList As List(Of String)
 
     Private _TitleResult As String
     Private _URLResults As String
     Private _PriceResults As String
+
+    Public Property displayResult As Boolean
+        Set(value As Boolean)
+            _displayResult = value
+        End Set
+        Get
+            Return _displayResult
+        End Get
+    End Property
 
     Public Property TitleResult As String
         Set(value As String)
@@ -107,7 +119,8 @@ Public Class URLFinder
                 Me.URLResult = urlResult.TrimEnd("|||")
                 Me.PriceResult = priceResult.TrimEnd("|||")
             Else
-                MessageBox.Show("There is no search results...")
+                _displayResult = False
+
             End If
             reader.Close()
             response.Close()

@@ -69,7 +69,6 @@ Partial Class ClothingDetails
         Me.CMDPatternAbstract = New System.Windows.Forms.Button()
         Me.CMDPatternPolka = New System.Windows.Forms.Button()
         Me.CMDPatternFloral = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.BrandPanel = New System.Windows.Forms.Panel()
         Me.CMDValidateBrand = New System.Windows.Forms.Button()
         Me.brandText = New System.Windows.Forms.TextBox()
@@ -94,9 +93,9 @@ Partial Class ClothingDetails
         Me.LabelPanel.Controls.Add(Me.CMDSubCatagory)
         Me.LabelPanel.Controls.Add(Me.CMDCatagory)
         Me.LabelPanel.Location = New System.Drawing.Point(0, 0)
-        Me.LabelPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.LabelPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LabelPanel.Name = "LabelPanel"
-        Me.LabelPanel.Size = New System.Drawing.Size(1907, 46)
+        Me.LabelPanel.Size = New System.Drawing.Size(1430, 37)
         Me.LabelPanel.TabIndex = 4
         '
         'CMDBrand
@@ -106,10 +105,10 @@ Partial Class ClothingDetails
         Me.CMDBrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDBrand.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDBrand.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDBrand.Location = New System.Drawing.Point(501, 0)
-        Me.CMDBrand.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDBrand.Location = New System.Drawing.Point(376, 0)
+        Me.CMDBrand.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDBrand.Name = "CMDBrand"
-        Me.CMDBrand.Size = New System.Drawing.Size(95, 46)
+        Me.CMDBrand.Size = New System.Drawing.Size(71, 37)
         Me.CMDBrand.TabIndex = 8
         Me.CMDBrand.Text = "Brand"
         Me.CMDBrand.UseVisualStyleBackColor = False
@@ -121,10 +120,10 @@ Partial Class ClothingDetails
         Me.CMDFindURLs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDFindURLs.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDFindURLs.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDFindURLs.Location = New System.Drawing.Point(705, 0)
-        Me.CMDFindURLs.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDFindURLs.Location = New System.Drawing.Point(529, 0)
+        Me.CMDFindURLs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDFindURLs.Name = "CMDFindURLs"
-        Me.CMDFindURLs.Size = New System.Drawing.Size(95, 46)
+        Me.CMDFindURLs.Size = New System.Drawing.Size(71, 37)
         Me.CMDFindURLs.TabIndex = 7
         Me.CMDFindURLs.Text = "Find URLs"
         Me.CMDFindURLs.UseVisualStyleBackColor = False
@@ -136,10 +135,10 @@ Partial Class ClothingDetails
         Me.CMDPattern.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPattern.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPattern.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPattern.Location = New System.Drawing.Point(301, 0)
-        Me.CMDPattern.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPattern.Location = New System.Drawing.Point(226, 0)
+        Me.CMDPattern.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPattern.Name = "CMDPattern"
-        Me.CMDPattern.Size = New System.Drawing.Size(95, 46)
+        Me.CMDPattern.Size = New System.Drawing.Size(71, 37)
         Me.CMDPattern.TabIndex = 6
         Me.CMDPattern.Text = "Pattern"
         Me.CMDPattern.UseVisualStyleBackColor = False
@@ -151,10 +150,10 @@ Partial Class ClothingDetails
         Me.CMDMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterial.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterial.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterial.Location = New System.Drawing.Point(200, 0)
-        Me.CMDMaterial.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterial.Location = New System.Drawing.Point(150, 0)
+        Me.CMDMaterial.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterial.Name = "CMDMaterial"
-        Me.CMDMaterial.Size = New System.Drawing.Size(95, 46)
+        Me.CMDMaterial.Size = New System.Drawing.Size(71, 37)
         Me.CMDMaterial.TabIndex = 5
         Me.CMDMaterial.Text = "Material"
         Me.CMDMaterial.UseVisualStyleBackColor = False
@@ -166,10 +165,10 @@ Partial Class ClothingDetails
         Me.CMDColour.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColour.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColour.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColour.Location = New System.Drawing.Point(403, 0)
-        Me.CMDColour.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColour.Location = New System.Drawing.Point(302, 0)
+        Me.CMDColour.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColour.Name = "CMDColour"
-        Me.CMDColour.Size = New System.Drawing.Size(95, 46)
+        Me.CMDColour.Size = New System.Drawing.Size(71, 37)
         Me.CMDColour.TabIndex = 4
         Me.CMDColour.Text = "Colour"
         Me.CMDColour.UseVisualStyleBackColor = False
@@ -181,10 +180,10 @@ Partial Class ClothingDetails
         Me.CMDSubCatagory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDSubCatagory.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDSubCatagory.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDSubCatagory.Location = New System.Drawing.Point(101, 0)
-        Me.CMDSubCatagory.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDSubCatagory.Location = New System.Drawing.Point(76, 0)
+        Me.CMDSubCatagory.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDSubCatagory.Name = "CMDSubCatagory"
-        Me.CMDSubCatagory.Size = New System.Drawing.Size(95, 46)
+        Me.CMDSubCatagory.Size = New System.Drawing.Size(71, 37)
         Me.CMDSubCatagory.TabIndex = 3
         Me.CMDSubCatagory.Text = "Sub Catagory"
         Me.CMDSubCatagory.UseVisualStyleBackColor = False
@@ -197,9 +196,9 @@ Partial Class ClothingDetails
         Me.CMDCatagory.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDCatagory.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.CMDCatagory.Location = New System.Drawing.Point(0, 0)
-        Me.CMDCatagory.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDCatagory.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDCatagory.Name = "CMDCatagory"
-        Me.CMDCatagory.Size = New System.Drawing.Size(95, 46)
+        Me.CMDCatagory.Size = New System.Drawing.Size(71, 37)
         Me.CMDCatagory.TabIndex = 2
         Me.CMDCatagory.Text = "Category "
         Me.CMDCatagory.UseVisualStyleBackColor = False
@@ -212,10 +211,10 @@ Partial Class ClothingDetails
         Me.CatagoryPanel.Controls.Add(Me.CMDTrousers)
         Me.CatagoryPanel.Controls.Add(Me.CMDTshirt)
         Me.CatagoryPanel.Controls.Add(Me.CMDJumpers)
-        Me.CatagoryPanel.Location = New System.Drawing.Point(0, 50)
-        Me.CatagoryPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CatagoryPanel.Location = New System.Drawing.Point(0, 41)
+        Me.CatagoryPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CatagoryPanel.Name = "CatagoryPanel"
-        Me.CatagoryPanel.Size = New System.Drawing.Size(95, 174)
+        Me.CatagoryPanel.Size = New System.Drawing.Size(71, 141)
         Me.CatagoryPanel.TabIndex = 5
         Me.CatagoryPanel.Visible = False
         '
@@ -226,10 +225,10 @@ Partial Class ClothingDetails
         Me.CMDOutWear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDOutWear.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDOutWear.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDOutWear.Location = New System.Drawing.Point(-5, 0)
-        Me.CMDOutWear.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDOutWear.Location = New System.Drawing.Point(-4, 0)
+        Me.CMDOutWear.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDOutWear.Name = "CMDOutWear"
-        Me.CMDOutWear.Size = New System.Drawing.Size(101, 31)
+        Me.CMDOutWear.Size = New System.Drawing.Size(76, 25)
         Me.CMDOutWear.TabIndex = 6
         Me.CMDOutWear.Text = "Outwear"
         Me.CMDOutWear.UseVisualStyleBackColor = False
@@ -241,10 +240,10 @@ Partial Class ClothingDetails
         Me.CMDShorts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDShorts.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDShorts.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDShorts.Location = New System.Drawing.Point(-5, 140)
-        Me.CMDShorts.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDShorts.Location = New System.Drawing.Point(-4, 114)
+        Me.CMDShorts.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDShorts.Name = "CMDShorts"
-        Me.CMDShorts.Size = New System.Drawing.Size(111, 34)
+        Me.CMDShorts.Size = New System.Drawing.Size(83, 28)
         Me.CMDShorts.TabIndex = 5
         Me.CMDShorts.Text = "Shorts"
         Me.CMDShorts.UseVisualStyleBackColor = False
@@ -256,10 +255,10 @@ Partial Class ClothingDetails
         Me.CMDTrousers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDTrousers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDTrousers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDTrousers.Location = New System.Drawing.Point(-5, 105)
-        Me.CMDTrousers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDTrousers.Location = New System.Drawing.Point(-4, 85)
+        Me.CMDTrousers.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDTrousers.Name = "CMDTrousers"
-        Me.CMDTrousers.Size = New System.Drawing.Size(101, 31)
+        Me.CMDTrousers.Size = New System.Drawing.Size(76, 25)
         Me.CMDTrousers.TabIndex = 4
         Me.CMDTrousers.Text = "Trousers"
         Me.CMDTrousers.UseVisualStyleBackColor = False
@@ -271,10 +270,10 @@ Partial Class ClothingDetails
         Me.CMDTshirt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDTshirt.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDTshirt.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDTshirt.Location = New System.Drawing.Point(-5, 70)
-        Me.CMDTshirt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDTshirt.Location = New System.Drawing.Point(-4, 57)
+        Me.CMDTshirt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDTshirt.Name = "CMDTshirt"
-        Me.CMDTshirt.Size = New System.Drawing.Size(111, 31)
+        Me.CMDTshirt.Size = New System.Drawing.Size(83, 25)
         Me.CMDTshirt.TabIndex = 3
         Me.CMDTshirt.Text = "T-Shirt"
         Me.CMDTshirt.UseVisualStyleBackColor = False
@@ -286,10 +285,10 @@ Partial Class ClothingDetails
         Me.CMDJumpers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDJumpers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDJumpers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDJumpers.Location = New System.Drawing.Point(-5, 34)
-        Me.CMDJumpers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDJumpers.Location = New System.Drawing.Point(-4, 28)
+        Me.CMDJumpers.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDJumpers.Name = "CMDJumpers"
-        Me.CMDJumpers.Size = New System.Drawing.Size(101, 31)
+        Me.CMDJumpers.Size = New System.Drawing.Size(76, 25)
         Me.CMDJumpers.TabIndex = 6
         Me.CMDJumpers.Text = "Jumpers"
         Me.CMDJumpers.UseVisualStyleBackColor = False
@@ -297,10 +296,10 @@ Partial Class ClothingDetails
         'SubCatagoryPanel
         '
         Me.SubCatagoryPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.SubCatagoryPanel.Location = New System.Drawing.Point(100, 50)
-        Me.SubCatagoryPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.SubCatagoryPanel.Location = New System.Drawing.Point(75, 41)
+        Me.SubCatagoryPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SubCatagoryPanel.Name = "SubCatagoryPanel"
-        Me.SubCatagoryPanel.Size = New System.Drawing.Size(95, 208)
+        Me.SubCatagoryPanel.Size = New System.Drawing.Size(71, 169)
         Me.SubCatagoryPanel.TabIndex = 7
         Me.SubCatagoryPanel.Visible = False
         '
@@ -325,10 +324,10 @@ Partial Class ClothingDetails
         Me.ColourPanel.Controls.Add(Me.CMDColourBlue)
         Me.ColourPanel.Controls.Add(Me.CMDColourWhite)
         Me.ColourPanel.Controls.Add(Me.CMDColourBlack)
-        Me.ColourPanel.Location = New System.Drawing.Point(401, 50)
-        Me.ColourPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ColourPanel.Location = New System.Drawing.Point(301, 41)
+        Me.ColourPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ColourPanel.Name = "ColourPanel"
-        Me.ColourPanel.Size = New System.Drawing.Size(120, 210)
+        Me.ColourPanel.Size = New System.Drawing.Size(90, 171)
         Me.ColourPanel.TabIndex = 8
         Me.ColourPanel.Visible = False
         '
@@ -339,10 +338,10 @@ Partial Class ClothingDetails
         Me.CMDColourPurple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourPurple.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourPurple.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourPurple.Location = New System.Drawing.Point(0, 561)
-        Me.CMDColourPurple.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourPurple.Location = New System.Drawing.Point(0, 456)
+        Me.CMDColourPurple.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourPurple.Name = "CMDColourPurple"
-        Me.CMDColourPurple.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourPurple.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourPurple.TabIndex = 12
         Me.CMDColourPurple.Text = "Purple"
         Me.CMDColourPurple.UseVisualStyleBackColor = False
@@ -354,10 +353,10 @@ Partial Class ClothingDetails
         Me.CMDColourKhaki.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourKhaki.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourKhaki.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourKhaki.Location = New System.Drawing.Point(0, 526)
-        Me.CMDColourKhaki.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourKhaki.Location = New System.Drawing.Point(0, 427)
+        Me.CMDColourKhaki.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourKhaki.Name = "CMDColourKhaki"
-        Me.CMDColourKhaki.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourKhaki.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourKhaki.TabIndex = 12
         Me.CMDColourKhaki.Text = "Khaki"
         Me.CMDColourKhaki.UseVisualStyleBackColor = False
@@ -369,10 +368,10 @@ Partial Class ClothingDetails
         Me.CMDColourYellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourYellow.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourYellow.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourYellow.Location = New System.Drawing.Point(0, 491)
-        Me.CMDColourYellow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourYellow.Location = New System.Drawing.Point(0, 399)
+        Me.CMDColourYellow.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourYellow.Name = "CMDColourYellow"
-        Me.CMDColourYellow.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourYellow.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourYellow.TabIndex = 12
         Me.CMDColourYellow.Text = "Yellow"
         Me.CMDColourYellow.UseVisualStyleBackColor = False
@@ -384,10 +383,10 @@ Partial Class ClothingDetails
         Me.CMDColourOrange.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourOrange.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourOrange.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourOrange.Location = New System.Drawing.Point(0, 455)
-        Me.CMDColourOrange.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourOrange.Location = New System.Drawing.Point(0, 370)
+        Me.CMDColourOrange.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourOrange.Name = "CMDColourOrange"
-        Me.CMDColourOrange.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourOrange.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourOrange.TabIndex = 12
         Me.CMDColourOrange.Text = "Orange"
         Me.CMDColourOrange.UseVisualStyleBackColor = False
@@ -399,10 +398,10 @@ Partial Class ClothingDetails
         Me.CMDColourBrown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourBrown.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourBrown.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourBrown.Location = New System.Drawing.Point(0, 421)
-        Me.CMDColourBrown.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourBrown.Location = New System.Drawing.Point(0, 342)
+        Me.CMDColourBrown.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourBrown.Name = "CMDColourBrown"
-        Me.CMDColourBrown.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourBrown.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourBrown.TabIndex = 12
         Me.CMDColourBrown.Text = "Brown "
         Me.CMDColourBrown.UseVisualStyleBackColor = False
@@ -414,10 +413,10 @@ Partial Class ClothingDetails
         Me.CMDColourLightBlue.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourLightBlue.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourLightBlue.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourLightBlue.Location = New System.Drawing.Point(0, 386)
-        Me.CMDColourLightBlue.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourLightBlue.Location = New System.Drawing.Point(0, 314)
+        Me.CMDColourLightBlue.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourLightBlue.Name = "CMDColourLightBlue"
-        Me.CMDColourLightBlue.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourLightBlue.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourLightBlue.TabIndex = 15
         Me.CMDColourLightBlue.Text = "Light Blue"
         Me.CMDColourLightBlue.UseVisualStyleBackColor = False
@@ -429,10 +428,10 @@ Partial Class ClothingDetails
         Me.CMDColourGreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourGreen.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourGreen.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourGreen.Location = New System.Drawing.Point(0, 351)
-        Me.CMDColourGreen.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourGreen.Location = New System.Drawing.Point(0, 285)
+        Me.CMDColourGreen.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourGreen.Name = "CMDColourGreen"
-        Me.CMDColourGreen.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourGreen.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourGreen.TabIndex = 11
         Me.CMDColourGreen.Text = "Green"
         Me.CMDColourGreen.UseVisualStyleBackColor = False
@@ -444,10 +443,10 @@ Partial Class ClothingDetails
         Me.CMDColourCream.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourCream.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourCream.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourCream.Location = New System.Drawing.Point(-1, 316)
-        Me.CMDColourCream.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourCream.Location = New System.Drawing.Point(-1, 257)
+        Me.CMDColourCream.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourCream.Name = "CMDColourCream"
-        Me.CMDColourCream.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourCream.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourCream.TabIndex = 11
         Me.CMDColourCream.Text = "Cream"
         Me.CMDColourCream.UseVisualStyleBackColor = False
@@ -459,10 +458,10 @@ Partial Class ClothingDetails
         Me.CMDColourBeige.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourBeige.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourBeige.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourBeige.Location = New System.Drawing.Point(-1, 281)
-        Me.CMDColourBeige.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourBeige.Location = New System.Drawing.Point(-1, 228)
+        Me.CMDColourBeige.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourBeige.Name = "CMDColourBeige"
-        Me.CMDColourBeige.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourBeige.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourBeige.TabIndex = 14
         Me.CMDColourBeige.Text = "Beige"
         Me.CMDColourBeige.UseVisualStyleBackColor = False
@@ -474,10 +473,10 @@ Partial Class ClothingDetails
         Me.CMDColourPink.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourPink.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourPink.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourPink.Location = New System.Drawing.Point(-3, 246)
-        Me.CMDColourPink.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourPink.Location = New System.Drawing.Point(-2, 200)
+        Me.CMDColourPink.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourPink.Name = "CMDColourPink"
-        Me.CMDColourPink.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourPink.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourPink.TabIndex = 13
         Me.CMDColourPink.Text = "Pink"
         Me.CMDColourPink.UseVisualStyleBackColor = False
@@ -489,10 +488,10 @@ Partial Class ClothingDetails
         Me.CMDColourRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourRed.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourRed.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourRed.Location = New System.Drawing.Point(3, 174)
-        Me.CMDColourRed.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourRed.Location = New System.Drawing.Point(2, 141)
+        Me.CMDColourRed.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourRed.Name = "CMDColourRed"
-        Me.CMDColourRed.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourRed.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourRed.TabIndex = 12
         Me.CMDColourRed.Text = "Red"
         Me.CMDColourRed.UseVisualStyleBackColor = False
@@ -504,10 +503,10 @@ Partial Class ClothingDetails
         Me.CMDColourNavy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourNavy.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourNavy.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourNavy.Location = New System.Drawing.Point(-1, 210)
-        Me.CMDColourNavy.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourNavy.Location = New System.Drawing.Point(-1, 171)
+        Me.CMDColourNavy.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourNavy.Name = "CMDColourNavy"
-        Me.CMDColourNavy.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourNavy.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourNavy.TabIndex = 10
         Me.CMDColourNavy.Text = "Navy"
         Me.CMDColourNavy.UseVisualStyleBackColor = False
@@ -519,10 +518,10 @@ Partial Class ClothingDetails
         Me.CMDColourMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourMulti.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourMulti.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourMulti.Location = New System.Drawing.Point(0, 139)
-        Me.CMDColourMulti.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourMulti.Location = New System.Drawing.Point(0, 113)
+        Me.CMDColourMulti.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourMulti.Name = "CMDColourMulti"
-        Me.CMDColourMulti.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourMulti.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourMulti.TabIndex = 11
         Me.CMDColourMulti.Text = "Multi"
         Me.CMDColourMulti.UseVisualStyleBackColor = False
@@ -534,10 +533,10 @@ Partial Class ClothingDetails
         Me.CMDColourGrey.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourGrey.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourGrey.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourGrey.Location = New System.Drawing.Point(-3, 103)
-        Me.CMDColourGrey.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourGrey.Location = New System.Drawing.Point(-2, 84)
+        Me.CMDColourGrey.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourGrey.Name = "CMDColourGrey"
-        Me.CMDColourGrey.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourGrey.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourGrey.TabIndex = 10
         Me.CMDColourGrey.Text = "Grey"
         Me.CMDColourGrey.UseVisualStyleBackColor = False
@@ -549,10 +548,10 @@ Partial Class ClothingDetails
         Me.CMDColourBlue.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourBlue.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourBlue.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourBlue.Location = New System.Drawing.Point(0, 69)
-        Me.CMDColourBlue.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourBlue.Location = New System.Drawing.Point(0, 56)
+        Me.CMDColourBlue.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourBlue.Name = "CMDColourBlue"
-        Me.CMDColourBlue.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourBlue.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourBlue.TabIndex = 10
         Me.CMDColourBlue.Text = "Blue"
         Me.CMDColourBlue.UseVisualStyleBackColor = False
@@ -564,10 +563,10 @@ Partial Class ClothingDetails
         Me.CMDColourWhite.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDColourWhite.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourWhite.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDColourWhite.Location = New System.Drawing.Point(0, 34)
-        Me.CMDColourWhite.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourWhite.Location = New System.Drawing.Point(0, 28)
+        Me.CMDColourWhite.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourWhite.Name = "CMDColourWhite"
-        Me.CMDColourWhite.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourWhite.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourWhite.TabIndex = 10
         Me.CMDColourWhite.Text = "White"
         Me.CMDColourWhite.UseVisualStyleBackColor = False
@@ -580,9 +579,9 @@ Partial Class ClothingDetails
         Me.CMDColourBlack.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDColourBlack.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.CMDColourBlack.Location = New System.Drawing.Point(0, 0)
-        Me.CMDColourBlack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDColourBlack.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDColourBlack.Name = "CMDColourBlack"
-        Me.CMDColourBlack.Size = New System.Drawing.Size(95, 31)
+        Me.CMDColourBlack.Size = New System.Drawing.Size(71, 25)
         Me.CMDColourBlack.TabIndex = 7
         Me.CMDColourBlack.Text = "Black"
         Me.CMDColourBlack.UseVisualStyleBackColor = False
@@ -597,10 +596,10 @@ Partial Class ClothingDetails
         Me.MaterialPanel.Controls.Add(Me.CMDMaterialLinen)
         Me.MaterialPanel.Controls.Add(Me.CMDMaterialLeather)
         Me.MaterialPanel.Controls.Add(Me.CMDMaterialCotton)
-        Me.MaterialPanel.Location = New System.Drawing.Point(200, 50)
-        Me.MaterialPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MaterialPanel.Location = New System.Drawing.Point(150, 41)
+        Me.MaterialPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaterialPanel.Name = "MaterialPanel"
-        Me.MaterialPanel.Size = New System.Drawing.Size(95, 210)
+        Me.MaterialPanel.Size = New System.Drawing.Size(71, 171)
         Me.MaterialPanel.TabIndex = 9
         Me.MaterialPanel.Visible = False
         '
@@ -611,10 +610,10 @@ Partial Class ClothingDetails
         Me.CMDMaterialPolyester.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterialPolyester.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialPolyester.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterialPolyester.Location = New System.Drawing.Point(-1, 177)
-        Me.CMDMaterialPolyester.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialPolyester.Location = New System.Drawing.Point(-1, 144)
+        Me.CMDMaterialPolyester.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialPolyester.Name = "CMDMaterialPolyester"
-        Me.CMDMaterialPolyester.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialPolyester.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialPolyester.TabIndex = 12
         Me.CMDMaterialPolyester.Text = "Polyester"
         Me.CMDMaterialPolyester.UseVisualStyleBackColor = False
@@ -626,10 +625,10 @@ Partial Class ClothingDetails
         Me.CMDMaterialDenim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterialDenim.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialDenim.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterialDenim.Location = New System.Drawing.Point(-3, 142)
-        Me.CMDMaterialDenim.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialDenim.Location = New System.Drawing.Point(-2, 115)
+        Me.CMDMaterialDenim.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialDenim.Name = "CMDMaterialDenim"
-        Me.CMDMaterialDenim.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialDenim.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialDenim.TabIndex = 11
         Me.CMDMaterialDenim.Text = "Denim"
         Me.CMDMaterialDenim.UseVisualStyleBackColor = False
@@ -641,10 +640,10 @@ Partial Class ClothingDetails
         Me.CMDMaterialWool.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterialWool.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialWool.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterialWool.Location = New System.Drawing.Point(-1, 107)
-        Me.CMDMaterialWool.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialWool.Location = New System.Drawing.Point(-1, 87)
+        Me.CMDMaterialWool.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialWool.Name = "CMDMaterialWool"
-        Me.CMDMaterialWool.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialWool.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialWool.TabIndex = 11
         Me.CMDMaterialWool.Text = "Wool"
         Me.CMDMaterialWool.UseVisualStyleBackColor = False
@@ -656,10 +655,10 @@ Partial Class ClothingDetails
         Me.CMDMaterialLinen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterialLinen.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialLinen.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterialLinen.Location = New System.Drawing.Point(0, 71)
-        Me.CMDMaterialLinen.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialLinen.Location = New System.Drawing.Point(0, 58)
+        Me.CMDMaterialLinen.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialLinen.Name = "CMDMaterialLinen"
-        Me.CMDMaterialLinen.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialLinen.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialLinen.TabIndex = 10
         Me.CMDMaterialLinen.Text = "Linen"
         Me.CMDMaterialLinen.UseVisualStyleBackColor = False
@@ -671,10 +670,10 @@ Partial Class ClothingDetails
         Me.CMDMaterialLeather.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDMaterialLeather.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialLeather.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDMaterialLeather.Location = New System.Drawing.Point(0, 37)
-        Me.CMDMaterialLeather.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialLeather.Location = New System.Drawing.Point(0, 30)
+        Me.CMDMaterialLeather.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialLeather.Name = "CMDMaterialLeather"
-        Me.CMDMaterialLeather.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialLeather.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialLeather.TabIndex = 8
         Me.CMDMaterialLeather.Text = "Leather"
         Me.CMDMaterialLeather.UseVisualStyleBackColor = False
@@ -687,9 +686,9 @@ Partial Class ClothingDetails
         Me.CMDMaterialCotton.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDMaterialCotton.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.CMDMaterialCotton.Location = New System.Drawing.Point(0, 2)
-        Me.CMDMaterialCotton.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDMaterialCotton.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDMaterialCotton.Name = "CMDMaterialCotton"
-        Me.CMDMaterialCotton.Size = New System.Drawing.Size(95, 31)
+        Me.CMDMaterialCotton.Size = New System.Drawing.Size(71, 25)
         Me.CMDMaterialCotton.TabIndex = 7
         Me.CMDMaterialCotton.Text = "Cotton"
         Me.CMDMaterialCotton.UseVisualStyleBackColor = False
@@ -703,10 +702,10 @@ Partial Class ClothingDetails
         Me.PatternPanel.Controls.Add(Me.CMDPatternAbstract)
         Me.PatternPanel.Controls.Add(Me.CMDPatternPolka)
         Me.PatternPanel.Controls.Add(Me.CMDPatternFloral)
-        Me.PatternPanel.Location = New System.Drawing.Point(301, 50)
-        Me.PatternPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PatternPanel.Location = New System.Drawing.Point(226, 41)
+        Me.PatternPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PatternPanel.Name = "PatternPanel"
-        Me.PatternPanel.Size = New System.Drawing.Size(95, 210)
+        Me.PatternPanel.Size = New System.Drawing.Size(71, 171)
         Me.PatternPanel.TabIndex = 9
         Me.PatternPanel.Visible = False
         '
@@ -717,10 +716,10 @@ Partial Class ClothingDetails
         Me.CMDPatternChequered.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPatternChequered.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternChequered.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPatternChequered.Location = New System.Drawing.Point(0, 37)
-        Me.CMDPatternChequered.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternChequered.Location = New System.Drawing.Point(0, 30)
+        Me.CMDPatternChequered.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternChequered.Name = "CMDPatternChequered"
-        Me.CMDPatternChequered.Size = New System.Drawing.Size(95, 31)
+        Me.CMDPatternChequered.Size = New System.Drawing.Size(71, 25)
         Me.CMDPatternChequered.TabIndex = 6
         Me.CMDPatternChequered.Text = "Chequered"
         Me.CMDPatternChequered.UseVisualStyleBackColor = False
@@ -732,10 +731,10 @@ Partial Class ClothingDetails
         Me.CMDPatternGeometric.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPatternGeometric.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternGeometric.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPatternGeometric.Location = New System.Drawing.Point(1, 177)
-        Me.CMDPatternGeometric.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternGeometric.Location = New System.Drawing.Point(1, 144)
+        Me.CMDPatternGeometric.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternGeometric.Name = "CMDPatternGeometric"
-        Me.CMDPatternGeometric.Size = New System.Drawing.Size(95, 31)
+        Me.CMDPatternGeometric.Size = New System.Drawing.Size(71, 25)
         Me.CMDPatternGeometric.TabIndex = 12
         Me.CMDPatternGeometric.Text = "Geometric"
         Me.CMDPatternGeometric.UseVisualStyleBackColor = False
@@ -748,9 +747,9 @@ Partial Class ClothingDetails
         Me.CMDPatternStriped.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternStriped.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.CMDPatternStriped.Location = New System.Drawing.Point(0, 0)
-        Me.CMDPatternStriped.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternStriped.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternStriped.Name = "CMDPatternStriped"
-        Me.CMDPatternStriped.Size = New System.Drawing.Size(95, 31)
+        Me.CMDPatternStriped.Size = New System.Drawing.Size(71, 25)
         Me.CMDPatternStriped.TabIndex = 6
         Me.CMDPatternStriped.Text = "Striped"
         Me.CMDPatternStriped.UseVisualStyleBackColor = False
@@ -762,10 +761,10 @@ Partial Class ClothingDetails
         Me.CMDPatternAbstract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPatternAbstract.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternAbstract.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPatternAbstract.Location = New System.Drawing.Point(1, 140)
-        Me.CMDPatternAbstract.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternAbstract.Location = New System.Drawing.Point(1, 114)
+        Me.CMDPatternAbstract.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternAbstract.Name = "CMDPatternAbstract"
-        Me.CMDPatternAbstract.Size = New System.Drawing.Size(93, 31)
+        Me.CMDPatternAbstract.Size = New System.Drawing.Size(70, 25)
         Me.CMDPatternAbstract.TabIndex = 5
         Me.CMDPatternAbstract.Text = "Abstract"
         Me.CMDPatternAbstract.UseVisualStyleBackColor = False
@@ -777,10 +776,10 @@ Partial Class ClothingDetails
         Me.CMDPatternPolka.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPatternPolka.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternPolka.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPatternPolka.Location = New System.Drawing.Point(3, 107)
-        Me.CMDPatternPolka.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternPolka.Location = New System.Drawing.Point(2, 87)
+        Me.CMDPatternPolka.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternPolka.Name = "CMDPatternPolka"
-        Me.CMDPatternPolka.Size = New System.Drawing.Size(92, 31)
+        Me.CMDPatternPolka.Size = New System.Drawing.Size(69, 25)
         Me.CMDPatternPolka.TabIndex = 4
         Me.CMDPatternPolka.Text = "Polka Dots"
         Me.CMDPatternPolka.UseVisualStyleBackColor = False
@@ -792,23 +791,13 @@ Partial Class ClothingDetails
         Me.CMDPatternFloral.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDPatternFloral.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDPatternFloral.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDPatternFloral.Location = New System.Drawing.Point(0, 71)
-        Me.CMDPatternFloral.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDPatternFloral.Location = New System.Drawing.Point(0, 58)
+        Me.CMDPatternFloral.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDPatternFloral.Name = "CMDPatternFloral"
-        Me.CMDPatternFloral.Size = New System.Drawing.Size(95, 31)
+        Me.CMDPatternFloral.Size = New System.Drawing.Size(71, 25)
         Me.CMDPatternFloral.TabIndex = 3
         Me.CMDPatternFloral.Text = "Floral"
         Me.CMDPatternFloral.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(963, 224)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 10
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'BrandPanel
         '
@@ -816,10 +805,10 @@ Partial Class ClothingDetails
         Me.BrandPanel.Controls.Add(Me.CMDValidateBrand)
         Me.BrandPanel.Controls.Add(Me.brandText)
         Me.BrandPanel.Controls.Add(Me.isValidPanel)
-        Me.BrandPanel.Location = New System.Drawing.Point(505, 50)
-        Me.BrandPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BrandPanel.Location = New System.Drawing.Point(379, 41)
+        Me.BrandPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BrandPanel.Name = "BrandPanel"
-        Me.BrandPanel.Size = New System.Drawing.Size(229, 80)
+        Me.BrandPanel.Size = New System.Drawing.Size(172, 65)
         Me.BrandPanel.TabIndex = 8
         Me.BrandPanel.Visible = False
         '
@@ -830,29 +819,29 @@ Partial Class ClothingDetails
         Me.CMDValidateBrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDValidateBrand.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDValidateBrand.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDValidateBrand.Location = New System.Drawing.Point(-4, 48)
-        Me.CMDValidateBrand.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDValidateBrand.Location = New System.Drawing.Point(-3, 39)
+        Me.CMDValidateBrand.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CMDValidateBrand.Name = "CMDValidateBrand"
-        Me.CMDValidateBrand.Size = New System.Drawing.Size(233, 32)
+        Me.CMDValidateBrand.Size = New System.Drawing.Size(175, 26)
         Me.CMDValidateBrand.TabIndex = 9
         Me.CMDValidateBrand.Text = "Enter"
         Me.CMDValidateBrand.UseVisualStyleBackColor = False
         '
         'brandText
         '
-        Me.brandText.Location = New System.Drawing.Point(13, 5)
-        Me.brandText.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.brandText.Location = New System.Drawing.Point(10, 4)
+        Me.brandText.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.brandText.Name = "brandText"
-        Me.brandText.Size = New System.Drawing.Size(199, 22)
+        Me.brandText.Size = New System.Drawing.Size(150, 20)
         Me.brandText.TabIndex = 0
         '
         'isValidPanel
         '
         Me.isValidPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.isValidPanel.Location = New System.Drawing.Point(13, 5)
-        Me.isValidPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.isValidPanel.Location = New System.Drawing.Point(10, 4)
+        Me.isValidPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.isValidPanel.Name = "isValidPanel"
-        Me.isValidPanel.Size = New System.Drawing.Size(199, 28)
+        Me.isValidPanel.Size = New System.Drawing.Size(149, 23)
         Me.isValidPanel.TabIndex = 1
         Me.isValidPanel.Visible = False
         '
@@ -860,19 +849,18 @@ Partial Class ClothingDetails
         '
         Me.ResultsScrollPanel.AutoScroll = True
         Me.ResultsScrollPanel.BackColor = System.Drawing.SystemColors.Control
-        Me.ResultsScrollPanel.Location = New System.Drawing.Point(42, 82)
-        Me.ResultsScrollPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ResultsScrollPanel.Location = New System.Drawing.Point(32, 67)
+        Me.ResultsScrollPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ResultsScrollPanel.Name = "ResultsScrollPanel"
-        Me.ResultsScrollPanel.Size = New System.Drawing.Size(1440, 120)
+        Me.ResultsScrollPanel.Size = New System.Drawing.Size(1080, 98)
         Me.ResultsScrollPanel.TabIndex = 11
         Me.ResultsScrollPanel.Visible = False
         '
         'ClothingDetails
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1545, 276)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(1159, 224)
         Me.Controls.Add(Me.BrandPanel)
         Me.Controls.Add(Me.PatternPanel)
         Me.Controls.Add(Me.MaterialPanel)
@@ -882,7 +870,7 @@ Partial Class ClothingDetails
         Me.Controls.Add(Me.LabelPanel)
         Me.Controls.Add(Me.ResultsScrollPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "ClothingDetails"
         Me.Text = "Clothing Details"
         Me.LabelPanel.ResumeLayout(False)
@@ -942,7 +930,6 @@ Partial Class ClothingDetails
     Friend WithEvents CMDMaterialPolyester As Button
     Friend WithEvents CMDPatternGeometric As Button
     Friend WithEvents CMDFindURLs As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents CMDBrand As Button
     Friend WithEvents BrandPanel As Panel
     Friend WithEvents CMDValidateBrand As Button

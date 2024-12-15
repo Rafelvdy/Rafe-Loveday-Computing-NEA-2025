@@ -5,7 +5,12 @@ Public Class dataBaseconnector
     'Also becomes global so that i can add handlers to it
     Dim WithEvents deleteButton As New PictureBox
 
+    'This timer is used to make the bin icon disappear
     Dim deleteButtonTimer As New Timer
+
+    'This list is used for storing which clothing items have been deleted
+    'Is reset everytime the wardrobe is populated
+    Dim deletedItems As New List(Of String)
 
     'Creating a variable to hold the connection string to the access database which is private so that it can only be accessed inside the object
     Private connectionString As String = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & Application.StartupPath & "\DigitalWardrobe.accdb"
@@ -34,9 +39,11 @@ Public Class dataBaseconnector
         'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
         'Runs the createConnection function and the returned value is stored into this subroutine
         Dim connection = createConnection()
+
         'Opens the connection between my program and the database
         connection.open()
         Dim sql As String
+
         'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
         If UploadDate <> Nothing Then
             'If there is an upload date, the upload date will be inserted when the image path is inserted
@@ -44,6 +51,7 @@ Public Class dataBaseconnector
         Else
             sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
         End If
+
         'Creating the command depending on the IF statement
         Dim command As New OleDbCommand(sql, connection)
         command.Parameters.AddWithValue("@data", data)
@@ -86,25 +94,45 @@ Public Class dataBaseconnector
         'Creating the connection to the database
         Dim connection = createConnection()
         connection.open()
+
         'Using inner join selects all rows from both tables as long as there is a match between the columns in both tables
         Dim sql = "Select [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] On [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [CLOTHINGITEM].[WardrobeID] = @WardrobeID"
         Dim command As New OleDbCommand(sql, connection)
+
         'This allows me to dynamically add wardrobe id to the Sql statement so that it can change with the variable
         command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
+
         'This reads the data from the database
         Dim dr As OleDbDataReader = command.ExecuteReader()
         If dr.HasRows Then
             Dim imagePathList As New List(Of String)
             imagePathList = findImagePaths()
+
+            'This total algorith compares each item in the list to each tag of the pictureboxes to see if they need to be deleted
+            'The first for statement is to access each image path
+            For Each item In deletedItems
+                'Creating the picturebox so that i can remove it later if the IF statement is met
+                Dim clothingItem As PictureBox
+                'Going through each picturebox
+                For Each ctrl As Control In Wardrobe.WardrobeImagePanel.Controls
+                    If ctrl.Tag = item Then
+                        clothingItem = ctrl
+                    End If
+                Next
+                'Removing any items that need to be deleted
+                Wardrobe.WardrobeImagePanel.Controls.Remove(clothingItem)
+            Next
+            'Clears the list after they are all deleted
+            deletedItems.Clear()
+
             'This will run the loop while it steps through each record and then stops when it stops reading
             While dr.Read()
-                'Gets the iamgepath at eac  h record so it can display the image
+                'Gets the iamgepath at each record so it can display the image
                 Dim imagePath As String = dr("ImagePath")
-                If imagePathList.Contains(Nothing) Then
-                    MessageBox.Show("NOTHING")
-                ElseIf imagePathList.Contains(imagePath) = False Then
+                If imagePathList.Contains(imagePath) = False Then
                     'creates a new picture box for each record
                     Dim picturebox As New PictureBox
+
                     'Formats the pictureboxes
                     With picturebox
                         .Image = Image.FromFile(imagePath)
@@ -112,15 +140,17 @@ Public Class dataBaseconnector
                         .SizeMode = PictureBoxSizeMode.Zoom
                         .Tag = imagePath
                     End With
+
                     'This handler makes the clothing details page when double clicked
                     AddHandler picturebox.DoubleClick, AddressOf pictureBox_Click
                     'This handler makes the bin icon appear when hovering over a clothing item
                     AddHandler picturebox.MouseEnter, AddressOf DeleteButtonHandler
 
-
                     Wardrobe.WardrobeImagePanel.Controls.Add(picturebox)
                 End If
             End While
+        ElseIf dr.HasRows = False Then
+            Wardrobe.WardrobeImagePanel.Controls.Clear()
         End If
     End Sub
 
@@ -129,6 +159,7 @@ Public Class dataBaseconnector
         'creating a list so all image paths can be added to it
         Dim imagePaths As New List(Of String)
         Dim tempPath As String
+        'Finding the picture box using imagePath
         For Each pictureBox As Control In Wardrobe.WardrobeImagePanel.Controls
             If pictureBox.Tag <> Nothing Then
                 tempPath = pictureBox.Tag
@@ -148,6 +179,7 @@ Public Class dataBaseconnector
     'If not it will run createWardrobe and return its ID
     Public Function checkForWardrobe()
         Dim dr As OleDbDataReader
+
         'Runs a function to retrieve instance of oledbconnection object
         Dim connection = createConnection()
         connection.open()
@@ -170,11 +202,13 @@ Public Class dataBaseconnector
             'If there is no wardrobe existing, this function will be run and it will create a wardrobe, and then return the wardrobes ID 
             Return createWardrobe(connection)
         End If
+
     End Function
 
     'This subroutine is ran if there is no existing wardrobe
     'It will create a wardrobe and return its ID
     Public Function createWardrobe(ByVal connection As OleDbConnection)
+
         'This inserts a new value into the wardrobe name so that the autonumber for the ID is created too
         Dim sql As String = "INSERT INTO WARDROBE (WardrobeName) VALUES ('Default Wardrobe')"
         Dim command As New OleDbCommand(sql, connection)
@@ -248,18 +282,14 @@ Public Class dataBaseconnector
             'This adds the imagepath of the clothing item to the tag of the bin icon so that when clicked the program knows which image is being deleted
             .Tag = clothingItem.Tag
         End With
-
-
-
+        'This sets the interval for how long the button will stay for
         deleteButtonTimer.Interval = 1500
         AddHandler deleteButtonTimer.Tick, AddressOf TimerEnd
 
         'Handler is now only added to the bin icon when the clothing item is hovered over
         'So there is only ever one handler for this event running at one time on one bin icon
         AddHandler deleteButton.Click, AddressOf DeleteImage
-
         AddHandler clothingItem.MouseMove, AddressOf showIcon
-
         clothingItem.Controls.Add(deleteButton)
         deleteButton.Show()
     End Sub
@@ -275,22 +305,28 @@ Public Class dataBaseconnector
     End Sub
 
     Public Sub DeleteImage(sender As Object, e As EventArgs)
+        deleteButtonTimer.Stop()
         'Sender is the delete button and the program needs to be able to access the tag of the clothingItem
         'This finds the parent of the deleteButton so the image can be accessed
         deleteButton = sender
         Dim imagePath As String = deleteButton.Tag
         Dim wardrobeID As Integer = findWardrobeID()
 
+
         Dim connection = createConnection()
         connection.open()
-        Dim command As New OleDbCommand($"DELETE FROM IMAGE WHERE ImagePath = {imagePath}", connection)
-
+        Dim command As New OleDbCommand("DELETE FROM [IMAGE] WHERE [ImagePath] = @imagePath", connection)
+        command.Parameters.AddWithValue("@imagePath", imagePath)
 
         command.ExecuteNonQuery()
         connection.close()
 
+        'Adding the imagepath to the list so that it does not get added to the wardrobe as a picturebox
+        deletedItems.Add(imagePath)
+
         'Refreshing the wardrobe
         populateWardrobe(wardrobeID)
+
     End Sub
 
 End Class

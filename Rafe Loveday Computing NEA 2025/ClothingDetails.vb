@@ -2,9 +2,11 @@
 Imports System.Windows.Automation
 
 Public Class ClothingDetails
+
+
     'Variables which store the colour of the selected and unselected buttons
-    Private unselectedColour As Color = Color.FromArgb(53, 59, 72)
-    Private selectedColour As Color = Color.FromArgb(72, 126, 176)
+    Private _unselectedColour As Color = Color.FromArgb(53, 59, 72)
+    Private _selectedColour As Color = Color.FromArgb(72, 126, 176)
 
     'Variable used to show if there is already a filter open
     Dim filterOpen As Boolean = False
@@ -92,9 +94,9 @@ Public Class ClothingDetails
             AddHandler newButton.Click, AddressOf filterPress
             'This IF statement allows it so if a button is selected, when they are created it will stay highlighted
             If newButton.Text = SubCatagory Then
-                newButton.BackColor = selectedColour
+                newButton.BackColor = _selectedColour
             Else
-                newButton.BackColor = unselectedColour
+                newButton.BackColor = _unselectedColour
             End If
         Next
         'Finds the total height of all the buttons, and then will set the height of the panel to change to it so it dynamically changes
@@ -182,9 +184,9 @@ Public Class ClothingDetails
         Dim buttonsPanel As Panel = buttonClicked.Parent
         'THIS CODE HANDLES THE COLOUR OF THE BUTTONS WHEN SELECTING AND DESELECTING
         'Checking if the clicked button is already selected so that if it is, it can be reverted and the variable set back to nothing
-        If buttonClicked.BackColor = selectedColour Then
+        If buttonClicked.BackColor = _selectedColour Then
             'If the button is selected already and then pressed again, its colour will be reverted back
-            buttonClicked.BackColor = unselectedColour
+            buttonClicked.BackColor = _unselectedColour
             'THIS CODE HANDLES WHAT IS SAVED IN THE VARIABLES WHEN BUTTONS ARE SELECTED AND DESELECTED
             'If the button clicked is already the selected colour, then the variable associated with it is changed back to nothing
             Select Case buttonsPanel.Name
@@ -210,12 +212,12 @@ Public Class ClothingDetails
             'This for loop goes through each button inside of the panel which is being used
             For Each control As Control In buttonsPanel.Controls
                 'If any of the buttons are selected they will be set back to the original colour
-                If control.BackColor = selectedColour Then
-                    control.BackColor = unselectedColour
+                If control.BackColor = _selectedColour Then
+                    control.BackColor = _unselectedColour
                 End If
             Next
             'This will set the button that was pressed to the selected colour
-            buttonClicked.BackColor = selectedColour
+            buttonClicked.BackColor = _selectedColour
             'This case statement will compare the name of the panel to the panels i have to determine which panel the buttons are apart of
             Select Case buttonsPanel.Name
                 Case "CatagoryPanel"
@@ -298,11 +300,14 @@ Public Class ClothingDetails
                     .Height = 60
                     .BackColor = Color.White
                     .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{priceArray(i)}"
+
                     'This places the label according to other labels and the padding
                     .Location = New Point(currentX, padding)
                     .TextAlign = ContentAlignment.MiddleCenter
+
                     'Makes the label visible in the panel
                     ResultsScrollPanel.Controls.Add(button)
+
                     'Creates the new x position for the next label
                     currentX += .Width + padding
 
@@ -324,13 +329,8 @@ Public Class ClothingDetails
             'Open web page with URL
             Process.Start(url)
         ElseIf buttonClicked.BackColor = Color.Gray Then
-            buttonClicked.BackColor = Color.white
+            buttonClicked.BackColor = Color.White
         End If
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        MessageBox.Show(Catagory & SubCatagory & colour & material & pattern)
     End Sub
 
     'Subroutine that will check that the brand the user enters is a real brand
