@@ -2,7 +2,10 @@
 Imports System.Windows.Automation
 
 Public Class ClothingDetails
-
+    'Stores the data pulled from API
+    Dim titles As String
+    Dim prices As String
+    Dim urls As String
 
     'Variables which store the colour of the selected and unselected buttons
     Private _unselectedColour As Color = Color.FromArgb(53, 59, 72)
@@ -243,10 +246,6 @@ Public Class ClothingDetails
 
     'This subroutine handles finding URLs depending on the chosen inputs
     Private Sub CMDFindURLs_Click(sender As Object, e As EventArgs) Handles CMDFindURLs.Click
-        'These must be declared outside of the IF statement so that they can be accessed within the entire subroutine
-        Dim titles As String
-        Dim prices As String
-        Dim urls As String
         'This IF statement makes a minimum requirement for the amount of data that must be entered
         If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
@@ -259,27 +258,66 @@ Public Class ClothingDetails
             titles = myURLFinder.TitleResult
             urls = myURLFinder.URLResult
             prices = myURLFinder.PriceResult
-            MessageBox.Show(prices)
             DisplayURLResults(titles, prices, urls)
+            Dim myDB As New dataBaseconnector
+            myDB.Insert(Nothing, Nothing, "CLOTHINGITEM", False, Nothing, Catagory, SubCatagory, colour, material, brand, pattern, Nothing, 0)
         End If
     End Sub
 
     Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
+        Dim defaultView() As Double
+
+
         'Showing the panel so that the buttons can be organised inside and resets anything that could be in there
         If ResultsScrollPanel.Visible = False Then
             ResultsScrollPanel.Show()
         End If
         ResultsScrollPanel.Controls.Clear()
         'This splits the results by using the separator that i put in.
-        Dim titleArray() As String = titles.Split("|||")
-        Dim urlArray() As String = urls.Split("|||")
-        Dim priceArray() As String = prices.Split("|||")
+        Dim titleArray() As String = titles.Split("|||").Where(Function(t) Not String.IsNullOrWhiteSpace(t)).ToArray()
+        Dim urlArray() As String = urls.Split("|||").Where(Function(u) Not String.IsNullOrWhiteSpace(u)).ToArray()
+        Dim priceArray() As String = prices.Split("|||").Where(Function(p) Not String.IsNullOrWhiteSpace(p)).ToArray()
+
+        'Making a variable to store values of integers to be sorted
+        'Allows me to convert array from string to integer
+        Dim arraytosort(priceArray.Length - 1) As Double
+        For i = 1 To priceArray.Count() - 1
+            If priceArray(i) <> "" Then
+                arraytosort(i) = CDbl(priceArray(i))
+            End If
+        Next
+
+        'This creates an instance of the searchOrFilter class so that i can use the merge sort on the price array
+        Dim mySearchOrFilter As New searchOrFilter
+        Dim low As Integer = 0
+        Dim high As Integer = arraytosort.Length - 1
+        'This list created is the list in order of price
+        defaultView = mySearchOrFilter.mergeSort(arraytosort, low, high)
+
+        Dim toDisplay(10) As Double
+
+        If priceLabel_Click() = "Price ↑" Then
+            'This is the position of the last element to be copied to the new array
+            Dim endIndex As Integer = defaultView.Length - 10
+            Dim addPosition As Integer = 0
+            'This for loop will go through the sorted array in reverse and copy each element to a new array
+            For i = defaultView.Length - 1 To endIndex Step -1
+                toDisplay(addPosition) = defaultView(i)
+                addPosition += 1
+            Next
+        ElseIf priceLabel_Click() = "Price ↓" Then
+            For i = 0 To 9
+                toDisplay(i) = defaultView(i)
+            Next
+
+        End If
+
         'These variables will handle the spacing between each of the results
         Dim padding As Integer = 10
         Dim currentX As Integer = padding
         'This creates a loop which will iterate the number of times that there are results. 
         'The array is 0-based so i have to take 1 away from the total length
-        For i = 0 To titleArray.Length - 1
+        For i = 0 To toDisplay.Length - 1
             If priceArray(i) <> "" Then
                 'This creates a new label on each iteration
                 Dim button As New Button
@@ -299,7 +337,7 @@ Public Class ClothingDetails
                     .Width = 200
                     .Height = 60
                     .BackColor = Color.White
-                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{priceArray(i)}"
+                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{toDisplay(i)}"
 
                     'This places the label according to other labels and the padding
                     .Location = New Point(currentX, padding)
@@ -353,5 +391,19 @@ Public Class ClothingDetails
             isValidPanel.BackColor = Color.Red
             isValidPanel.Visible = True
         End If
+    End Sub
+
+    Private Function priceLabel_Click() Handles priceLabel.Click
+        ' Toggle and return the new state
+        If priceLabel.Text = "Price ↓" Then
+            priceLabel.Text = "Price ↑"
+        Else
+            priceLabel.Text = "Price ↓"
+        End If
+        Return priceLabel.Text
+    End Function
+
+    Private Sub CMDUpdate_Click(sender As Object, e As EventArgs) Handles CMDUpdate.Click
+        DisplayURLResults(titles, prices, urls)
     End Sub
 End Class

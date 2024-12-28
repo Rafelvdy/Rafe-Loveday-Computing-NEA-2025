@@ -24,7 +24,7 @@ Public Class Wardrobe
                 Dim todaysDate As String = DateString
                 myDBCon.Insert(filename, "ImagePath", "IMAGE", link, todaysDate)
                 'DISPLAYING THE WARDROBE
-                Dim wardrobeID As Integer = myDBCon.findWardrobeID()
+                Dim wardrobeID As Integer = myDBCon.checkForWardrobe()
                 myDBCon.populateWardrobe(wardrobeID)
             Next
         End If

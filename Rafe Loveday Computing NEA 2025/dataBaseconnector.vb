@@ -35,7 +35,7 @@ Public Class dataBaseconnector
         Return connection
     End Function
 
-    Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String, ByVal link As Boolean, Optional ByVal UploadDate As String = Nothing)
+    Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String, ByVal link As Boolean, Optional ByVal UploadDate As String = Nothing, Optional ByVal Category As String = Nothing, Optional ByVal subCategory As String = Nothing, Optional ByVal colour As String = Nothing, Optional ByVal Material As String = Nothing, Optional ByVal Brand As String = Nothing, Optional ByVal Pattern As String = Nothing, Optional ByVal LastWornDate As String = Nothing, Optional ByVal WearFrequency As Integer = 0)
         'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
         'Runs the createConnection function and the returned value is stored into this subroutine
         Dim connection = createConnection()
@@ -44,29 +44,53 @@ Public Class dataBaseconnector
         connection.open()
         Dim sql As String
 
-        'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
-        If UploadDate <> Nothing Then
+        'This finds the wardrobeID of the wardrobe currently being used
+        'This was moved up here as it needs to be used earlier on 
+        Dim imageID As Integer
+
+        Dim wardrobeID As Integer = checkForWardrobe()
+        If Category <> Nothing Then
+            'This finds the imageID of the most recent image added and then returns it to the variable
+            'This was moved up here as it needs to be used earlier on 
+            imageID = findImageID()
+            sql = $"INSERT INTO [{tableName}] ([wardrobeID], [ImageID], [Category], [SubCategory], [Colour], [Material], [Brand], [Pattern], [LastWornDate], [WearFrequency]) VALUES (@WardrobeID, @ImageID, @Category, @SubCategory, @Colour, @Material, @Brand, @Pattern, @LastWornDate, @wearFrequency)"
+
+            'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
+        ElseIf UploadDate <> Nothing Then
             'If there is an upload date, the upload date will be inserted when the image path is inserted
             sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
-        Else
+        ElseIf Category = Nothing Then
             sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
         End If
 
         'Creating the command depending on the IF statement
         Dim command As New OleDbCommand(sql, connection)
-        command.Parameters.AddWithValue("@data", data)
+        If Category = Nothing Then
+            command.Parameters.AddWithValue("@data", data)
+        End If
 
         If UploadDate <> Nothing Then
             command.Parameters.AddWithValue("@uploadDate", UploadDate)
         End If
+        If Category <> Nothing Then
+            imageID = findImageID()
+            command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
+            command.Parameters.AddWithValue("@ImageID", imageID)
+            command.Parameters.AddWithValue("@Category", Category)
+            command.Parameters.AddWithValue("@SubCategory", subCategory)
+            command.Parameters.AddWithValue("@Colour", colour)
+            command.Parameters.AddWithValue("@Material", Material)
+            command.Parameters.AddWithValue("@Brand", Brand)
+            command.Parameters.AddWithValue("@Pattern", Pattern)
+            command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
+            command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
+        End If
         command.ExecuteNonQuery()
         connection.close()
-        'This finds the wardrobeID of the wardrobe currently being used
-        Dim wardrobeID As Integer = findWardrobeID()
+
         'If the link variable inputted as a parameter is true, the link tables subroutine is used
         If link = True Then
-            'This finds the imageID of the most recent image added and then returns it to the variable
-            Dim imageID As Integer = findImageID()
+            imageID = findImageID()
             linkTables(wardrobeID, imageID)
         End If
 
@@ -179,7 +203,6 @@ Public Class dataBaseconnector
     'If not it will run createWardrobe and return its ID
     Public Function checkForWardrobe()
         Dim dr As OleDbDataReader
-
         'Runs a function to retrieve instance of oledbconnection object
         Dim connection = createConnection()
         connection.open()
@@ -208,36 +231,36 @@ Public Class dataBaseconnector
     'This subroutine is ran if there is no existing wardrobe
     'It will create a wardrobe and return its ID
     Public Function createWardrobe(ByVal connection As OleDbConnection)
-
         'This inserts a new value into the wardrobe name so that the autonumber for the ID is created too
         Dim sql As String = "INSERT INTO WARDROBE (WardrobeName) VALUES ('Default Wardrobe')"
         Dim command As New OleDbCommand(sql, connection)
         command.ExecuteNonQuery()
+        connection.Close()
 
-        Return findWardrobeID()
+        Return checkForWardrobe()
     End Function
 
-    'This subroutine gets the current wardrobeID (only works when there is one wardrobe)
-    Public Function findWardrobeID()
-        'Creates the connection to the wardrobe
-        Dim connection = createConnection()
-        connection.open()
+    ''This subroutine gets the current wardrobeID (only works when there is one wardrobe)
+    'Public Function findWardrobeID()
+    '    'Creates the connection to the wardrobe
+    '    Dim connection = createConnection()
+    '    connection.open()
 
-        Dim dr As OleDbDataReader
-        'Tells the program what data i want
-        Dim sql As String = "SELECT WardrobeID FROM WARDROBE"
+    '    Dim dr As OleDbDataReader
+    '    'Tells the program what data i want
+    '    Dim sql As String = "SELECT WardrobeID FROM WARDROBE"
 
-        Dim command As New OleDbCommand(sql, connection)
-        dr = command.ExecuteReader
-        'moves it onto the first row
-        dr.Read()
-        'Saves the wardrobeID to a local variable
-        Dim wardrobeID As Integer = dr("WardrobeID")
-        'closes all the connections
-        dr.Close()
-        connection.close()
-        Return wardrobeID
-    End Function
+    '    Dim command As New OleDbCommand(sql, connection)
+    '    dr = command.ExecuteReader
+    '    'moves it onto the first row
+    '    dr.Read()
+    '    'Saves the wardrobeID to a local variable
+    '    Dim wardrobeID As Integer = dr("WardrobeID")
+    '    'closes all the connections
+    '    dr.Close()
+    '    connection.close()
+    '    Return wardrobeID
+    'End Function
 
     Public Function findImageID()
         'Creates the connection to the wardrobe
@@ -257,11 +280,12 @@ Public Class dataBaseconnector
             Dim imageID As Integer = dr("ImageID")
             'closes all the connections
             dr.Close()
-            connection.close()
+
             Return imageID
         Else
             MessageBox.Show("No data")
         End If
+        connection.close()
     End Function
 
     Public Sub DeleteButtonHandler(sender As Object, e As EventArgs)
@@ -310,7 +334,7 @@ Public Class dataBaseconnector
         'This finds the parent of the deleteButton so the image can be accessed
         deleteButton = sender
         Dim imagePath As String = deleteButton.Tag
-        Dim wardrobeID As Integer = findWardrobeID()
+        Dim wardrobeID As Integer = checkForWardrobe()
 
 
         Dim connection = createConnection()
