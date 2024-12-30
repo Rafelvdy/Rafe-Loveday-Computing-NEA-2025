@@ -23,10 +23,10 @@ Public Class dataBaseconnector
         Public SubCategory As String
         Public Colour As String
         Public Material As String
-        Public Brand As String
+        Public _Brand As String
         Public Pattern As String
         Public LastWornDate As String
-        Public WearFrequency As String
+        Public WearFrequency As Integer
     End Structure
 
     Public Function createConnection()
@@ -51,9 +51,9 @@ Public Class dataBaseconnector
         Dim wardrobeID As Integer = checkForWardrobe()
         If Category <> Nothing Then
             'This finds the imageID of the most recent image added and then returns it to the variable
-            'This was moved up here as it needs to be used earlier on 
+
             imageID = findImageID()
-            sql = $"INSERT INTO [{tableName}] ([wardrobeID], [ImageID], [Category], [SubCategory], [Colour], [Material], [Brand], [Pattern], [LastWornDate], [WearFrequency]) VALUES (@WardrobeID, @ImageID, @Category, @SubCategory, @Colour, @Material, @Brand, @Pattern, @LastWornDate, @wearFrequency)"
+            sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
 
             'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
         ElseIf UploadDate <> Nothing Then
@@ -74,17 +74,60 @@ Public Class dataBaseconnector
         End If
         If Category <> Nothing Then
             imageID = findImageID()
-            command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
-            command.Parameters.AddWithValue("@ImageID", imageID)
-            command.Parameters.AddWithValue("@Category", Category)
-            command.Parameters.AddWithValue("@SubCategory", subCategory)
-            command.Parameters.AddWithValue("@Colour", colour)
-            command.Parameters.AddWithValue("@Material", Material)
-            command.Parameters.AddWithValue("@Brand", Brand)
-            command.Parameters.AddWithValue("@Pattern", Pattern)
-            command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
-            command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
+            If wardrobeID <> Nothing Then
+                MessageBox.Show($"WardrobeID: {wardrobeID}")
+                command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
+            Else
+                command.Parameters.AddWithValue("@wardrobeID", "N")
+            End If
+            If imageID <> Nothing Then
+                MessageBox.Show($"ImageID: {imageID}")
+                command.Parameters.AddWithValue("@ImageID", imageID)
+            Else
+                command.Parameters.AddWithValue("@ImageID", "N")
+            End If
+            If Category <> Nothing Then
+                command.Parameters.AddWithValue("@Category", Category)
+            Else
+                command.Parameters.AddWithValue("@Category", "N")
+            End If
+            If subCategory <> Nothing Then
+                command.Parameters.AddWithValue("@SubCategory", subCategory)
+            Else
+                command.Parameters.AddWithValue("@SubCategory", "N")
+            End If
+            If colour <> Nothing Then
+                command.Parameters.AddWithValue("@Colour", colour)
+            Else
+                command.Parameters.AddWithValue("@Colour", "N")
+            End If
+            If Material <> Nothing Then
+                command.Parameters.AddWithValue("@Material", Material)
+            Else
+                command.Parameters.AddWithValue("@Material", "N")
+            End If
+            If Brand <> Nothing Then
+                command.Parameters.AddWithValue("@Brand", Brand)
+            Else
+                command.Parameters.AddWithValue("@Brand", "N")
+            End If
+            If Pattern <> Nothing Then
+                command.Parameters.AddWithValue("@Pattern", Pattern)
+            Else
+                command.Parameters.AddWithValue("@Pattern", "N")
+            End If
+            If LastWornDate <> Nothing Then
+                command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
+            Else
+                command.Parameters.AddWithValue("@LastWornDate", "N")
+            End If
+            If WearFrequency <> Nothing Then
+                command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
+            Else
+                command.Parameters.AddWithValue("@WearFrequency", "0")
+            End If
         End If
+        MessageBox.Show(command.CommandText)
         command.ExecuteNonQuery()
         connection.close()
 
@@ -96,6 +139,17 @@ Public Class dataBaseconnector
 
         'Then reloads the flowlayout panel
         populateWardrobe(wardrobeID)
+    End Sub
+
+    Public Sub Update()
+        'CREATING THE CONNECTION TO THE DB
+        Dim connection = createConnection()
+        connection.open()
+
+        'VARIABLES NEEDED FOR THE PROGRAM
+        Dim sql As String
+
+
     End Sub
 
     'This is used to link the image to the wardrobe
