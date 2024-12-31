@@ -36,109 +36,220 @@ Public Class dataBaseconnector
     End Function
 
     Public Sub Insert(ByVal data As String, ByVal fieldName As String, ByVal tableName As String, ByVal link As Boolean, Optional ByVal UploadDate As String = Nothing, Optional ByVal Category As String = Nothing, Optional ByVal subCategory As String = Nothing, Optional ByVal colour As String = Nothing, Optional ByVal Material As String = Nothing, Optional ByVal Brand As String = Nothing, Optional ByVal Pattern As String = Nothing, Optional ByVal LastWornDate As String = Nothing, Optional ByVal WearFrequency As Integer = 0)
-        'THIS IS ADDING THE IMAGE PATH TO THE IMAGE
         'Runs the createConnection function and the returned value is stored into this subroutine
         Dim connection = createConnection()
-
         'Opens the connection between my program and the database
         connection.open()
+
+        'Initialising sql and oledbcommand here so that they only have to be done once
         Dim sql As String
+        Dim command As New OleDbCommand
 
         'This finds the wardrobeID of the wardrobe currently being used
-        'This was moved up here as it needs to be used earlier on 
+        'imageID cannot be found yet as if there are no images in the wardrobe, the program will not be able to find one.
         Dim imageID As Integer
-
         Dim wardrobeID As Integer = checkForWardrobe()
-        If Category <> Nothing Then
-            'This finds the imageID of the most recent image added and then returns it to the variable
 
-            imageID = findImageID()
-            sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
-
-            'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
-        ElseIf UploadDate <> Nothing Then
-            'If there is an upload date, the upload date will be inserted when the image path is inserted
-            sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
-        ElseIf Category = Nothing Then
+        'CHOOSING WHAT SQL STATEMENT TO USE
+        If tableName = "WARDROBE" Then
+            'THIS CODE WILL RUN IF INSERTING TO THE WARDROBE TABLE
+            'This inserts the string default wardrobe to the database to create the record, the PK is an autonumber
             sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
-        End If
-
-        'Creating the command depending on the IF statement
-        Dim command As New OleDbCommand(sql, connection)
-        If Category = Nothing Then
+            'Adding the data from my program to the query
+            command = New OleDbCommand(sql, connection)
             command.Parameters.AddWithValue("@data", data)
-        End If
 
-        If UploadDate <> Nothing Then
+            'Executing the query
+            command.ExecuteNonQuery()
+
+        ElseIf tableName = "IMAGE" Then
+            'THIS CODE WILL RUN IF INSERTING TO THE IMAGE TABLE
+            sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
+            command = New OleDbCommand(sql, connection)
+
+            command.Parameters.AddWithValue("@data", data)
             command.Parameters.AddWithValue("@uploadDate", UploadDate)
-        End If
-        If Category <> Nothing Then
+
+            command.ExecuteNonQuery()
+            connection.close()
             imageID = findImageID()
-            If wardrobeID <> Nothing Then
-                MessageBox.Show($"WardrobeID: {wardrobeID}")
-                command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
-            Else
-                command.Parameters.AddWithValue("@wardrobeID", "N")
-            End If
-            If imageID <> Nothing Then
-                MessageBox.Show($"ImageID: {imageID}")
-                command.Parameters.AddWithValue("@ImageID", imageID)
-            Else
-                command.Parameters.AddWithValue("@ImageID", "N")
-            End If
+            linkTables(wardrobeID, imageID)
+
+        ElseIf tableName = "CLOTHINGITEM" Then
+            imageID = findImageID()
+
+            'THIS CODE WILL RUN IF UPDATING TO THE CLOTHINGITEM TABLE
+            sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
+            command = New OleDbCommand(sql, connection)
+
             If Category <> Nothing Then
                 command.Parameters.AddWithValue("@Category", Category)
+                MessageBox.Show(command.CommandText)
             Else
                 command.Parameters.AddWithValue("@Category", "N")
             End If
+
             If subCategory <> Nothing Then
                 command.Parameters.AddWithValue("@SubCategory", subCategory)
             Else
                 command.Parameters.AddWithValue("@SubCategory", "N")
             End If
+
             If colour <> Nothing Then
                 command.Parameters.AddWithValue("@Colour", colour)
             Else
                 command.Parameters.AddWithValue("@Colour", "N")
             End If
+
             If Material <> Nothing Then
                 command.Parameters.AddWithValue("@Material", Material)
             Else
                 command.Parameters.AddWithValue("@Material", "N")
             End If
+
             If Brand <> Nothing Then
                 command.Parameters.AddWithValue("@Brand", Brand)
             Else
                 command.Parameters.AddWithValue("@Brand", "N")
             End If
+
             If Pattern <> Nothing Then
                 command.Parameters.AddWithValue("@Pattern", Pattern)
             Else
                 command.Parameters.AddWithValue("@Pattern", "N")
             End If
+
             If LastWornDate <> Nothing Then
                 command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
             Else
                 command.Parameters.AddWithValue("@LastWornDate", "N")
             End If
+
             If WearFrequency <> Nothing Then
                 command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
             Else
-                command.Parameters.AddWithValue("@WearFrequency", "0")
+                command.Parameters.AddWithValue("@WearFrequency", 0)
             End If
-        End If
-        MessageBox.Show(command.CommandText)
-        command.ExecuteNonQuery()
-        connection.close()
 
-        'If the link variable inputted as a parameter is true, the link tables subroutine is used
-        If link = True Then
-            imageID = findImageID()
-            linkTables(wardrobeID, imageID)
+            'must have a value so no if statement needed
+            command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
+            command.Parameters.AddWithValue("@ImageID", imageID)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            command.ExecuteNonQuery()
+
+
+            connection.close()
         End If
 
         'Then reloads the flowlayout panel
         populateWardrobe(wardrobeID)
+
+
+
+        'If Category <> Nothing Then
+        '    'This finds the imageID of the most recent image added and then returns it to the variable
+
+        '    imageID = findImageID()
+        '    sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
+
+        '    'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
+        'ElseIf UploadDate <> Nothing Then
+        '    'If there is an upload date, the upload date will be inserted when the image path is inserted
+        '    sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
+        'ElseIf Category = Nothing Then
+        '    sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
+        'End If
+
+        ''Creating the command depending on the IF statement
+        'Dim command As New OleDbCommand(sql, connection)
+        'If Category = Nothing Then
+        '    command.Parameters.AddWithValue("@data", data)
+        'End If
+
+        'If UploadDate <> Nothing Then
+        '    command.Parameters.AddWithValue("@uploadDate", UploadDate)
+        'End If
+        'If Category <> Nothing Then
+        '    imageID = findImageID()
+        '    If wardrobeID <> Nothing Then
+        '        MessageBox.Show($"WardrobeID: {wardrobeID}")
+        '        command.Parameters.AddWithValue("@wardrobeID", wardrobeID)Z
+        '    Else
+        '        command.Parameters.AddWithValue("@wardrobeID", "N")
+        '    End If
+        '    If imageID <> Nothing Then
+        '        MessageBox.Show($"ImageID: {imageID}")
+        '        command.Parameters.AddWithValue("@ImageID", imageID)
+        '    Else
+        '        command.Parameters.AddWithValue("@ImageID", "N")
+        '    End If
+        '    If Category <> Nothing Then
+        '        command.Parameters.AddWithValue("@Category", Category)
+        '    Else
+        '        command.Parameters.AddWithValue("@Category", "N")
+        '    End If
+        '    If subCategory <> Nothing Then
+        '        command.Parameters.AddWithValue("@SubCategory", subCategory)
+        '    Else
+        '        command.Parameters.AddWithValue("@SubCategory", "N")
+        '    End If
+        '    If colour <> Nothing Then
+        '        command.Parameters.AddWithValue("@Colour", colour)
+        '    Else
+        '        command.Parameters.AddWithValue("@Colour", "N")
+        '    End If
+        '    If Material <> Nothing Then
+        '        command.Parameters.AddWithValue("@Material", Material)
+        '    Else
+        '        command.Parameters.AddWithValue("@Material", "N")
+        '    End If
+        '    If Brand <> Nothing Then
+        '        command.Parameters.AddWithValue("@Brand", Brand)
+        '    Else
+        '        command.Parameters.AddWithValue("@Brand", "N")
+        '    End If
+        '    If Pattern <> Nothing Then
+        '        command.Parameters.AddWithValue("@Pattern", Pattern)
+        '    Else
+        '        command.Parameters.AddWithValue("@Pattern", "N")
+        '    End If
+        '    If LastWornDate <> Nothing Then
+        '        command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
+        '    Else
+        '        command.Parameters.AddWithValue("@LastWornDate", "N")
+        '    End If
+        '    If WearFrequency <> Nothing Then
+        '        command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
+        '    Else
+        '        command.Parameters.AddWithValue("@WearFrequency", "0")
+        '    End If
+        'End If
+
+        'Command.ExecuteNonQuery()
+        ' connection.close()
+
+        'If the link variable inputted as a parameter is true, the link tables subroutine is used
+        ' If link = True Then
+        ' imageID = findImageID()
+        '   linkTables(wardrobeID, imageID)
+        ' End If
+
+        'Then reloads the flowlayout panel
+        'populateWardrobe(wardrobeID)
     End Sub
 
     Public Sub Update()
