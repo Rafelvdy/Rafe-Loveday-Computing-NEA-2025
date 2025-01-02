@@ -2,6 +2,18 @@
 Imports System.Windows.Automation
 
 Public Class ClothingDetails
+    Private _currentImagePath As String
+
+    Public Property currentImagePath As String
+        Set(value As String)
+            _currentImagePath = value
+        End Set
+        Get
+            Return _currentImagePath
+        End Get
+    End Property
+
+
     'Stores the data pulled from API
     Dim titles As String
     Dim prices As String
@@ -17,12 +29,66 @@ Public Class ClothingDetails
     Dim lastOpen As Panel = Nothing
 
     'Making variables so that data from database can be copied to the variables upon load.
-    Dim Catagory As String = Nothing
-    Dim SubCatagory As String = Nothing
-    Dim colour As String = Nothing
-    Dim material As String = Nothing
-    Dim pattern As String = Nothing
-    Dim brand As String = Nothing
+    Private _Category As String = Nothing
+    Private _SubCategory As String = Nothing
+    Private _colour As String = Nothing
+    Private _material As String = Nothing
+    Private _pattern As String = Nothing
+    Private _brand As String = Nothing
+
+    Public Property Category As String
+        Set(value As String)
+            _Category = value
+        End Set
+        Get
+            Return _Category
+        End Get
+    End Property
+
+    Public Property SubCategory As String
+        Set(value As String)
+            _SubCategory = value
+        End Set
+        Get
+            Return _SubCategory
+        End Get
+    End Property
+
+    Public Property Colour As String
+        Set(value As String)
+            _colour = value
+        End Set
+        Get
+            Return _colour
+        End Get
+    End Property
+
+    Public Property Material As String
+        Set(value As String)
+            _material = value
+        End Set
+        Get
+            Return _material
+        End Get
+    End Property
+
+    Public Property Pattern As String
+        Set(value As String)
+            _pattern = value
+        End Set
+        Get
+            Return _pattern
+        End Get
+    End Property
+
+    Public Property Brand As String
+        Set(value As String)
+            _brand = value
+        End Set
+        Get
+            Return _brand
+        End Get
+    End Property
 
     'A dictionary created to store which sub-categories are associated with each category
     Dim associatedCategories As New Dictionary(Of String, List(Of String)) From {
@@ -73,7 +139,7 @@ Public Class ClothingDetails
         'This code will remove all controls from the panel so the buttons do not layer over each other
         SubCatagoryPanel.Controls.Clear()
         'Creating a variable which is a list to hold the sub category options
-        Dim listOfsubCategories As List(Of String) = associatedCategories(Catagory)
+        Dim listOfsubCategories As List(Of String) = associatedCategories(_Category)
         'Finds out how many buttons need to be made depending on the size of the list
         Dim noButtons As Integer = listOfsubCategories.Count
         'This for loop will run as large as the list is so that only the required number of buttons are created
@@ -96,7 +162,7 @@ Public Class ClothingDetails
             'Using addhandler so that when the buttons are created they can also have the addhandler
             AddHandler newButton.Click, AddressOf filterPress
             'This IF statement allows it so if a button is selected, when they are created it will stay highlighted
-            If newButton.Text = SubCatagory Then
+            If newButton.Text = _SubCategory Then
                 newButton.BackColor = _selectedColour
             Else
                 newButton.BackColor = _unselectedColour
@@ -112,7 +178,7 @@ Public Class ClothingDetails
 
     Private Sub CMDSubCatagory_Click(sender As Object, e As EventArgs) Handles CMDSubCatagory.Click
         openPanel(SubCatagoryPanel)
-        If Catagory <> Nothing Then
+        If _Category <> Nothing Then
             subCategorybuttons()
         End If
 
@@ -178,6 +244,68 @@ Public Class ClothingDetails
         AddHandler CMDPatternPolka.Click, AddressOf filterPress
         AddHandler CMDPatternAbstract.Click, AddressOf filterPress
         AddHandler CMDPatternGeometric.Click, AddressOf filterPress
+
+        'This subroutine will run when clothingDetails loads, so that it can retrieve any filters
+        Dim myDBCon As New dataBaseconnector
+        myDBCon.RetrieveFilters(_currentImagePath)
+
+        'This is used to indicate any previous selected filters when the form loads
+        If _Category <> "" And _Category <> "N" Then
+            'This changes the main options text to the selected text
+            CMDCatagory.Text = _Category
+            'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
+            For Each ctrl As Control In CatagoryPanel.Controls
+                If ctrl.Text = _Category Then
+                    ctrl.BackColor = _selectedColour
+                End If
+            Next
+        End If
+
+        If _SubCategory <> "" And _SubCategory <> "N" Then
+            'This changes the main options text to the selected text
+            CMDSubCatagory.Text = _SubCategory
+            'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
+            For Each ctrl As Control In SubCatagoryPanel.Controls
+                If ctrl.Text = _SubCategory Then
+                    ctrl.BackColor = _selectedColour
+                End If
+            Next
+        End If
+
+        If _colour <> "" And _colour <> "N" Then
+            'This changes the main options text to the selected text
+            CMDColour.Text = _colour
+            'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
+            For Each ctrl As Control In ColourPanel.Controls
+                If ctrl.Text = _colour Then
+                    ctrl.BackColor = _selectedColour
+                End If
+            Next
+        End If
+
+        If _material <> "" And _material <> "N" Then
+            'This changes the main options text to the selected text
+            CMDMaterial.Text = _material
+            'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
+            For Each ctrl As Control In MaterialPanel.Controls
+                If ctrl.Text = _material Then
+                    ctrl.BackColor = _selectedColour
+                End If
+            Next
+        End If
+
+        If _pattern <> "" And _SubCategory <> "N" Then
+            'This changes the main options text to the selected text
+            CMDPattern.Text = _pattern
+            'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
+            For Each ctrl As Control In PatternPanel.Controls
+                If ctrl.Text = _pattern Then
+                    ctrl.BackColor = _selectedColour
+                End If
+            Next
+        End If
+
+
     End Sub
 
     Private Sub filterPress(sender As Object, e As EventArgs)
@@ -194,20 +322,20 @@ Public Class ClothingDetails
             'If the button clicked is already the selected colour, then the variable associated with it is changed back to nothing
             Select Case buttonsPanel.Name
                 Case "CatagoryPanel"
-                    Catagory = Nothing
+                    _Category = Nothing
                     'When the button is deselected it will change the text of the button back to its original text
                     CMDCatagory.Text = "Category"
                 Case "SubCatagoryPanel"
-                    SubCatagory = Nothing
+                    _SubCategory = Nothing
                     CMDSubCatagory.Text = "Sub Category"
                 Case "ColourPanel"
-                    colour = Nothing
+                    _colour = Nothing
                     CMDColour.Text = "Colour"
                 Case "MaterialPanel"
-                    material = Nothing
+                    _material = Nothing
                     CMDMaterial.Text = "Material"
                 Case "PatternPanel"
-                    pattern = Nothing
+                    _pattern = Nothing
                     CMDPattern.Text = "Pattern"
             End Select
         Else
@@ -225,20 +353,20 @@ Public Class ClothingDetails
             Select Case buttonsPanel.Name
                 Case "CatagoryPanel"
                     'Will save the filter chosen to the appropriate variable
-                    Catagory = buttonClicked.Text
+                    _Category = buttonClicked.Text
                     'When the button is selected, it will change the text of the category button
                     CMDCatagory.Text = buttonClicked.Text
                 Case "SubCatagoryPanel"
-                    SubCatagory = buttonClicked.Text
+                    _SubCategory = buttonClicked.Text
                     CMDSubCatagory.Text = buttonClicked.Text
                 Case "ColourPanel"
-                    colour = buttonClicked.Text
+                    _colour = buttonClicked.Text
                     CMDColour.Text = buttonClicked.Text
                 Case "MaterialPanel"
-                    material = buttonClicked.Text
+                    _material = buttonClicked.Text
                     CMDMaterial.Text = buttonClicked.Text
                 Case "PatternPanel"
-                    pattern = buttonClicked.Text
+                    _pattern = buttonClicked.Text
                     CMDPattern.Text = buttonClicked.Text
             End Select
         End If
@@ -247,11 +375,11 @@ Public Class ClothingDetails
     'This subroutine handles finding URLs depending on the chosen inputs
     Private Sub CMDFindURLs_Click(sender As Object, e As EventArgs) Handles CMDFindURLs.Click
         'This IF statement makes a minimum requirement for the amount of data that must be entered
-        If Catagory = Nothing Or SubCatagory = Nothing Or colour = Nothing Or material = Nothing Then
+        If _Category = Nothing Or _SubCategory = Nothing Or _colour = Nothing Or _material = Nothing Then
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
         Else
             'This constructs the keyword string that is entered for the API
-            Dim keyword As String = brand & "" & Catagory & " " & SubCatagory & " " & colour & " " & material & " " & pattern
+            Dim keyword As String = _brand & "" & _Category & " " & _SubCategory & " " & _colour & " " & _material & " " & _pattern
             Dim myURLFinder As New URLFinder
             myURLFinder.keyWord = keyword
             myURLFinder.getURLs()
@@ -260,7 +388,7 @@ Public Class ClothingDetails
             prices = myURLFinder.PriceResult
             DisplayURLResults(titles, prices, urls)
             Dim myDB As New dataBaseconnector
-            myDB.Insert(Nothing, Nothing, "CLOTHINGITEM", False, Nothing, Catagory, SubCatagory, colour, material, brand, pattern, Nothing, 0)
+            myDB.Insert(_currentImagePath, Nothing, "CLOTHINGITEM", False, Nothing, _Category, _SubCategory, _colour, _material, _brand, _pattern, Nothing, 0)
         End If
     End Sub
 

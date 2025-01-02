@@ -72,11 +72,11 @@ Public Class dataBaseconnector
 
             command.ExecuteNonQuery()
             connection.close()
-            imageID = findImageID()
+            imageID = findImageID(data)
             linkTables(wardrobeID, imageID)
 
         ElseIf tableName = "CLOTHINGITEM" Then
-            imageID = findImageID()
+            imageID = findImageID(data)
 
             'THIS CODE WILL RUN IF UPDATING TO THE CLOTHINGITEM TABLE
             sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
@@ -135,132 +135,12 @@ Public Class dataBaseconnector
             command.Parameters.AddWithValue("@wardrobeID", wardrobeID)
             command.Parameters.AddWithValue("@ImageID", imageID)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             command.ExecuteNonQuery()
-
-
             connection.close()
         End If
 
         'Then reloads the flowlayout panel
         populateWardrobe(wardrobeID)
-
-
-
-        'If Category <> Nothing Then
-        '    'This finds the imageID of the most recent image added and then returns it to the variable
-
-        '    imageID = findImageID()
-        '    sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
-
-        '    'IF STATEMENT USED TO DETERMINE WHICH SQL STATEMENT TO USE DEPENDING ON UPLOADDATE
-        'ElseIf UploadDate <> Nothing Then
-        '    'If there is an upload date, the upload date will be inserted when the image path is inserted
-        '    sql = $"INSERT INTO [{tableName}] ([{fieldName}], UploadDate) VALUES (@data, @uploadDate)"
-        'ElseIf Category = Nothing Then
-        '    sql = $"INSERT INTO [{tableName}] ([{fieldName}]) VALUES (@data)"
-        'End If
-
-        ''Creating the command depending on the IF statement
-        'Dim command As New OleDbCommand(sql, connection)
-        'If Category = Nothing Then
-        '    command.Parameters.AddWithValue("@data", data)
-        'End If
-
-        'If UploadDate <> Nothing Then
-        '    command.Parameters.AddWithValue("@uploadDate", UploadDate)
-        'End If
-        'If Category <> Nothing Then
-        '    imageID = findImageID()
-        '    If wardrobeID <> Nothing Then
-        '        MessageBox.Show($"WardrobeID: {wardrobeID}")
-        '        command.Parameters.AddWithValue("@wardrobeID", wardrobeID)Z
-        '    Else
-        '        command.Parameters.AddWithValue("@wardrobeID", "N")
-        '    End If
-        '    If imageID <> Nothing Then
-        '        MessageBox.Show($"ImageID: {imageID}")
-        '        command.Parameters.AddWithValue("@ImageID", imageID)
-        '    Else
-        '        command.Parameters.AddWithValue("@ImageID", "N")
-        '    End If
-        '    If Category <> Nothing Then
-        '        command.Parameters.AddWithValue("@Category", Category)
-        '    Else
-        '        command.Parameters.AddWithValue("@Category", "N")
-        '    End If
-        '    If subCategory <> Nothing Then
-        '        command.Parameters.AddWithValue("@SubCategory", subCategory)
-        '    Else
-        '        command.Parameters.AddWithValue("@SubCategory", "N")
-        '    End If
-        '    If colour <> Nothing Then
-        '        command.Parameters.AddWithValue("@Colour", colour)
-        '    Else
-        '        command.Parameters.AddWithValue("@Colour", "N")
-        '    End If
-        '    If Material <> Nothing Then
-        '        command.Parameters.AddWithValue("@Material", Material)
-        '    Else
-        '        command.Parameters.AddWithValue("@Material", "N")
-        '    End If
-        '    If Brand <> Nothing Then
-        '        command.Parameters.AddWithValue("@Brand", Brand)
-        '    Else
-        '        command.Parameters.AddWithValue("@Brand", "N")
-        '    End If
-        '    If Pattern <> Nothing Then
-        '        command.Parameters.AddWithValue("@Pattern", Pattern)
-        '    Else
-        '        command.Parameters.AddWithValue("@Pattern", "N")
-        '    End If
-        '    If LastWornDate <> Nothing Then
-        '        command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
-        '    Else
-        '        command.Parameters.AddWithValue("@LastWornDate", "N")
-        '    End If
-        '    If WearFrequency <> Nothing Then
-        '        command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
-        '    Else
-        '        command.Parameters.AddWithValue("@WearFrequency", "0")
-        '    End If
-        'End If
-
-        'Command.ExecuteNonQuery()
-        ' connection.close()
-
-        'If the link variable inputted as a parameter is true, the link tables subroutine is used
-        ' If link = True Then
-        ' imageID = findImageID()
-        '   linkTables(wardrobeID, imageID)
-        ' End If
-
-        'Then reloads the flowlayout panel
-        'populateWardrobe(wardrobeID)
-    End Sub
-
-    Public Sub Update()
-        'CREATING THE CONNECTION TO THE DB
-        Dim connection = createConnection()
-        connection.open()
-
-        'VARIABLES NEEDED FOR THE PROGRAM
-        Dim sql As String
-
-
     End Sub
 
     'This is used to link the image to the wardrobe
@@ -358,8 +238,16 @@ Public Class dataBaseconnector
         Return imagePaths
     End Function
 
+    Private Function findSpecificPath()
+
+    End Function
     'This subroutine is used so that iamges which are loaded in are able to be also clicked
     Private Sub pictureBox_Click(sender As Object, e As EventArgs)
+        ''This gets the clothing item that was just clicked and retrieves the image path so that the filters can be loaded
+        Dim clothingItem As PictureBox = sender
+        Dim ImagePath As String = clothingItem.Tag
+        'Dim myClothingDetails As New ClothingDetails
+        ClothingDetails.currentImagePath = ImagePath
         ClothingDetails.Show()
     End Sub
 
@@ -427,30 +315,54 @@ Public Class dataBaseconnector
     '    Return wardrobeID
     'End Function
 
-    Public Function findImageID()
+    Public Function findImageID(ByVal ImagePath As String)
         'Creates the connection to the wardrobe
+        'Dim connection = createConnection()
+        'connection.open()
+
+        'Dim dr As OleDbDataReader
+        ''Selecting all imageID's in descending order so the last one added is the first one
+        'Dim sql As String = "SELECT ImageID FROM [IMAGE] ORDER BY ImageID DESC"
+
+        'Dim command As New OleDbCommand(sql, connection)
+        'dr = command.ExecuteReader
+        ''moves it onto the first row
+        'dr.Read()
+        'If dr.HasRows Then
+        '    'Saves the imageID to a local variable
+        '    Dim imageID As Integer = dr("ImageID")
+        '    'closes all the connections
+        '    dr.Close()
+
+        '    Return imageID
+        'Else
+        '    MessageBox.Show("No data")
+        'End If
+        'connection.close()
+
+        'THIS SECTION RETRIEVES THE IMAGEID USING THE IMAGEPATH
+        Dim ImageID As Integer
+        'Creating a connection to the database
         Dim connection = createConnection()
         connection.open()
 
-        Dim dr As OleDbDataReader
-        'Selecting all imageID's in descending order so the last one added is the first one
-        Dim sql As String = "SELECT ImageID FROM [IMAGE] ORDER BY ImageID DESC"
-
+        Dim sql As String = "SELECT ImageID FROM [IMAGE] WHERE ImagePath = @ImagePath"
         Dim command As New OleDbCommand(sql, connection)
+        command.Parameters.AddWithValue("@ImagePath", ImagePath)
+
+        Dim dr As OleDbDataReader
         dr = command.ExecuteReader
         'moves it onto the first row
         dr.Read()
         If dr.HasRows Then
             'Saves the imageID to a local variable
-            Dim imageID As Integer = dr("ImageID")
+            ImageID = dr("ImageID")
             'closes all the connections
-            dr.Close()
-
-            Return imageID
+            Return ImageID
         Else
-            MessageBox.Show("No data")
+            MessageBox.Show("No Image ID")
         End If
-        connection.close()
+        dr.Close()
     End Function
 
     Public Sub DeleteButtonHandler(sender As Object, e As EventArgs)
@@ -518,4 +430,91 @@ Public Class dataBaseconnector
 
     End Sub
 
+    'This subroutine retrieves any previous applied filters from the database so that they can be displayed.
+    Public Sub RetrieveFilters(ByVal ImagePath As String)
+        findImageID(ImagePath)
+        'THIS SECTION RETRIEVES THE IMAGEID USING THE IMAGEPATH
+        Dim ImageID As Integer
+        'Creating a connection to the database
+        Dim connection = createConnection()
+        connection.open()
+
+        Dim sql As String = "SELECT ImageID FROM [IMAGE] WHERE ImagePath = @ImagePath"
+        Dim command As New OleDbCommand(sql, connection)
+        command.Parameters.AddWithValue("@ImagePath", ImagePath)
+
+        Dim dr As OleDbDataReader
+        dr = command.ExecuteReader
+        'moves it onto the first row
+        dr.Read()
+        If dr.HasRows Then
+            'Saves the imageID to a local variable
+            ImageID = dr("ImageID")
+            'closes all the connections
+
+        End If
+        dr.Close()
+
+        'RETRIEVING FILTERS
+
+        sql = "SELECT Category, SubCategory, Colour, Material, Brand, Pattern FROM CLOTHINGITEM WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
+
+        command = New OleDbCommand(sql, connection)
+
+        Dim WardrobeID As Integer = checkForWardrobe()
+        command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
+        command.Parameters.AddWithValue("@ImageID", ImageID)
+        MessageBox.Show(ImageID)
+        'Creating a new datareader
+        Dim reader As OleDbDataReader
+        reader = command.ExecuteReader
+
+        'These variables are just being used to test if this works.
+        Dim Category As String
+        Dim SubCategory As String
+        Dim Colour As String
+        Dim Material As String
+        Dim Brand As String
+        Dim Pattern As String
+
+        If reader.Read() Then ' Read the first matching row
+            'This finds the data from the position in the reader
+            Category = reader(0).ToString()
+            SubCategory = reader(1).ToString
+            Colour = reader(2).ToString
+            Material = reader(3).ToString
+            Brand = reader(4).ToString
+            Pattern = reader(5).ToString
+        End If
+
+        ' Close the DataReader and connection
+        reader.Close()
+        connection.Close()
+
+
+        'If there is any data retrieved it is sent to the clothingdetails form to be displayed
+        If Category <> "" Then
+            ClothingDetails.Category = Category
+        End If
+
+        If SubCategory <> "" Then
+            ClothingDetails.SubCategory = SubCategory
+        End If
+
+        If Colour <> "" Then
+            ClothingDetails.Colour = Colour
+        End If
+
+        If Material <> "" Then
+            ClothingDetails.Material = Material
+        End If
+
+        If Brand <> "" Then
+            ClothingDetails.Brand = Brand
+        End If
+
+        If Pattern <> "" Then
+            ClothingDetails.Pattern = Pattern
+        End If
+    End Sub
 End Class
