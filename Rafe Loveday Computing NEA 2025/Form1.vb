@@ -15,7 +15,6 @@ Public Class MainMenu
         End If
     End Sub
 
-
     Private Sub CMDOpenWardrobe_Click(sender As Object, e As EventArgs) Handles CMDOpenWardrobe.Click
         menuSwap(Wardrobe)
         Dim myDBconnector As New dataBaseconnector

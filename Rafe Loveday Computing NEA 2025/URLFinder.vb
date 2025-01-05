@@ -2,7 +2,6 @@
 Imports System.IO
 Imports Newtonsoft.Json.Linq
 
-
 Public Class URLFinder
     'Variable to flag whether to Display URLS
     Private _displayResult As Boolean
@@ -101,17 +100,25 @@ Public Class URLFinder
 
                 'This will loop through the items so that it can gather URLs and prices
                 For Each item In items
-                    'Getting the title from the JSON object
-                    Dim title As String = item("title").ToString()
-                    'Getting the URL so the user can view the items on ebay 
-                    Dim viewUrl As String = item("viewItemURL").ToString()
-                    'Getting the price from the JSON structure
-                    Dim price As String = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
+                    Dim title As String
+                    Dim viewURL As String
+                    Dim price As String
 
-                    'Appends the results so that it is formatted for display
-                    titleResult &= $"{title}|||"
-                    urlResult &= $"{viewUrl}|||"
-                    priceResult &= $"{price}|||"
+                    'This if statement should prevent empty entries from being added to the array
+                    If item("title").ToString <> "" Then
+                        'Getting the title from the JSON object
+                        title = item("title").ToString()
+                        'Getting the URL so the user can view the items on ebay 
+                        viewURL = item("viewItemURL").ToString()
+                        'Getting the price from the JSON structure
+                        price = item("sellingStatus")(0)("currentPrice")(0)("__value__").ToString()
+
+                        'Appends the results so that it is formatted for display
+                        titleResult &= $"{title}|||"
+                        urlResult &= $"{viewURL}|||"
+                        priceResult &= $"{price}|||"
+                    End If
+
                 Next
                 'me allows me to reference the current class so that the variables can be stored in the public properties
                 'I moved these out as they did not need to be ran every iteration. Also the change takes off the extra splitters at the end.
