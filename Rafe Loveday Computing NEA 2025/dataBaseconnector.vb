@@ -464,7 +464,6 @@ Public Class dataBaseconnector
         Dim WardrobeID As Integer = checkForWardrobe()
         command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
         command.Parameters.AddWithValue("@ImageID", ImageID)
-        MessageBox.Show(ImageID)
         'Creating a new datareader
         Dim reader As OleDbDataReader
         reader = command.ExecuteReader
@@ -493,27 +492,27 @@ Public Class dataBaseconnector
 
 
         'If there is any data retrieved it is sent to the clothingdetails form to be displayed
-        If Category <> "" Then
+        If Category <> "" And Category <> "N" Then
             ClothingDetails.Category = Category
         End If
 
-        If SubCategory <> "" Then
+        If SubCategory <> "" And SubCategory <> "N" Then
             ClothingDetails.SubCategory = SubCategory
         End If
 
-        If Colour <> "" Then
+        If Colour <> "" And Colour <> "N" Then
             ClothingDetails.Colour = Colour
         End If
 
-        If Material <> "" Then
+        If Material <> "" And Material <> "N" Then
             ClothingDetails.Material = Material
         End If
 
-        If Brand <> "" Then
+        If Brand <> "" And Brand <> "N" Then
             ClothingDetails.Brand = Brand
         End If
 
-        If Pattern <> "" Then
+        If Pattern <> "" And Pattern <> "N" Then
             ClothingDetails.Pattern = Pattern
         End If
     End Sub

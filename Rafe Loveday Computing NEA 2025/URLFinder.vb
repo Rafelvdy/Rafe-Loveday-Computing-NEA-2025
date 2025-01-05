@@ -2,7 +2,6 @@
 Imports System.IO
 Imports Newtonsoft.Json.Linq
 
-
 Public Class URLFinder
     'Variable to flag whether to Display URLS
     Private _displayResult As Boolean

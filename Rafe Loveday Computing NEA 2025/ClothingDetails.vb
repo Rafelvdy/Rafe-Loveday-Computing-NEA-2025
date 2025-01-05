@@ -294,7 +294,7 @@ Public Class ClothingDetails
             Next
         End If
 
-        If _pattern <> "" And _SubCategory <> "N" Then
+        If _pattern <> "" And _pattern <> "N" Then
             'This changes the main options text to the selected text
             CMDPattern.Text = _pattern
             'This compares each button in the CatagoryPanel to the selected category so it can find which button to change colour.
@@ -379,7 +379,7 @@ Public Class ClothingDetails
             MessageBox.Show("Please make sure you have selected a filter for category, subcategory, colour and material!")
         Else
             'This constructs the keyword string that is entered for the API
-            Dim keyword As String = _brand & "" & _Category & " " & _SubCategory & " " & _colour & " " & _material & " " & _pattern
+            Dim keyword As String = _brand & " " & _Category & " " & _SubCategory & " " & _colour & " " & _material & " " & _pattern
             Dim myURLFinder As New URLFinder
             myURLFinder.keyWord = keyword
             myURLFinder.getURLs()
