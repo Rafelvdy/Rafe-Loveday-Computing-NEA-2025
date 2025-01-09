@@ -13,6 +13,12 @@ Public Class ClothingDetails
         End Get
     End Property
 
+    'This variable is used to store the state of the price filtering
+    'By default it shows low to high
+    '1 - low to high
+    '2 - high to low
+    '3 - low to high all results
+    Dim priceState As Integer = 1
 
     'Stores the data pulled from API
     Dim titles As String
@@ -395,36 +401,58 @@ Public Class ClothingDetails
     Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
         Dim defaultView() As Double
 
-
-        'Showing the panel so that the buttons can be organised inside and resets anything that could be in there
-        If ResultsScrollPanel.Visible = False Then
-            ResultsScrollPanel.Show()
-        End If
-        ResultsScrollPanel.Controls.Clear()
         'This splits the results by using the separator that i put in.
         Dim titleArray() As String = titles.Split("|||").Where(Function(t) Not String.IsNullOrWhiteSpace(t)).ToArray()
         Dim urlArray() As String = urls.Split("|||").Where(Function(u) Not String.IsNullOrWhiteSpace(u)).ToArray()
         Dim priceArray() As String = prices.Split("|||").Where(Function(p) Not String.IsNullOrWhiteSpace(p)).ToArray()
 
+        'Showing the panel so that the buttons can be organised inside and resets anything that could be in there
+        If ResultsScrollPanel.Visible = False Then
+            ResultsScrollPanel.Show()
+            priceLabel.Show()
+            CMDUpdate.Show()
+            SearchBar.Show()
+        End If
+        ResultsScrollPanel.Controls.Clear()
+
+
+        'This creates an instance of the searchOrFilter class so that i can use the merge sort on the price array
+        Dim mySearchOrFilter As New searchOrFilter
+
+        'This is used for the searching part of the algorithm
+        'This IF statement determines whether the user has entered any data into the search bar
+        If SearchBar.Text <> "" Then
+            Dim results = mySearchOrFilter.containsSearch(titleArray, priceArray, urlArray, SearchBar.Text)
+            Dim arraySize = results.item1
+
+            Array.Resize(titleArray, arraySize)
+            Array.Resize(priceArray, arraySize)
+            Array.Resize(urlArray, arraySize)
+
+            titleArray = results.item2
+            priceArray = results.item3
+            urlArray = results.item4
+        End If
+
+
         'Making a variable to store values of integers to be sorted
         'Allows me to convert array from string to integer
         Dim arraytosort(priceArray.Length - 1) As Double
-        For i = 1 To priceArray.Count() - 1
-            If priceArray(i) <> "" Then
+        For i = 0 To priceArray.Count() - 1
+            If priceArray(i) <> 0 Then
                 arraytosort(i) = CDbl(priceArray(i))
             End If
         Next
 
-        'This creates an instance of the searchOrFilter class so that i can use the merge sort on the price array
-        Dim mySearchOrFilter As New searchOrFilter
+        'This is used for the Sorting part of the Algorithm
         Dim low As Integer = 0
         Dim high As Integer = arraytosort.Length - 1
         'This list created is the list in order of price
         defaultView = mySearchOrFilter.mergeSort(arraytosort, low, high)
 
-        Dim toDisplay(10) As Double
+        Dim toDisplay(9) As Double
 
-        If priceLabel_Click() = "Price ↑" Then
+        If priceLabel.Text = "Price ↑" Then
             'This is the position of the last element to be copied to the new array
             Dim endIndex As Integer = defaultView.Length - 10
             Dim addPosition As Integer = 0
@@ -433,11 +461,16 @@ Public Class ClothingDetails
                 toDisplay(addPosition) = defaultView(i)
                 addPosition += 1
             Next
-        ElseIf priceLabel_Click() = "Price ↓" Then
+        ElseIf priceLabel.Text = "Price ↓" Then
             For i = 0 To 9
                 toDisplay(i) = defaultView(i)
             Next
-
+        ElseIf priceLabel.Text = "Price -" Then
+            'This will allow me to adjust the size of the array which is displayed so that all the results can be displayed
+            ReDim toDisplay(defaultView.Length - 1)
+            For i = 0 To defaultView.Length - 1
+                toDisplay(i) = defaultView(i)
+            Next
         End If
 
         'These variables will handle the spacing between each of the results
@@ -465,7 +498,7 @@ Public Class ClothingDetails
                     .Width = 200
                     .Height = 60
                     .BackColor = Color.White
-                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"£{toDisplay(i)}"
+                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"${toDisplay(i)}"
 
                     'This places the label according to other labels and the padding
                     .Location = New Point(currentX, padding)
@@ -508,30 +541,37 @@ Public Class ClothingDetails
         myValidation.GetURLs()
         'If the brand is valid, it will save the brand name to a variable in this forms, if it is not the variable is set to nothing to clear any previous entries from the field
         If myValidation.valid = True Then
-            brand = myValidation.brand
+            Brand = myValidation.brand
             'This will make a green box appear under the brand text box if the user enters a valid brand
             isValidPanel.BackColor = Color.Green
             isValidPanel.Visible = True
         Else
             'Variable is reset back to nothing if the brand is invalid
-            brand = Nothing
+            Brand = Nothing
             'This will make a red box appear under the brand text box if the user enters an invalid brand
             isValidPanel.BackColor = Color.Red
             isValidPanel.Visible = True
         End If
     End Sub
 
-    Private Function priceLabel_Click() Handles priceLabel.Click
-        ' Toggle and return the new state
-        If priceLabel.Text = "Price ↓" Then
-            priceLabel.Text = "Price ↑"
-        Else
+    Private Sub priceLabel_Click() Handles priceLabel.Click
+        'This increments the priceState variable, while allowing it to wrap back round 
+        priceState = (priceState Mod 3) + 1
+        If priceState = 1 Then
             priceLabel.Text = "Price ↓"
+        ElseIf priceState = 2 Then
+            priceLabel.Text = "Price ↑"
+        ElseIf priceState = 3 Then
+            priceLabel.Text = "Price -"
         End If
-        Return priceLabel.Text
-    End Function
+    End Sub
 
+    'This updates the scroll bar that shows the results from the API call.
     Private Sub CMDUpdate_Click(sender As Object, e As EventArgs) Handles CMDUpdate.Click
+
+
+
+
         DisplayURLResults(titles, prices, urls)
     End Sub
 End Class

@@ -84,7 +84,6 @@ Public Class dataBaseconnector
 
             If Category <> Nothing Then
                 command.Parameters.AddWithValue("@Category", Category)
-                MessageBox.Show(command.CommandText)
             Else
                 command.Parameters.AddWithValue("@Category", "N")
             End If

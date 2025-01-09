@@ -1,4 +1,6 @@
-﻿Public Class searchOrFilter
+﻿Imports System.Text.RegularExpressions
+
+Public Class searchOrFilter
     Public Function mergeSort(ByVal priceArray As Double(), ByVal low As Integer, ByVal high As Integer)
         'THIS IS THE BASE CASE
         If low >= high Then Return priceArray
@@ -45,5 +47,34 @@
             End If
         Next
         Return priceArray
+    End Function
+
+    Public Function containsSearch(ByVal titlesArray() As String, ByVal priceArray() As String, ByVal urlArray() As String, ByVal searchData As String)
+        'These variables are used to hold the API data so that they can be kept organised together when searching
+        Dim titlesToDisplay(titlesArray.Length - 1) As String
+        Dim pricesToDisplay(titlesArray.Length - 1) As String
+        Dim urlsToDisplay(titlesArray.Length - 1) As String
+
+
+        'This variable is used to hold the index so that whenever a match is found so that the program adds the results to the next index 
+        Dim index As Integer = 0
+        'This holds all the results so they can be returned and displayed 
+
+
+        For Each item In titlesArray
+            If Regex.IsMatch(item, searchData, RegexOptions.IgnoreCase) Then
+                titlesToDisplay(index) = titlesArray(index)
+                pricesToDisplay(index) = priceArray(index)
+                urlsToDisplay(index) = urlArray(index)
+
+                index += 1
+            End If
+        Next
+
+        Array.Resize(titlesToDisplay, index)
+        Array.Resize(pricesToDisplay, index)
+        Array.Resize(urlsToDisplay, index)
+
+        Return (index, titlesToDisplay, pricesToDisplay, urlsToDisplay)
     End Function
 End Class
