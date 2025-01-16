@@ -222,6 +222,65 @@ Public Class dataBaseconnector
         End If
     End Sub
 
+    Public Sub loadCategory(ByVal Category As String)
+        'OutfitPicker.clothesByCategory.Controls.Clear()
+
+
+
+        'Dim WardrobeID As Integer = checkForWardrobe()
+
+        'Dim connection = createConnection()
+        'connection.open()
+
+        'Dim command As New OleDbCommand
+        'Dim sql As String
+
+        ''Checking for bottoms as this will require sql statement to look for both trousers and shorts
+        'If Category = "Bottoms" Then
+        '    sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] On [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [CLOTHINGITEM].[WardrobeID] = @WardrobeID AND [CLOTHINGITEM].[Category] = 'Trousers' OR [CLOTHINGITEM].[Category] = 'Shorts'"
+        '    command = New OleDbCommand(sql, connection)
+        '    command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
+        'Else
+        '    sql = "SELECT [Image].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] On [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [CLOTHINGITEM].[WardrobeID] = @WardrobeID And [CLOTHINGITEM].[Category] = @Category"
+        '    command = New OleDbCommand(sql, connection)
+        '    command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
+        '    command.Parameters.AddWithValue("@Category", Category)
+        'End If
+
+        'Dim dr As OleDbDataReader = command.ExecuteReader()
+        ''This checks if there is any data to display
+        'If dr.HasRows() Then
+        '    While dr.Read()
+        '        Dim ImagePath As String = dr("ImagePath")
+        '        MessageBox.Show(ImagePath)
+        '        Dim clothingItem As New PictureBox
+
+        '        'This will make it easier to access the imagepath of the clothingitem in future from here
+        '        clothingItem.Tag = ImagePath
+
+        '        clothingItem.Image = Image.FromFile(ImagePath)
+        '        With clothingItem
+        '            'Sets the image of the picture box to the imagepath pulled from the database
+
+        '            .Size = New Size(150, 150)
+        '            .SizeMode = PictureBoxSizeMode.Zoom
+        '        End With
+        '        OutfitPicker.clothesByCategory.Controls.Add(clothingItem)
+        '    End While
+        'End If
+        'dr.Close()
+        Dim picture As New PictureBox
+        With picture
+            .Size = New Size(150, 150)
+            .SizeMode = PictureBoxSizeMode.Zoom
+            .Image = Image.FromFile("C:\Users\Owner\OneDrive - Maidstone Grammar School\A Level NEAs\Computing\Images\download (2).jpg")
+            .Visible = True
+        End With
+        OutfitPicker.clothesByCategory.Controls.Add(picture)
+        OutfitPicker.clothesByCategory.Refresh()
+    End Sub
+
+
     'This function makes a list of all image paths and returns it
     Private Function findImagePaths()
         'creating a list so all image paths can be added to it
@@ -240,6 +299,7 @@ Public Class dataBaseconnector
     Private Function findSpecificPath()
 
     End Function
+
     'This subroutine is used so that iamges which are loaded in are able to be also clicked
     Private Sub pictureBox_Click(sender As Object, e As EventArgs)
         ''This gets the clothing item that was just clicked and retrieves the image path so that the filters can be loaded
@@ -515,4 +575,6 @@ Public Class dataBaseconnector
             ClothingDetails.Pattern = Pattern
         End If
     End Sub
+
+
 End Class

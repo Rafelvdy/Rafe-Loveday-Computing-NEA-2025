@@ -54,19 +54,7 @@ Public Class MainMenu
         End If
     End Sub
 
-    Private Sub CMDSelectImage_Click(sender As Object, e As EventArgs) Handles CMDSelectImage.Click
-        'Create a new OpenFileDialogue Instance
-        Dim openFileDialog As New OpenFileDialog()
-        'Set the filter options
-        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
-        openFileDialog.Title = "Select an Image File"
-        openFileDialog.ShowDialog()
-        If openFileDialog.FileName <> "" Then
-            Dim imageFile = openFileDialog.FileName
-            ImageAnalysis.PictureBox1.Image = System.Drawing.Image.FromFile(imageFile)
-            menuSwap(ImageAnalysis)
-            ImageAnalysis.Show()
-        End If
+    Private Sub CMDOutfitPicker_Click(sender As Object, e As EventArgs) Handles CMDOutfitPicker.Click
+        menuSwap(OutfitPicker)
     End Sub
-
 End Class

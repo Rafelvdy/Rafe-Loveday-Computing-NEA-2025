@@ -159,12 +159,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageAnalysis.Designer.vb">
-      <DependentUpon>ImageAnalysis.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ImageAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -179,6 +173,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="OutfitPicker.Designer.vb">
+      <DependentUpon>OutfitPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutfitPicker.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="searchOrFilter.vb" />
     <Compile Include="URLFinder.vb" />
@@ -197,14 +197,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImageAnalysis.resx">
-      <DependentUpon>ImageAnalysis.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutfitPicker.resx">
+      <DependentUpon>OutfitPicker.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wardrobe.resx">
       <DependentUpon>Wardrobe.vb</DependentUpon>
