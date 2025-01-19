@@ -26,20 +26,22 @@ Partial Class OutfitPicker
         Me.CMDChooseTshirt = New System.Windows.Forms.Button()
         Me.CMDChooseBottoms = New System.Windows.Forms.Button()
         Me.CMDChooseJumpers = New System.Windows.Forms.Button()
+        Me.Outwear = New System.Windows.Forms.PictureBox()
+        Me.Jumpers = New System.Windows.Forms.PictureBox()
+        Me.Tshirts = New System.Windows.Forms.PictureBox()
+        Me.Bottoms = New System.Windows.Forms.PictureBox()
         Me.clothesByCategory = New System.Windows.Forms.FlowLayoutPanel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.OutfitPanel = New System.Windows.Forms.Panel()
+        CType(Me.Outwear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Jumpers, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Tshirts, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Bottoms, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.OutfitPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'CMDChooseOutwear
         '
-        Me.CMDChooseOutwear.Location = New System.Drawing.Point(985, 89)
+        Me.CMDChooseOutwear.Location = New System.Drawing.Point(702, 107)
         Me.CMDChooseOutwear.Name = "CMDChooseOutwear"
         Me.CMDChooseOutwear.Size = New System.Drawing.Size(140, 96)
         Me.CMDChooseOutwear.TabIndex = 0
@@ -48,7 +50,7 @@ Partial Class OutfitPicker
         '
         'CMDChooseTshirt
         '
-        Me.CMDChooseTshirt.Location = New System.Drawing.Point(985, 515)
+        Me.CMDChooseTshirt.Location = New System.Drawing.Point(702, 522)
         Me.CMDChooseTshirt.Name = "CMDChooseTshirt"
         Me.CMDChooseTshirt.Size = New System.Drawing.Size(140, 96)
         Me.CMDChooseTshirt.TabIndex = 1
@@ -57,7 +59,7 @@ Partial Class OutfitPicker
         '
         'CMDChooseBottoms
         '
-        Me.CMDChooseBottoms.Location = New System.Drawing.Point(985, 736)
+        Me.CMDChooseBottoms.Location = New System.Drawing.Point(1370, 731)
         Me.CMDChooseBottoms.Name = "CMDChooseBottoms"
         Me.CMDChooseBottoms.Size = New System.Drawing.Size(140, 96)
         Me.CMDChooseBottoms.TabIndex = 2
@@ -66,66 +68,73 @@ Partial Class OutfitPicker
         '
         'CMDChooseJumpers
         '
-        Me.CMDChooseJumpers.Location = New System.Drawing.Point(985, 304)
+        Me.CMDChooseJumpers.Location = New System.Drawing.Point(1370, 308)
         Me.CMDChooseJumpers.Name = "CMDChooseJumpers"
         Me.CMDChooseJumpers.Size = New System.Drawing.Size(140, 96)
         Me.CMDChooseJumpers.TabIndex = 3
         Me.CMDChooseJumpers.Text = "Jumpers"
         Me.CMDChooseJumpers.UseVisualStyleBackColor = True
         '
+        'Outwear
+        '
+        Me.Outwear.BackColor = System.Drawing.SystemColors.Control
+        Me.Outwear.Location = New System.Drawing.Point(21, 4)
+        Me.Outwear.Name = "Outwear"
+        Me.Outwear.Size = New System.Drawing.Size(224, 358)
+        Me.Outwear.TabIndex = 5
+        Me.Outwear.TabStop = False
+        '
+        'Jumpers
+        '
+        Me.Jumpers.BackColor = System.Drawing.SystemColors.Control
+        Me.Jumpers.Location = New System.Drawing.Point(265, 165)
+        Me.Jumpers.Name = "Jumpers"
+        Me.Jumpers.Size = New System.Drawing.Size(224, 358)
+        Me.Jumpers.TabIndex = 6
+        Me.Jumpers.TabStop = False
+        '
+        'Tshirts
+        '
+        Me.Tshirts.BackColor = System.Drawing.SystemColors.Control
+        Me.Tshirts.Location = New System.Drawing.Point(21, 417)
+        Me.Tshirts.Name = "Tshirts"
+        Me.Tshirts.Size = New System.Drawing.Size(224, 358)
+        Me.Tshirts.TabIndex = 7
+        Me.Tshirts.TabStop = False
+        '
+        'Bottoms
+        '
+        Me.Bottoms.BackColor = System.Drawing.SystemColors.Control
+        Me.Bottoms.Location = New System.Drawing.Point(265, 574)
+        Me.Bottoms.Name = "Bottoms"
+        Me.Bottoms.Size = New System.Drawing.Size(224, 358)
+        Me.Bottoms.TabIndex = 8
+        Me.Bottoms.TabStop = False
+        '
         'clothesByCategory
         '
-        Me.clothesByCategory.BackColor = System.Drawing.SystemColors.Control
-        Me.clothesByCategory.Location = New System.Drawing.Point(58, 48)
+        Me.clothesByCategory.Location = New System.Drawing.Point(13, 48)
         Me.clothesByCategory.Name = "clothesByCategory"
-        Me.clothesByCategory.Size = New System.Drawing.Size(747, 818)
-        Me.clothesByCategory.TabIndex = 4
+        Me.clothesByCategory.Size = New System.Drawing.Size(679, 818)
+        Me.clothesByCategory.TabIndex = 9
         '
-        'PictureBox1
+        'OutfitPanel
         '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PictureBox1.Location = New System.Drawing.Point(1310, 48)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(197, 163)
-        Me.PictureBox1.TabIndex = 5
-        Me.PictureBox1.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PictureBox2.Location = New System.Drawing.Point(1310, 262)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(197, 163)
-        Me.PictureBox2.TabIndex = 6
-        Me.PictureBox2.TabStop = False
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PictureBox3.Location = New System.Drawing.Point(1310, 482)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(197, 163)
-        Me.PictureBox3.TabIndex = 7
-        Me.PictureBox3.TabStop = False
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PictureBox4.Location = New System.Drawing.Point(1310, 703)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(197, 163)
-        Me.PictureBox4.TabIndex = 8
-        Me.PictureBox4.TabStop = False
+        Me.OutfitPanel.Controls.Add(Me.Outwear)
+        Me.OutfitPanel.Controls.Add(Me.Jumpers)
+        Me.OutfitPanel.Controls.Add(Me.Bottoms)
+        Me.OutfitPanel.Controls.Add(Me.Tshirts)
+        Me.OutfitPanel.Location = New System.Drawing.Point(848, -1)
+        Me.OutfitPanel.Name = "OutfitPanel"
+        Me.OutfitPanel.Size = New System.Drawing.Size(516, 942)
+        Me.OutfitPanel.TabIndex = 10
         '
         'OutfitPicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1763, 943)
-        Me.Controls.Add(Me.PictureBox4)
-        Me.Controls.Add(Me.PictureBox3)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.OutfitPanel)
         Me.Controls.Add(Me.clothesByCategory)
         Me.Controls.Add(Me.CMDChooseJumpers)
         Me.Controls.Add(Me.CMDChooseBottoms)
@@ -134,10 +143,11 @@ Partial Class OutfitPicker
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "OutfitPicker"
         Me.Text = "OutfitPicker"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Outwear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Jumpers, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Tshirts, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Bottoms, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.OutfitPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -146,9 +156,10 @@ Partial Class OutfitPicker
     Friend WithEvents CMDChooseTshirt As Button
     Friend WithEvents CMDChooseBottoms As Button
     Friend WithEvents CMDChooseJumpers As Button
+    Friend WithEvents Outwear As PictureBox
+    Friend WithEvents Jumpers As PictureBox
+    Friend WithEvents Tshirts As PictureBox
+    Friend WithEvents Bottoms As PictureBox
     Friend WithEvents clothesByCategory As FlowLayoutPanel
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents OutfitPanel As Panel
 End Class
