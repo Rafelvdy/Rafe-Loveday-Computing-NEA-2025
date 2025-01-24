@@ -79,7 +79,7 @@ Public Class dataBaseconnector
             imageID = findImageID(data)
 
             'THIS CODE WILL RUN IF UPDATING TO THE CLOTHINGITEM TABLE
-            sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, LastWornDate = @LastWornDate, WearFrequency = @WearFrequency WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
+            sql = $"UPDATE CLOTHINGITEM SET Category = @Category, SubCategory = @SubCategory, Colour = @Colour, Material = @Material, Brand = @Brand, Pattern = @Pattern, WearFrequency = @WearFrequency, NoOfWears = 0 WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
             command = New OleDbCommand(sql, connection)
 
             If Category <> Nothing Then
@@ -117,13 +117,6 @@ Public Class dataBaseconnector
             Else
                 command.Parameters.AddWithValue("@Pattern", "N")
             End If
-
-            If LastWornDate <> Nothing Then
-                command.Parameters.AddWithValue("@LastWornDate", LastWornDate)
-            Else
-                command.Parameters.AddWithValue("@LastWornDate", "N")
-            End If
-
             If WearFrequency <> Nothing Then
                 command.Parameters.AddWithValue("@WearFrequency", WearFrequency)
             Else
@@ -552,5 +545,69 @@ Public Class dataBaseconnector
         End If
     End Sub
 
+    Public Sub wearOutfit(ByVal ImagePath As String)
+        'creating connection to the database
+        Dim connection = createConnection()
+        connection.open()
+
+        'Finding the data needed for the sql query
+        Dim WardrobeID As Integer = checkForWardrobe()
+        Dim ImageID As Integer = findImageID(ImagePath)
+
+        'Building the sql query
+        Dim sql As String = "UPDATE CLOTHINGITEM SET LastWornDate=@LastWornDate, NoOfWears = NoOfWears + 1 WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
+        Dim command As New OleDbCommand(sql, connection)
+
+        'Adding the data to the SQL statement
+        command.Parameters.AddWithValue("@LastWornDate", DateString)
+        command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
+        command.Parameters.AddWithValue("ImageID", ImageID)
+
+        command.ExecuteNonQuery()
+        connection.close()
+    End Sub
+
+    'Finds a non worn clothing item and least worn clothing item to display
+    Public Function getClothingSuggestion(ByVal Category As String, ByVal field As String)
+        'creating a connection to the database
+        Dim connection = createConnection()
+        connection.open()
+        Dim sql As String
+        Dim command As New OleDbCommand
+        'This finds the wardrobe ID and stores it in the variable
+        Dim wardrobeID As Integer = checkForWardrobe()
+        If field = "LastWornDate" Then
+            If Category = "Bottoms" Then
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = 'Trousers' OR [Category] = 'Shorts' ORDER BY LastWornDate ASC"
+            Else
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = @Category ORDER BY LastWornDate ASC"
+            End If
+            command = New OleDbCommand(sql, connection)
+            'Adding the variable parameter to the sql statement
+            command.Parameters.AddWithValue("@WardrobeID", wardrobeID)
+            command.Parameters.AddWithValue("@Category", Category)
+        ElseIf field = "NoOfWears" Then
+            If Category = "Bottoms" Then
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID And [Category] = 'Trousers' OR [Category] = 'Shorts' AND NoOfWears = 0"
+            Else
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID And [Category] = @Category AND NoOfWears = 0"
+            End If
+            command = New OleDbCommand(sql, connection)
+
+            command.Parameters.AddWithValue("@WardrobeID", wardrobeID)
+            command.Parameters.AddWithValue("@Category", Category)
+        End If
+        'Reads the data
+        Dim reader As OleDbDataReader
+        reader = command.ExecuteReader()
+        If reader.HasRows Then
+            'Moves the reader onto the first line 
+            reader.Read()
+            'Will output the date longest ago
+            Return (reader(0).ToString)
+        Else
+            Return ""
+        End If
+    End Function
 
 End Class

@@ -182,6 +182,12 @@
     </Compile>
     <Compile Include="searchOrFilter.vb" />
     <Compile Include="URLFinder.vb" />
+    <Compile Include="UserStats.Designer.vb">
+      <DependentUpon>UserStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ValidateBrand.vb" />
     <Compile Include="Wardrobe.Designer.vb">
       <DependentUpon>Wardrobe.vb</DependentUpon>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutfitPicker.resx">
       <DependentUpon>OutfitPicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserStats.resx">
+      <DependentUpon>UserStats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wardrobe.resx">
       <DependentUpon>Wardrobe.vb</DependentUpon>

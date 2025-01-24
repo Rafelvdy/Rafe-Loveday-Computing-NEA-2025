@@ -461,10 +461,21 @@ Public Class ClothingDetails
                 toDisplay(addPosition) = defaultView(i)
                 addPosition += 1
             Next
+
         ElseIf priceLabel.Text = "Price ↓" Then
-            For i = 0 To 9
+            'This by default will show 10 elements
+            Dim index As Integer = 9
+
+            'If there is less than 10 elements, the array is resized to fit exaclty how many elements there are when less than 10
+            If defaultView.Length - 1 < 9 Then
+                index = defaultView.Length - 1
+                ReDim toDisplay(index)
+            End If
+
+            For i = 0 To index
                 toDisplay(i) = defaultView(i)
             Next
+
         ElseIf priceLabel.Text = "Price -" Then
             'This will allow me to adjust the size of the array which is displayed so that all the results can be displayed
             ReDim toDisplay(defaultView.Length - 1)

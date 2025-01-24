@@ -28,6 +28,7 @@ Partial Class MainMenu
         Me.CMDOutfitPicker = New System.Windows.Forms.Button()
         Me.MenuBar = New System.Windows.Forms.Panel()
         Me.CMDOpenMenu = New System.Windows.Forms.Button()
+        Me.CMDStatistics = New System.Windows.Forms.Button()
         Me.MenuPanel.SuspendLayout()
         Me.MenuBar.SuspendLayout()
         Me.SuspendLayout()
@@ -43,12 +44,13 @@ Partial Class MainMenu
         'MenuPanel
         '
         Me.MenuPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.MenuPanel.Controls.Add(Me.CMDStatistics)
         Me.MenuPanel.Controls.Add(Me.CMDOpenWardrobe)
         Me.MenuPanel.Controls.Add(Me.CMDOutfitPicker)
         Me.MenuPanel.Location = New System.Drawing.Point(0, 46)
         Me.MenuPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MenuPanel.Name = "MenuPanel"
-        Me.MenuPanel.Size = New System.Drawing.Size(121, 122)
+        Me.MenuPanel.Size = New System.Drawing.Size(121, 186)
         Me.MenuPanel.TabIndex = 4
         Me.MenuPanel.Visible = False
         '
@@ -74,7 +76,7 @@ Partial Class MainMenu
         Me.CMDOutfitPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CMDOutfitPicker.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CMDOutfitPicker.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDOutfitPicker.Location = New System.Drawing.Point(-3, 66)
+        Me.CMDOutfitPicker.Location = New System.Drawing.Point(-2, 63)
         Me.CMDOutfitPicker.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CMDOutfitPicker.Name = "CMDOutfitPicker"
         Me.CMDOutfitPicker.Size = New System.Drawing.Size(123, 57)
@@ -109,6 +111,21 @@ Partial Class MainMenu
         Me.CMDOpenMenu.Text = "Menu"
         Me.CMDOpenMenu.UseVisualStyleBackColor = False
         '
+        'CMDStatistics
+        '
+        Me.CMDStatistics.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.CMDStatistics.FlatAppearance.BorderSize = 0
+        Me.CMDStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CMDStatistics.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CMDStatistics.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.CMDStatistics.Location = New System.Drawing.Point(-2, 124)
+        Me.CMDStatistics.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDStatistics.Name = "CMDStatistics"
+        Me.CMDStatistics.Size = New System.Drawing.Size(123, 57)
+        Me.CMDStatistics.TabIndex = 2
+        Me.CMDStatistics.Text = "Statistics"
+        Me.CMDStatistics.UseVisualStyleBackColor = False
+        '
         'MainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -132,4 +149,5 @@ Partial Class MainMenu
     Friend WithEvents CMDOutfitPicker As Button
     Friend WithEvents MenuBar As Panel
     Friend WithEvents CMDOpenMenu As Button
+    Friend WithEvents CMDStatistics As Button
 End Class

@@ -57,4 +57,8 @@ Public Class MainMenu
     Private Sub CMDOutfitPicker_Click(sender As Object, e As EventArgs) Handles CMDOutfitPicker.Click
         menuSwap(OutfitPicker)
     End Sub
+
+    Private Sub CMDStatistics_Click(sender As Object, e As EventArgs) Handles CMDStatistics.Click
+        menuSwap(UserStats)
+    End Sub
 End Class

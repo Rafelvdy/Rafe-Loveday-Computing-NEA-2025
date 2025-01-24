@@ -23,6 +23,7 @@ Public Class Wardrobe
         'Set the filter options
         openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
         openFileDialog.Title = "Select an Image File"
+        openFileDialog.Multiselect = True
         openFileDialog.ShowDialog()
         If openFileDialog.FileName <> "" Then
             'This will loop through each selected file, so that if multiple images are selected they can all be processed
