@@ -15,6 +15,9 @@ Public Class dataBaseconnector
     'Creating a variable to hold the connection string to the access database which is private so that it can only be accessed inside the object
     Private connectionString As String = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & Application.StartupPath & "\DigitalWardrobe.accdb"
 
+    Private _LeastStatsImagePath As String
+    Private _MostStatsImagePath As String
+
     'A structure which will hold the information which is being written to the database
     Public Structure dataToDB
         Public ImagePath As String
@@ -28,6 +31,24 @@ Public Class dataBaseconnector
         Public LastWornDate As String
         Public WearFrequency As Integer
     End Structure
+
+    Public Property LeastStatsImagePath As String
+        Set(value As String)
+            _LeastStatsImagePath = value
+        End Set
+        Get
+            Return _LeastStatsImagePath
+        End Get
+    End Property
+
+    Public Property MostStatsImagePath As String
+        Set(value As String)
+            _MostStatsImagePath = value
+        End Set
+        Get
+            Return _MostStatsImagePath
+        End Get
+    End Property
 
     Public Function createConnection()
         'Creating a new instance of the oleDBConnection object with the connection string as a parameter
@@ -610,4 +631,169 @@ Public Class dataBaseconnector
         End If
     End Function
 
+    Public Sub retrieveStatistics(ByVal tableName As String, ByVal fieldName As String)
+        Dim connection = createConnection()
+        connection.open()
+
+        Dim command As New OleDbCommand
+        Dim sql As String
+        If tableName = "CLOTHINGITEM" Then
+            'THIS WILL OCCUPY THE COLOUR STATISTICS BOTH LEAST WORN AND MOST WORN
+            If fieldName = "Colour" Then 'This will handle the sql statement for the colour statistic
+                'This first part is showing the least worn colour
+                sql = "SELECT Colour FROM CLOTHINGITEM ORDER BY NoOfWears ASC"
+                command = New OleDbCommand(sql, connection)
+                Dim dr As OleDbDataReader
+                dr = command.ExecuteReader
+                'This will retrieve the relevent data if there is any
+                If dr.HasRows Then
+                    dr.Read()
+                    'This will be the colour of the panel for this stat
+                    Dim Colour As String = dr(0)
+                    Dim newColour As Color = Color.FromName(Colour)
+                    'This is setting the appearance and data into the stats form
+                    UserStats.LeastColourPanel.BackColor = newColour
+                    UserStats.LeastColourPanel2.BackColor = newColour
+                    UserStats.WearLeastLabel.Text = Colour
+                    If Colour = "White" Then
+                        UserStats.WearLeastLabel.ForeColor = Color.Black
+                    End If
+                End If
+
+                'Using same strcuture as above, but to show most worn colour instead
+                sql = "SELECT Colour FROM CLOTHINGITEM ORDER BY NoOfWears DESC"
+                command = New OleDbCommand(sql, connection)
+                dr = command.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+                    Dim Colour As String = dr(0)
+                    Dim newColour As Color = Color.FromName(Colour)
+
+                    UserStats.MostColourPanel.BackColor = newColour
+                    UserStats.MostColourPanel2.BackColor = newColour
+                    UserStats.WearMostLabel.Text = Colour
+                    If Colour = "White" Then
+                        UserStats.WearLeastLabel.ForeColor = Color.Black
+                    End If
+                End If
+                connection.close()
+
+            ElseIf fieldName = "Material" Then 'This will handle the sql statement for the material statistic
+                sql = "SELECT Material FROM CLOTHINGITEM ORDER BY NoOfWears DESC"
+                command = New OleDbCommand(sql, connection)
+                Dim dr As OleDbDataReader
+                dr = command.ExecuteReader
+                'This will retrieve the relevent data if there is any
+                If dr.HasRows Then
+                    dr.Read()
+                    'This will be the colour of the panel for this stat
+                    Dim Material As String = dr(0)
+
+                    'Changes the label to show the material selected
+                    UserStats.LeastMaterialLabel.Text = Material
+                End If
+                'Using same strcuture as above, but to show most worn material instead
+                sql = "SELECT Material FROM CLOTHINGITEM ORDER BY NoOfWears ASC"
+                command = New OleDbCommand(sql, connection)
+                dr = command.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+                    Dim Material As String = dr(0)
+                    UserStats.MostMaterialLabel.Text = Material
+                End If
+                connection.close()
+            End If
+
+        ElseIf tableName = "IMAGE" Then
+
+            If fieldName = "ImagePath" Then 'This will handle the sql statement for the least and most worn clothing item
+                sql = "SELECT [IMAGE].[ImagePath] FROM [CLOTHINGITEM] INNER JOIN [IMAGE] On [CLOTHINGITEM].[ImageID] = [IMAGE].[ImageID] ORDER BY [CLOTHINGITEM].[NoOfWears] ASC"
+                command = New OleDbCommand(sql, connection)
+                Dim dr As OleDbDataReader
+                dr = command.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+                    'This accesses the first record that is taken from the datab
+                    Dim ImagePath As String = dr(0)
+                    _LeastStatsImagePath = ImagePath
+                End If
+
+                sql = "SELECT [IMAGE].[ImagePath] FROM [CLOTHINGITEM] INNER JOIN [IMAGE] On [CLOTHINGITEM].[ImageID] = [IMAGE].[ImageID] ORDER BY [CLOTHINGITEM].[NoOfWears] DESC"
+                command = New OleDbCommand(sql, connection)
+                dr = command.ExecuteReader
+
+                If dr.HasRows Then
+                    dr.Read()
+                    'This accesses the first record that is taken from the datab
+                    Dim ImagePath As String = dr(0)
+                    _MostStatsImagePath = ImagePath
+                End If
+
+            End If
+        End If
+    End Sub
+
+    Public Sub createLeastWorn()
+        Dim Category As New List(Of String)({"Outwear", "Jumpers", "T-Shirt", "Trousers", "Shorts"})
+        'THis will hold the values in adjacent indexs in the list
+        Dim CategoryImagePaths As New List(Of String)({"", "", "", "", ""})
+        Dim index As Integer = 0
+
+        'Variables for the image paths to be saved to
+        Dim LeastOutwear As String = ""
+        Dim LeastJumpers As String = ""
+        Dim LeastTShirt As String = ""
+        Dim LeastTrousers As String = ""
+        Dim LeastShorts As String = ""
+
+        Dim connection = createConnection()
+        connection.open()
+        Dim sql As String
+        Dim command As New OleDbCommand
+        Dim dr As OleDbDataReader
+
+        'This loops through each category and saves the image path to an adjacent index in a different list.
+        For Each item In Category
+            sql = "SELECT [IMAGE].[ImagePath] FROM [CLOTHINGITEM] INNER JOIN [IMAGE] On [CLOTHINGITEM].[ImageID] = [IMAGE].[ImageID] WHERE [CLOTHINGITEM].[Category] = @Category ORDER BY [CLOTHINGITEM].[NoOfWears] ASC"
+            command = New OleDbCommand(sql, connection)
+            command.Parameters.AddWithValue("@Category", item)
+
+            dr = command.ExecuteReader()
+            If dr.HasRows Then
+                dr.Read()
+                'Storing value in an adjacent index
+                CategoryImagePaths(index) = dr(0)
+                index += 1
+            End If
+        Next
+
+        LeastOutwear = CategoryImagePaths(0)
+        If LeastOutwear <> "" Then
+            UserStats.LeastWornOutwear.Image = Image.FromFile(LeastOutwear)
+        End If
+
+        LeastJumpers = CategoryImagePaths(1)
+        If LeastJumpers <> "" Then
+            UserStats.LeastWornJumpers.Image = Image.FromFile(LeastJumpers)
+        End If
+
+        LeastTShirt = CategoryImagePaths(2)
+        If LeastTShirt <> "" Then
+            UserStats.LeastWornTShirt.Image = Image.FromFile(LeastTShirt)
+        End If
+
+        LeastTrousers = CategoryImagePaths(3)
+        If LeastTrousers <> "" Then
+            UserStats.LeastWornTrousers.Image = Image.FromFile(LeastTrousers)
+        End If
+
+        LeastShorts = CategoryImagePaths(4)
+        If LeastShorts <> "" Then
+            UserStats.LeastWornShorts.Image = Image.FromFile(LeastShorts)
+        End If
+        connection.close()
+    End Sub
 End Class

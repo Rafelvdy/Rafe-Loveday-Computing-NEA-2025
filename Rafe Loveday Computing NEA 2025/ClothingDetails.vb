@@ -579,10 +579,6 @@ Public Class ClothingDetails
 
     'This updates the scroll bar that shows the results from the API call.
     Private Sub CMDUpdate_Click(sender As Object, e As EventArgs) Handles CMDUpdate.Click
-
-
-
-
         DisplayURLResults(titles, prices, urls)
     End Sub
 End Class

@@ -31,9 +31,9 @@ Partial Class ClothingDetails
         Me.CMDSubCatagory = New System.Windows.Forms.Button()
         Me.CMDCatagory = New System.Windows.Forms.Button()
         Me.CatagoryPanel = New System.Windows.Forms.Panel()
+        Me.CMDTrousers = New System.Windows.Forms.Button()
         Me.CMDOutWear = New System.Windows.Forms.Button()
         Me.CMDShorts = New System.Windows.Forms.Button()
-        Me.CMDTrousers = New System.Windows.Forms.Button()
         Me.CMDTshirt = New System.Windows.Forms.Button()
         Me.CMDJumpers = New System.Windows.Forms.Button()
         Me.SubCatagoryPanel = New System.Windows.Forms.Panel()
@@ -221,6 +221,21 @@ Partial Class ClothingDetails
         Me.CatagoryPanel.TabIndex = 5
         Me.CatagoryPanel.Visible = False
         '
+        'CMDTrousers
+        '
+        Me.CMDTrousers.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.CMDTrousers.FlatAppearance.BorderSize = 0
+        Me.CMDTrousers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CMDTrousers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CMDTrousers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.CMDTrousers.Location = New System.Drawing.Point(0, 106)
+        Me.CMDTrousers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDTrousers.Name = "CMDTrousers"
+        Me.CMDTrousers.Size = New System.Drawing.Size(94, 31)
+        Me.CMDTrousers.TabIndex = 4
+        Me.CMDTrousers.Text = "Trousers"
+        Me.CMDTrousers.UseVisualStyleBackColor = False
+        '
         'CMDOutWear
         '
         Me.CMDOutWear.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
@@ -250,21 +265,6 @@ Partial Class ClothingDetails
         Me.CMDShorts.TabIndex = 5
         Me.CMDShorts.Text = "Shorts"
         Me.CMDShorts.UseVisualStyleBackColor = False
-        '
-        'CMDTrousers
-        '
-        Me.CMDTrousers.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.CMDTrousers.FlatAppearance.BorderSize = 0
-        Me.CMDTrousers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CMDTrousers.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CMDTrousers.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDTrousers.Location = New System.Drawing.Point(0, 106)
-        Me.CMDTrousers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CMDTrousers.Name = "CMDTrousers"
-        Me.CMDTrousers.Size = New System.Drawing.Size(94, 31)
-        Me.CMDTrousers.TabIndex = 4
-        Me.CMDTrousers.Text = "Trousers"
-        Me.CMDTrousers.UseVisualStyleBackColor = False
         '
         'CMDTshirt
         '

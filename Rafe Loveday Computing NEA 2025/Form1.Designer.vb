@@ -24,21 +24,22 @@ Partial Class MainMenu
     Private Sub InitializeComponent()
         Me.DisplayPanel = New System.Windows.Forms.Panel()
         Me.MenuPanel = New System.Windows.Forms.Panel()
+        Me.CMDStatistics = New System.Windows.Forms.Button()
         Me.CMDOpenWardrobe = New System.Windows.Forms.Button()
         Me.CMDOutfitPicker = New System.Windows.Forms.Button()
         Me.MenuBar = New System.Windows.Forms.Panel()
         Me.CMDOpenMenu = New System.Windows.Forms.Button()
-        Me.CMDStatistics = New System.Windows.Forms.Button()
         Me.MenuPanel.SuspendLayout()
         Me.MenuBar.SuspendLayout()
         Me.SuspendLayout()
         '
         'DisplayPanel
         '
+        Me.DisplayPanel.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.DisplayPanel.Location = New System.Drawing.Point(117, 46)
         Me.DisplayPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DisplayPanel.Name = "DisplayPanel"
-        Me.DisplayPanel.Size = New System.Drawing.Size(1816, 1300)
+        Me.DisplayPanel.Size = New System.Drawing.Size(1819, 1300)
         Me.DisplayPanel.TabIndex = 5
         '
         'MenuPanel
@@ -53,6 +54,21 @@ Partial Class MainMenu
         Me.MenuPanel.Size = New System.Drawing.Size(121, 186)
         Me.MenuPanel.TabIndex = 4
         Me.MenuPanel.Visible = False
+        '
+        'CMDStatistics
+        '
+        Me.CMDStatistics.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.CMDStatistics.FlatAppearance.BorderSize = 0
+        Me.CMDStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CMDStatistics.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CMDStatistics.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.CMDStatistics.Location = New System.Drawing.Point(-2, 124)
+        Me.CMDStatistics.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDStatistics.Name = "CMDStatistics"
+        Me.CMDStatistics.Size = New System.Drawing.Size(123, 57)
+        Me.CMDStatistics.TabIndex = 2
+        Me.CMDStatistics.Text = "Statistics"
+        Me.CMDStatistics.UseVisualStyleBackColor = False
         '
         'CMDOpenWardrobe
         '
@@ -110,21 +126,6 @@ Partial Class MainMenu
         Me.CMDOpenMenu.TabIndex = 0
         Me.CMDOpenMenu.Text = "Menu"
         Me.CMDOpenMenu.UseVisualStyleBackColor = False
-        '
-        'CMDStatistics
-        '
-        Me.CMDStatistics.BackColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.CMDStatistics.FlatAppearance.BorderSize = 0
-        Me.CMDStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CMDStatistics.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CMDStatistics.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CMDStatistics.Location = New System.Drawing.Point(-2, 124)
-        Me.CMDStatistics.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CMDStatistics.Name = "CMDStatistics"
-        Me.CMDStatistics.Size = New System.Drawing.Size(123, 57)
-        Me.CMDStatistics.TabIndex = 2
-        Me.CMDStatistics.Text = "Statistics"
-        Me.CMDStatistics.UseVisualStyleBackColor = False
         '
         'MainMenu
         '
