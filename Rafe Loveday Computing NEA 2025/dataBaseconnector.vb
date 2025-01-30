@@ -286,10 +286,6 @@ Public Class dataBaseconnector
         Return imagePaths
     End Function
 
-    Private Function findSpecificPath()
-
-    End Function
-
     'This subroutine is used so that iamges which are loaded in are able to be also clicked
     Private Sub pictureBox_Click(sender As Object, e As EventArgs)
         ''This gets the clothing item that was just clicked and retrieves the image path so that the filters can be loaded
@@ -342,53 +338,7 @@ Public Class dataBaseconnector
         Return checkForWardrobe()
     End Function
 
-    ''This subroutine gets the current wardrobeID (only works when there is one wardrobe)
-    'Public Function findWardrobeID()
-    '    'Creates the connection to the wardrobe
-    '    Dim connection = createConnection()
-    '    connection.open()
-
-    '    Dim dr As OleDbDataReader
-    '    'Tells the program what data i want
-    '    Dim sql As String = "SELECT WardrobeID FROM WARDROBE"
-
-    '    Dim command As New OleDbCommand(sql, connection)
-    '    dr = command.ExecuteReader
-    '    'moves it onto the first row
-    '    dr.Read()
-    '    'Saves the wardrobeID to a local variable
-    '    Dim wardrobeID As Integer = dr("WardrobeID")
-    '    'closes all the connections
-    '    dr.Close()
-    '    connection.close()
-    '    Return wardrobeID
-    'End Function
-
     Public Function findImageID(ByVal ImagePath As String)
-        'Creates the connection to the wardrobe
-        'Dim connection = createConnection()
-        'connection.open()
-
-        'Dim dr As OleDbDataReader
-        ''Selecting all imageID's in descending order so the last one added is the first one
-        'Dim sql As String = "SELECT ImageID FROM [IMAGE] ORDER BY ImageID DESC"
-
-        'Dim command As New OleDbCommand(sql, connection)
-        'dr = command.ExecuteReader
-        ''moves it onto the first row
-        'dr.Read()
-        'If dr.HasRows Then
-        '    'Saves the imageID to a local variable
-        '    Dim imageID As Integer = dr("ImageID")
-        '    'closes all the connections
-        '    dr.Close()
-
-        '    Return imageID
-        'Else
-        '    MessageBox.Show("No data")
-        'End If
-        'connection.close()
-
         'THIS SECTION RETRIEVES THE IMAGEID USING THE IMAGEPATH
         Dim ImageID As Integer
         'Creating a connection to the database
@@ -796,4 +746,48 @@ Public Class dataBaseconnector
         End If
         connection.close()
     End Sub
+
+    Public Sub insertURL(ByVal url As String, ByVal ImagePath As String)
+        Dim ImageID As Integer = findImageID(ImagePath)
+        Dim connection = createConnection()
+        connection.open()
+
+        Dim sql As String = "UPDATE [IMAGE] SET [ImageURL] = @url WHERE [ImageID] = @ImageID"
+        Dim command As New OleDbCommand(sql, connection)
+
+        command.Parameters.AddWithValue("@url", url)
+        command.Parameters.AddWithValue("@ImageID", ImageID)
+
+        command.ExecuteNonQuery()
+        connection.close()
+    End Sub
+
+    'Retrieves the url from the database of the selected image
+    Public Function retrieveURL(ByVal ImagePath As String)
+        'creating a connection to the database
+        Dim connection = createConnection()
+        connection.open()
+
+        'This finds the image id of the current selected image
+        Dim ImageID As Integer = findImageID(ImagePath)
+
+        'Creating the sql query and adding the parameters
+        Dim sql As String = "SELECT [ImageURL] FROM [IMAGE] WHERE [ImageID] = @ImageID"
+        Dim command As New OleDbCommand(sql, connection)
+        command.Parameters.AddWithValue("@ImageID", ImageID)
+
+        'Creating a variable to store the url
+        Dim url As String
+
+        'Reads the data only if there are rows to read
+        Dim dr As OleDbDataReader
+        dr = command.ExecuteReader
+        If dr.HasRows Then
+            dr.Read()
+            url = dr(0)
+            Return url
+        Else
+            Return Nothing
+        End If
+    End Function
 End Class

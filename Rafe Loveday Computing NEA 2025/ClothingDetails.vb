@@ -204,6 +204,7 @@ Public Class ClothingDetails
 
     Private Sub CMDBrand_Click(sender As Object, e As EventArgs) Handles CMDBrand.Click
         openPanel(BrandPanel)
+        brandText.Text = _brand
     End Sub
 
     'When these buttons are pressed, they will save their associated clothing items into the catagory panel
@@ -392,10 +393,16 @@ Public Class ClothingDetails
             titles = myURLFinder.TitleResult
             urls = myURLFinder.URLResult
             prices = myURLFinder.PriceResult
-            DisplayURLResults(titles, prices, urls)
+            If titles <> Nothing Then
+                DisplayURLResults(titles, prices, urls)
+            Else
+                MessageBox.Show("There are not results for this search...")
+            End If
+
             Dim myDB As New dataBaseconnector
-            myDB.Insert(_currentImagePath, Nothing, "CLOTHINGITEM", False, Nothing, _Category, _SubCategory, _colour, _material, _brand, _pattern, Nothing, 0)
-        End If
+                myDB.Insert(_currentImagePath, Nothing, "CLOTHINGITEM", False, Nothing, _Category, _SubCategory, _colour, _material, _brand, _pattern, Nothing, 0)
+
+            End If
     End Sub
 
     Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
@@ -448,9 +455,16 @@ Public Class ClothingDetails
         Dim low As Integer = 0
         Dim high As Integer = arraytosort.Length - 1
         'This list created is the list in order of price
-        defaultView = mySearchOrFilter.mergeSort(arraytosort, low, high)
+        Dim sortedResults = mySearchOrFilter.mergeSort(arraytosort, low, high, titleArray, urlArray)
 
-        Dim toDisplay(9) As Double
+        defaultView = sortedResults.Item1
+        titleArray = sortedResults.item2
+        urlArray = sortedResults.Item3
+
+        'Arrays to hold what will be displayed
+        Dim PricetoDisplay(9) As Double
+        Dim TitletoDisplay(9) As String
+        Dim URLToDisplay(9) As String
 
         If priceLabel.Text = "Price ↑" Then
             'This is the position of the last element to be copied to the new array
@@ -458,7 +472,9 @@ Public Class ClothingDetails
             Dim addPosition As Integer = 0
             'This for loop will go through the sorted array in reverse and copy each element to a new array
             For i = defaultView.Length - 1 To endIndex Step -1
-                toDisplay(addPosition) = defaultView(i)
+                PricetoDisplay(addPosition) = defaultView(i)
+                TitletoDisplay(addPosition) = titleArray(i)
+                URLToDisplay(addPosition) = urlArray(i)
                 addPosition += 1
             Next
 
@@ -469,18 +485,21 @@ Public Class ClothingDetails
             'If there is less than 10 elements, the array is resized to fit exaclty how many elements there are when less than 10
             If defaultView.Length - 1 < 9 Then
                 index = defaultView.Length - 1
-                ReDim toDisplay(index)
+                ReDim PricetoDisplay(index)
             End If
 
             For i = 0 To index
-                toDisplay(i) = defaultView(i)
+                PricetoDisplay(i) = defaultView(i)
+                TitletoDisplay(i) = titleArray(i)
+                URLToDisplay(i) = urlArray(i)
             Next
 
         ElseIf priceLabel.Text = "Price -" Then
             'This will allow me to adjust the size of the array which is displayed so that all the results can be displayed
-            ReDim toDisplay(defaultView.Length - 1)
+            ReDim PricetoDisplay(defaultView.Length - 1)
             For i = 0 To defaultView.Length - 1
-                toDisplay(i) = defaultView(i)
+                PricetoDisplay(i) = defaultView(i)
+
             Next
         End If
 
@@ -489,13 +508,13 @@ Public Class ClothingDetails
         Dim currentX As Integer = padding
         'This creates a loop which will iterate the number of times that there are results. 
         'The array is 0-based so i have to take 1 away from the total length
-        For i = 0 To toDisplay.Length - 1
+        For i = 0 To PricetoDisplay.Length - 1
             If priceArray(i) <> "" Then
                 'This creates a new label on each iteration
                 Dim button As New Button
                 With button
                     'Tagging the button with the URL so that it can be accessed
-                    Dim cleanURL = urlArray(i)
+                    Dim cleanURL = URLToDisplay(i)
                     With cleanURL
                         .Replace("[", "")
                         .Replace("]", "")
@@ -509,7 +528,7 @@ Public Class ClothingDetails
                     .Width = 200
                     .Height = 60
                     .BackColor = Color.White
-                    .Text = $"{titleArray(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"${toDisplay(i)}"
+                    .Text = $"{TitletoDisplay(i).Replace("[", "").Replace("]", "").Replace("""", "").Trim()}" & Environment.NewLine & $"${PricetoDisplay(i)}"
 
                     'This places the label according to other labels and the padding
                     .Location = New Point(currentX, padding)
@@ -538,6 +557,8 @@ Public Class ClothingDetails
             url = url.Replace("[", "").Replace("]", "").Replace("""", "").Trim()
             'Open web page with URL
             Process.Start(url)
+            Dim myDBconn As New dataBaseconnector
+            myDBconn.insertURL(url, currentImagePath)
         ElseIf buttonClicked.BackColor = Color.Gray Then
             buttonClicked.BackColor = Color.White
         End If
@@ -562,6 +583,7 @@ Public Class ClothingDetails
             'This will make a red box appear under the brand text box if the user enters an invalid brand
             isValidPanel.BackColor = Color.Red
             isValidPanel.Visible = True
+            isValidPanel.Visible = True
         End If
     End Sub
 
@@ -580,5 +602,14 @@ Public Class ClothingDetails
     'This updates the scroll bar that shows the results from the API call.
     Private Sub CMDUpdate_Click(sender As Object, e As EventArgs) Handles CMDUpdate.Click
         DisplayURLResults(titles, prices, urls)
+    End Sub
+
+    'If there is a URL stored in the db, when the button is clicked it will load it into a webpage
+    Private Sub CMDShowCurrent_Click(sender As Object, e As EventArgs) Handles CMDShowCurrent.Click
+        Dim myDBconn As New dataBaseconnector
+        Dim url As String = myDBconn.retrieveURL(_currentImagePath)
+        If url <> Nothing Then
+            Process.Start(url)
+        End If
     End Sub
 End Class

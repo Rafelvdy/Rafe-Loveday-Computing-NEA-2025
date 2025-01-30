@@ -77,6 +77,7 @@ Partial Class ClothingDetails
         Me.priceLabel = New System.Windows.Forms.Label()
         Me.CMDUpdate = New System.Windows.Forms.Button()
         Me.SearchBar = New System.Windows.Forms.TextBox()
+        Me.CMDShowCurrent = New System.Windows.Forms.Button()
         Me.LabelPanel.SuspendLayout()
         Me.CatagoryPanel.SuspendLayout()
         Me.ColourPanel.SuspendLayout()
@@ -88,6 +89,7 @@ Partial Class ClothingDetails
         'LabelPanel
         '
         Me.LabelPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(47, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelPanel.Controls.Add(Me.CMDShowCurrent)
         Me.LabelPanel.Controls.Add(Me.CMDBrand)
         Me.LabelPanel.Controls.Add(Me.CMDFindURLs)
         Me.LabelPanel.Controls.Add(Me.CMDPattern)
@@ -890,6 +892,21 @@ Partial Class ClothingDetails
         Me.SearchBar.TabIndex = 14
         Me.SearchBar.Visible = False
         '
+        'CMDShowCurrent
+        '
+        Me.CMDShowCurrent.BackColor = System.Drawing.Color.FromArgb(CType(CType(47, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CMDShowCurrent.FlatAppearance.BorderSize = 0
+        Me.CMDShowCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CMDShowCurrent.Font = New System.Drawing.Font("Segoe UI Black", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CMDShowCurrent.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.CMDShowCurrent.Location = New System.Drawing.Point(1060, 0)
+        Me.CMDShowCurrent.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CMDShowCurrent.Name = "CMDShowCurrent"
+        Me.CMDShowCurrent.Size = New System.Drawing.Size(145, 46)
+        Me.CMDShowCurrent.TabIndex = 9
+        Me.CMDShowCurrent.Text = "Show Current URL"
+        Me.CMDShowCurrent.UseVisualStyleBackColor = False
+        '
         'ClothingDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -978,4 +995,5 @@ Partial Class ClothingDetails
     Friend WithEvents priceLabel As Label
     Friend WithEvents CMDUpdate As Button
     Friend WithEvents SearchBar As TextBox
+    Friend WithEvents CMDShowCurrent As Button
 End Class
