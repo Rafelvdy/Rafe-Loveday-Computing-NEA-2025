@@ -89,6 +89,7 @@ Public Class URLFinder
             'Makes easier data manipulation
             Dim json As JObject = JObject.Parse(responseData)
 
+
             'Searching through the JSON structure to access the array of items returned by the API
             Dim items = json("findItemsByKeywordsResponse")(0)("searchResult")(0)("item")
 
@@ -146,3 +147,4 @@ Public Class URLFinder
     End Sub
 
 End Class
+

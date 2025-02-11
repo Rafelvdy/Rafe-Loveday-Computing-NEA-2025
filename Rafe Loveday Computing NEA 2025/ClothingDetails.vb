@@ -2,6 +2,8 @@
 Imports System.Windows.Automation
 
 Public Class ClothingDetails
+    Private _resultClicked As Button
+
     Private _currentImagePath As String
 
     Public Property currentImagePath As String
@@ -400,16 +402,17 @@ Public Class ClothingDetails
             End If
 
             Dim myDB As New dataBaseconnector
-                myDB.Insert(_currentImagePath, Nothing, "CLOTHINGITEM", False, Nothing, _Category, _SubCategory, _colour, _material, _brand, _pattern, Nothing, 0)
+            myDB.Insert(_currentImagePath, Nothing, "CLOTHINGITEM", False, Nothing, _Category, _SubCategory, _colour, _material, _brand, _pattern, Nothing, 0)
 
-            End If
+        End If
     End Sub
 
     Private Sub DisplayURLResults(ByVal titles As String, ByVal prices As String, ByVal urls As String)
         Dim defaultView() As Double
 
         'This splits the results by using the separator that i put in.
-        Dim titleArray() As String = titles.Split("|||").Where(Function(t) Not String.IsNullOrWhiteSpace(t)).ToArray()
+        ' Dim titleArray() As String = titles.Split("|||").Where(Function(t) Not String.IsNullOrWhiteSpace(t)).ToArray()
+        Dim titleArray() As String = titles.Split(New String() {"|||"}, StringSplitOptions.RemoveEmptyEntries)
         Dim urlArray() As String = urls.Split("|||").Where(Function(u) Not String.IsNullOrWhiteSpace(u)).ToArray()
         Dim priceArray() As String = prices.Split("|||").Where(Function(p) Not String.IsNullOrWhiteSpace(p)).ToArray()
 
@@ -497,9 +500,12 @@ Public Class ClothingDetails
         ElseIf priceLabel.Text = "Price -" Then
             'This will allow me to adjust the size of the array which is displayed so that all the results can be displayed
             ReDim PricetoDisplay(defaultView.Length - 1)
+            ReDim TitletoDisplay(defaultView.Length - 1)
+            ReDim URLToDisplay(defaultView.Length - 1)
             For i = 0 To defaultView.Length - 1
                 PricetoDisplay(i) = defaultView(i)
-
+                TitletoDisplay(i) = titleArray(i)
+                URLToDisplay(i) = urlArray(i)
             Next
         End If
 
@@ -550,6 +556,18 @@ Public Class ClothingDetails
     'This subroutine is ran when one of the buttons which shows the URL results are pressed to display the url in google chrome
     Private Sub resultButton(sender As Object, e As EventArgs)
         Dim buttonClicked As Button = sender
+
+        'This if statement will check to see if the text of the button just clicked is the same as the button clicked before
+        'Allows the program to determine whether a new button has been pressed or the same one
+        If _resultClicked IsNot Nothing Then
+            If buttonClicked.Text <> _resultClicked.Text Then
+                'This code will reset the previous buttons highlighting
+                _resultClicked.BackColor = Color.White
+            End If
+        End If
+
+        'this stores the new current clicked button
+        _resultClicked = sender
         Dim url As String = buttonClicked.Tag.ToString()
         If buttonClicked.BackColor = Color.White Then
             buttonClicked.BackColor = Color.Gray
@@ -566,24 +584,26 @@ Public Class ClothingDetails
 
     'Subroutine that will check that the brand the user enters is a real brand
     Private Sub CMDValidateBrand_Click(sender As Object, e As EventArgs) Handles CMDValidateBrand.Click
-        Dim myValidation As New ValidateBrand
-        'Saves the brand name that is entered to the object using setters and getters.
-        myValidation.brand = brandText.Text
-        'Runs the subroutine inside of the class to valid if the brand is valid or not
-        myValidation.GetURLs()
-        'If the brand is valid, it will save the brand name to a variable in this forms, if it is not the variable is set to nothing to clear any previous entries from the field
-        If myValidation.valid = True Then
-            Brand = myValidation.brand
-            'This will make a green box appear under the brand text box if the user enters a valid brand
-            isValidPanel.BackColor = Color.Green
-            isValidPanel.Visible = True
-        Else
-            'Variable is reset back to nothing if the brand is invalid
-            Brand = Nothing
-            'This will make a red box appear under the brand text box if the user enters an invalid brand
-            isValidPanel.BackColor = Color.Red
-            isValidPanel.Visible = True
-            isValidPanel.Visible = True
+        If brandText.Text <> "" Then
+            Dim myValidation As New ValidateBrand
+            'Saves the brand name that is entered to the object using setters and getters.
+            myValidation.brand = brandText.Text
+            'Runs the subroutine inside of the class to valid if the brand is valid or not
+            myValidation.GetURLs()
+            'If the brand is valid, it will save the brand name to a variable in this forms, if it is not the variable is set to nothing to clear any previous entries from the field
+            If myValidation.valid = True Then
+                Brand = myValidation.brand
+                'This will make a green box appear under the brand text box if the user enters a valid brand
+                isValidPanel.BackColor = Color.Green
+                isValidPanel.Visible = True
+            Else
+                'Variable is reset back to nothing if the brand is invalid
+                Brand = Nothing
+                'This will make a red box appear under the brand text box if the user enters an invalid brand
+                isValidPanel.BackColor = Color.Red
+                isValidPanel.Visible = True
+                isValidPanel.Visible = True
+            End If
         End If
     End Sub
 

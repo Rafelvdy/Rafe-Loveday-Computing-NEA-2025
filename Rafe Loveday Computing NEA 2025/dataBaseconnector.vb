@@ -323,7 +323,6 @@ Public Class dataBaseconnector
             'If there is no wardrobe existing, this function will be run and it will create a wardrobe, and then return the wardrobes ID 
             Return createWardrobe(connection)
         End If
-
     End Function
 
     'This subroutine is ran if there is no existing wardrobe
@@ -529,8 +528,15 @@ Public Class dataBaseconnector
         Dim sql As String = "UPDATE CLOTHINGITEM SET LastWornDate=@LastWornDate, NoOfWears = NoOfWears + 1 WHERE WardrobeID = @WardrobeID AND ImageID = @ImageID"
         Dim command As New OleDbCommand(sql, connection)
 
+        Dim todaysDate As String = DateString
+        Dim dateParts() As String = todaysDate.Split("-")
+
+        Dim month As String = dateParts(0)
+        Dim day As String = dateParts(1)
+        Dim year As String = dateParts(2)
+
         'Adding the data to the SQL statement
-        command.Parameters.AddWithValue("@LastWornDate", DateString)
+        command.Parameters.AddWithValue("@LastWornDate", day & "/" & month & "/" & year)
         command.Parameters.AddWithValue("@WardrobeID", WardrobeID)
         command.Parameters.AddWithValue("ImageID", ImageID)
 
@@ -549,9 +555,9 @@ Public Class dataBaseconnector
         Dim wardrobeID As Integer = checkForWardrobe()
         If field = "LastWornDate" Then
             If Category = "Bottoms" Then
-                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = 'Trousers' OR [Category] = 'Shorts' ORDER BY LastWornDate ASC"
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = 'Trousers' OR [Category] = 'Shorts' AND LastWornDate IS NOT NULL ORDER BY LastWornDate ASC"
             Else
-                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = @Category ORDER BY LastWornDate ASC"
+                sql = "SELECT [IMAGE].[ImagePath] FROM [IMAGE] INNER JOIN [CLOTHINGITEM] ON [IMAGE].[ImageID] = [CLOTHINGITEM].[ImageID] WHERE [WardrobeID] = @WardrobeID AND [Category] = @Category AND LastWornDate IS NOT NULL ORDER BY LastWornDate ASC"
             End If
             command = New OleDbCommand(sql, connection)
             'Adding the variable parameter to the sql statement
@@ -597,35 +603,42 @@ Public Class dataBaseconnector
                 dr = command.ExecuteReader
                 'This will retrieve the relevent data if there is any
                 If dr.HasRows Then
-                    dr.Read()
-                    'This will be the colour of the panel for this stat
-                    Dim Colour As String = dr(0)
-                    Dim newColour As Color = Color.FromName(Colour)
-                    'This is setting the appearance and data into the stats form
-                    UserStats.LeastColourPanel.BackColor = newColour
-                    UserStats.LeastColourPanel2.BackColor = newColour
-                    UserStats.WearLeastLabel.Text = Colour
-                    If Colour = "White" Then
-                        UserStats.WearLeastLabel.ForeColor = Color.Black
-                    End If
+                    While dr.Read()
+                        If Not IsDBNull(dr("Colour")) Then
+                            'This will be the colour of the panel for this stat
+                            Dim Colour As String = dr("Colour")
+                            Dim newColour As Color = Color.FromName(Colour)
+                            'This is setting the appearance and data into the stats form
+                            UserStats.LeastColourPanel.BackColor = newColour
+                            UserStats.LeastColourPanel2.BackColor = newColour
+                            UserStats.WearLeastLabel.Text = Colour
+                            If Colour = "White" Then
+                                UserStats.WearLeastLabel.ForeColor = Color.Black
+                            End If
+                            Exit While
+                        End If
+                    End While
                 End If
 
                 'Using same strcuture as above, but to show most worn colour instead
                 sql = "SELECT Colour FROM CLOTHINGITEM ORDER BY NoOfWears DESC"
                 command = New OleDbCommand(sql, connection)
                 dr = command.ExecuteReader
-
                 If dr.HasRows Then
-                    dr.Read()
-                    Dim Colour As String = dr(0)
-                    Dim newColour As Color = Color.FromName(Colour)
+                    While dr.Read()
+                        If Not IsDBNull(dr("Colour")) Then
+                            Dim Colour As String = dr("Colour")
+                            Dim newColour As Color = Color.FromName(Colour)
 
-                    UserStats.MostColourPanel.BackColor = newColour
-                    UserStats.MostColourPanel2.BackColor = newColour
-                    UserStats.WearMostLabel.Text = Colour
-                    If Colour = "White" Then
-                        UserStats.WearLeastLabel.ForeColor = Color.Black
-                    End If
+                            UserStats.MostColourPanel.BackColor = newColour
+                            UserStats.MostColourPanel2.BackColor = newColour
+                            UserStats.WearMostLabel.Text = Colour
+                            If Colour = "White" Then
+                                UserStats.WearLeastLabel.ForeColor = Color.Black
+                            End If
+                            Exit While
+                        End If
+                    End While
                 End If
                 connection.close()
 
@@ -636,22 +649,31 @@ Public Class dataBaseconnector
                 dr = command.ExecuteReader
                 'This will retrieve the relevent data if there is any
                 If dr.HasRows Then
-                    dr.Read()
-                    'This will be the colour of the panel for this stat
-                    Dim Material As String = dr(0)
+                    While dr.Read()
+                        If Not IsDBNull(dr("Material")) Then
+                            'This will be the colour of the panel for this stat
+                            Dim Material As String = dr("Material")
 
-                    'Changes the label to show the material selected
-                    UserStats.LeastMaterialLabel.Text = Material
+                            'Changes the label to show the material selected
+                            UserStats.LeastMaterialLabel.Text = Material
+                            Exit While
+                        End If
+                    End While
                 End If
+
                 'Using same strcuture as above, but to show most worn material instead
                 sql = "SELECT Material FROM CLOTHINGITEM ORDER BY NoOfWears ASC"
                 command = New OleDbCommand(sql, connection)
                 dr = command.ExecuteReader
 
                 If dr.HasRows Then
-                    dr.Read()
-                    Dim Material As String = dr(0)
-                    UserStats.MostMaterialLabel.Text = Material
+                    While dr.Read()
+                        If Not IsDBNull(dr("Material")) Then
+                            Dim Material As String = dr("Material")
+                            UserStats.MostMaterialLabel.Text = Material
+                            Exit While
+                        End If
+                    End While
                 End If
                 connection.close()
             End If
@@ -783,9 +805,14 @@ Public Class dataBaseconnector
         Dim dr As OleDbDataReader
         dr = command.ExecuteReader
         If dr.HasRows Then
-            dr.Read()
-            url = dr(0)
-            Return url
+            While dr.Read()
+                If Not IsDBNull(dr("ImageURL")) Then
+                    url = dr("ImageURL")
+                    Return url
+                    Exit While
+
+                End If
+            End While
         Else
             Return Nothing
         End If
